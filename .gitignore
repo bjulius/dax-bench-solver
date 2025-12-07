@@ -32,3 +32,6 @@ desktop.ini
 *.tmp
 *.temp
 ~$*
+
+# Crash dumps
+*.stackdump
