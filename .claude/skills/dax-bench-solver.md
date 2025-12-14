@@ -269,46 +269,185 @@ Extract DAX from response - models may include markdown formatting:
 2. If no code block, look for pattern: `MeasureName = ...`
 3. Strip any explanatory text before/after
 
-## Validation Methods
+## Validation Method: Power BI Execution (Required)
 
-### Method 1: Pattern Matching (All Tasks)
+**Pattern matching has been removed.** All validation must go through Power BI execution.
+This ensures functionally equivalent DAX (e.g., `LASTDATE` vs `MAX`) is correctly validated.
 
-Compare generated DAX against:
-- `expectedOutput.dax` (primary)
-- `expectedOutput.alternativeCorrect` (alternatives)
+### Validation Workflow
 
-Normalize before comparison:
-- Remove extra whitespace
-- Standardize quotes (`'Table'` vs `Table`)
-- Ignore case for keywords
+For each generated DAX response:
 
-### Method 2: Execution Validation (Tasks with expectedResult)
-
-For tasks that include `expectedOutput.expectedResult`:
-
-1. Create measure in Power BI via MCP:
-```
-manage_measure(operation: "create", table: "_Measures", name: "Test_Measure", expression: "{generated_dax}")
+**Step 1: Parse the measure**
+```python
+from benchmark_mcp import parse_measure_definition
+measure_name, expression = parse_measure_definition(generated_dax)
 ```
 
-2. Execute test query:
+**Step 2: Create the measure in Power BI**
 ```
-run_dax("EVALUATE SUMMARIZECOLUMNS(...)")
+manage_measure(
+    operation: "create",
+    table: "_Measures",
+    name: "{task_id}_{measure_name}",
+    expression: "{expression}"
+)
+```
+- If creation fails → Syntax error → Generate feedback → Next iteration
+- If creation succeeds → Syntax is valid → Continue
+
+**Step 3: Execute the measure**
+```
+run_dax('EVALUATE ROW("Result", [{measure_name}])')
+```
+- If execution fails → Execution error → Generate feedback → Next iteration
+- If execution succeeds → Measure works → Mark as SOLVED
+
+**Step 4: Keep the measure**
+Measures are kept in `_Measures` table for reference. No cleanup needed.
+
+### Task Selection (v4)
+
+Run specific tasks using the benchmark_mcp module or CLI:
+
+```bash
+# Specific tasks
+python run_benchmark_v4.py model --tasks 1,2,3
+python run_benchmark_v4.py model --tasks task-001,task-028
+python run_benchmark_v4.py model --tasks 1-10
+
+# By complexity
+python run_benchmark_v4.py model --complexity basic
+python run_benchmark_v4.py model --complexity advanced
+
+# Combine filters
+python run_benchmark_v4.py model --tasks 1-30 --complexity advanced
+
+# Dry run (show what would run)
+python run_benchmark_v4.py model --tasks 1-5 --dry-run
 ```
 
-3. Compare results to `expectedResult.rows`
+### Using benchmark_mcp.py from Claude Code
 
-4. Clean up:
+```python
+# Load task
+from benchmark_mcp import load_task, get_model_response, parse_measure_definition, generate_feedback, record_result
+
+task = load_task("task-001")
+
+# Get model's response
+response = get_model_response(task, "google/gemini-2.5-pro")
+dax = response["dax"]
+measure_name, expression = parse_measure_definition(dax)
+
+# Validate using MCP tools (Claude Code runs these)
+# 1. Create measure
+result = manage_measure(operation="create", table="_Measures", name=f"{task['id']}_{measure_name}", expression=expression)
+
+# 2. If failed, generate feedback and retry
+if not result["success"]:
+    feedback = generate_feedback("syntax", result["error"], task, iteration=1)
+    response = get_model_response(task, model, previous_attempts=[{"dax": dax, "feedback": feedback}])
+    # ... continue iteration
+
+# 3. If succeeded, execute to verify
+exec_result = run_dax(f'EVALUATE ROW("Test", [{measure_name}])')
+
+# 4. Record result
+record_result(task, model, solved=True, iterations=[...], final_dax=dax)
 ```
-manage_measure(operation: "delete", table: "_Measures", name: "Test_Measure")
+
+## DAX Function Validation Rules
+
+### CRITICAL: Only Use Valid DAX Functions
+
+Before generating DAX, validate against the official function list from [DAX.guide](https://dax.guide/functions/).
+
+**Common Invalid Functions (DO NOT USE):**
+
+| Invalid Function | Language | Use Instead |
+|-----------------|----------|-------------|
+| `SUMIF` | Excel | `CALCULATE(SUM(col), filter)` |
+| `SUMIFS` | Excel | `CALCULATE(SUM(col), filter1, filter2)` |
+| `COUNTIF` | Excel | `CALCULATE(COUNTROWS(table), filter)` |
+| `SUMPRODUCT` | Excel | `SUMX(table, expr1 * expr2)` |
+| `VLOOKUP` | Excel | `LOOKUPVALUE(result, search_col, value)` |
+| `DENSE_RANK` | SQL | `RANKX(table, expr, , DESC, DENSE)` |
+| `ROW_NUMBER` | SQL | `RANKX(table, expr, , , SKIP)` |
+| `SAMEPERIODLASTDAY` | **Invented** | `DATEADD('Date'[Date], -1, DAY)` |
+
+### EARLIER is Deprecated - Use VAR Pattern
+
+The `EARLIER()` function is **not recommended** per DAX.guide. Always use VAR to capture values before nested row context.
+
+**BAD (deprecated):**
+```dax
+Category Rank =
+RANKX(
+    FILTER(Product, Product[Category] = EARLIER(Product[Category])),
+    Product[Unit Price],
+    , DESC, DENSE
+)
 ```
 
-### Method 3: Syntax-Only Validation
+**GOOD (modern pattern):**
+```dax
+Category Rank =
+VAR CurrentCategory = Product[Category]
+VAR CurrentPrice = Product[Unit Price]
+RETURN
+RANKX(
+    FILTER(ALL(Product), Product[Category] = CurrentCategory),
+    Product[Unit Price],
+    , DESC, DENSE
+)
+```
 
-If execution not possible, at minimum:
-1. Attempt to create measure
-2. If creation fails, capture error message
-3. Use error for iteration feedback
+### Creating Tables: Use Table Variables, Not New Tables
+
+If you need to create intermediate tables for calculations, use **table variables** within the measure, not references to tables that don't exist in the model.
+
+**BAD (references non-existent table):**
+```dax
+Top 5 Sales =
+VAR IsInTop5 = CurrentProduct IN TopProducts  // TopProducts doesn't exist!
+RETURN ...
+```
+
+**GOOD (create table as variable):**
+```dax
+Top 5 Sales =
+VAR CurrentProduct = SELECTEDVALUE(Product[ProductKey])
+VAR TopProducts =
+    TOPN(
+        5,
+        ADDCOLUMNS(
+            ALL(Product[ProductKey]),
+            "@Sales", CALCULATE(SUM(Sales[Net Price]))
+        ),
+        [@Sales], DESC
+    )
+VAR IsInTop5 = CurrentProduct IN SELECTCOLUMNS(TopProducts, "Key", Product[ProductKey])
+RETURN
+    IF(IsInTop5, SUM(Sales[Net Price]), BLANK())
+```
+
+### Pre-Flight Validation
+
+Before submitting DAX, the validator (`dax_function_validator.py`) checks:
+
+1. **Function existence**: All functions must be in the official DAX.guide list
+2. **Deprecated functions**: Warns about `EARLIER`/`EARLIEST` usage
+3. **Excel/SQL functions**: Catches common mistakes from other languages
+4. **Table references**: Ensures referenced tables exist in the model schema
+
+Run validation:
+```bash
+cd dax-bench
+python dax_function_validator.py
+```
+
+---
 
 ## Error Feedback Templates
 
