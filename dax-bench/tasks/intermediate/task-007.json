@@ -1,0 +1,26 @@
+{
+  "id": "task-007",
+  "version": "2.0",
+  "title": "Previous Year Sales",
+  "description": "Create a measure that calculates sales from the same period in the previous year.",
+  "complexity": "intermediate",
+  "category": "time-intelligence",
+  "prompt": {
+    "system": "You are a DAX expert. Generate only the DAX code without any explanation or markdown formatting. Return the measure definition starting with the name followed by an equals sign.",
+    "user": "Create a DAX measure called 'PY Sales' that calculates the Net Price from the same period last year, using the Date table.",
+    "dataModelContext": "You are working with a sales database. Sales[Order Date] relates to Date[Date]. Date contains: Date, Year, Month, Quarter. Assume a 'Total Sales' measure already exists that sums Net Price."
+  },
+  "expectedOutput": {
+    "dax": "PY Sales = CALCULATE(SUM(Sales[Net Price]), SAMEPERIODLASTYEAR(Date[Date]))",
+    "alternativeCorrect": [
+      "PY Sales = CALCULATE([Total Sales], SAMEPERIODLASTYEAR(Date[Date]))",
+      "PY Sales = CALCULATE(SUM(Sales[Net Price]), DATEADD(Date[Date], -1, YEAR))",
+      "PY Sales = CALCULATE(SUM(Sales[Net Price]), SAMEPERIODLASTYEAR('Date'[Date]))"
+    ]
+  },
+  "evaluationCriteria": {
+    "syntaxWeight": 0.3,
+    "outputMatchWeight": 0.7
+  },
+  "tags": ["measure", "time-intelligence", "yoy", "contoso"]
+}

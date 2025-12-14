@@ -1,0 +1,25 @@
+{
+  "id": "task-002",
+  "version": "2.0",
+  "title": "Count of Customers",
+  "description": "Create a measure that counts the total number of customers.",
+  "complexity": "basic",
+  "category": "aggregation",
+  "prompt": {
+    "system": "You are a DAX expert. Generate only the DAX code without any explanation or markdown formatting. Return the measure definition starting with the name followed by an equals sign.",
+    "user": "Create a DAX measure called 'Customer Count' that counts the total number of rows in the 'Customer' table.",
+    "dataModelContext": "You are working with a sales database. The Customer table contains: CustomerKey (primary key), Gender, Name, Address, City, State Code, State, Zip Code, Country Code, Country, Continent, Birthday, Age."
+  },
+  "expectedOutput": {
+    "dax": "Customer Count = COUNTROWS(Customer)",
+    "alternativeCorrect": [
+      "Customer Count = COUNT(Customer[CustomerKey])",
+      "[Customer Count] = COUNTROWS(Customer)"
+    ]
+  },
+  "evaluationCriteria": {
+    "syntaxWeight": 0.3,
+    "outputMatchWeight": 0.7
+  },
+  "tags": ["measure", "count", "basic-aggregation", "contoso"]
+}

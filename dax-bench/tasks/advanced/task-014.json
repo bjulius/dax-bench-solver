@@ -1,0 +1,53 @@
+{
+  "id": "task-014",
+  "version": "1.0",
+  "title": "Year-Category Analysis Matrix",
+  "description": "Create a Cartesian product matrix using CROSSJOIN for dimensional analysis.",
+  "complexity": "advanced",
+  "category": "table-manipulation",
+  "prompt": {
+    "system": "You are a DAX expert. Generate only the DAX code without any explanation or markdown formatting. Return the table expression starting with the name followed by an equals sign.",
+    "user": "Create a calculated table called 'Analysis Matrix' that contains all possible combinations of Year (from Date table) and Category (from Product table). This matrix should include every year paired with every category, regardless of whether sales exist for that combination.",
+    "dataModelContext": "You are working with a sales database. Date contains: Year (integer). Product contains: Category (text - e.g., Audio, Computers, TV and Video). This matrix is needed for gap analysis where some year-category combinations may have no sales."
+  },
+  "expectedOutput": {
+    "dax": "Analysis Matrix = CROSSJOIN(ALL('Date'[Year]), ALL(Product[Category]))",
+    "alternativeCorrect": [
+      "Analysis Matrix = CROSSJOIN(VALUES('Date'[Year]), VALUES(Product[Category]))",
+      "Analysis Matrix = CROSSJOIN(DISTINCT('Date'[Year]), DISTINCT(Product[Category]))",
+      "Analysis Matrix = GENERATE(ALL('Date'[Year]), ALL(Product[Category]))"
+    ],
+    "expectedResult": {
+      "columns": ["Year", "Category"],
+      "rows": [
+        {"Year": 2020, "Category": "Audio"},
+        {"Year": 2020, "Category": "Computers"},
+        {"Year": 2021, "Category": "Audio"},
+        {"Year": 2021, "Category": "Computers"}
+      ]
+    }
+  },
+  "evaluationCriteria": {
+    "syntaxWeight": 0.3,
+    "outputMatchWeight": 0.7,
+    "requiredElements": ["CROSSJOIN"],
+    "partialCreditRules": [
+      { "condition": "contains_CROSSJOIN", "credit": 0.5 },
+      { "condition": "contains_ALL", "credit": 0.2 },
+      { "condition": "references_column_Year", "credit": 0.15 },
+      { "condition": "references_column_Category", "credit": 0.15 }
+    ],
+    "bestPractices": {
+      "required": [],
+      "preferred": ["ALL"],
+      "antiPatterns": []
+    },
+    "performanceNotes": "ALL() ensures all dimension values are included regardless of current filter context"
+  },
+  "hints": [
+    "CROSSJOIN creates a Cartesian product of two tables",
+    "Use ALL() to get all unique values regardless of filter context",
+    "GENERATE can also be used as an alternative to CROSSJOIN"
+  ],
+  "tags": ["table", "crossjoin", "all", "table-manipulation", "advanced", "contoso"]
+}

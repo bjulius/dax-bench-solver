@@ -1,0 +1,25 @@
+{
+  "id": "task-005",
+  "version": "2.0",
+  "title": "Total Order Quantity",
+  "description": "Create a measure that calculates the total quantity of items ordered.",
+  "complexity": "basic",
+  "category": "aggregation",
+  "prompt": {
+    "system": "You are a DAX expert. Generate only the DAX code without any explanation or markdown formatting. Return the measure definition starting with the name followed by an equals sign.",
+    "user": "Create a DAX measure called 'Total Quantity' that sums the 'Quantity' column from the 'Sales' table.",
+    "dataModelContext": "You are working with a sales database. The Sales table contains: Order Number, Line Number, Order Date, Delivery Date, CustomerKey, StoreKey, ProductKey, Quantity (integer), Unit Price, Net Price, Unit Cost."
+  },
+  "expectedOutput": {
+    "dax": "Total Quantity = SUM(Sales[Quantity])",
+    "alternativeCorrect": [
+      "Total Quantity = SUMX(Sales, Sales[Quantity])",
+      "[Total Quantity] = SUM(Sales[Quantity])"
+    ]
+  },
+  "evaluationCriteria": {
+    "syntaxWeight": 0.3,
+    "outputMatchWeight": 0.7
+  },
+  "tags": ["measure", "sum", "basic-aggregation", "contoso"]
+}

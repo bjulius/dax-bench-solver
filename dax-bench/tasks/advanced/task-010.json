@@ -1,0 +1,26 @@
+{
+  "id": "task-010",
+  "version": "2.0",
+  "title": "Running Total with CALCULATE and FILTER",
+  "description": "Create a measure that calculates a running total of sales within each year.",
+  "complexity": "advanced",
+  "category": "iterator",
+  "prompt": {
+    "system": "You are a DAX expert. Generate only the DAX code without any explanation or markdown formatting. Return the measure definition starting with the name followed by an equals sign.",
+    "user": "Create a DAX measure called 'Running Total' that calculates a cumulative running total of Net Price within the current year. The running total should reset at the beginning of each year.",
+    "dataModelContext": "You are working with a sales database. Sales[Order Date] relates to Date[Date]. Date contains: Date, Year, Month, Day, Day of Year."
+  },
+  "expectedOutput": {
+    "dax": "Running Total = CALCULATE(SUM(Sales[Net Price]), FILTER(ALL(Date), Date[Year] = MAX(Date[Year]) && Date[Date] <= MAX(Date[Date])))",
+    "alternativeCorrect": [
+      "Running Total = CALCULATE(SUM(Sales[Net Price]), DATESYTD(Date[Date]))",
+      "Running Total = VAR CurrentYear = MAX(Date[Year]) VAR CurrentDate = MAX(Date[Date]) RETURN CALCULATE(SUM(Sales[Net Price]), FILTER(ALL(Date), Date[Year] = CurrentYear && Date[Date] <= CurrentDate))",
+      "Running Total = CALCULATE(SUM(Sales[Net Price]), DATESYTD('Date'[Date]))"
+    ]
+  },
+  "evaluationCriteria": {
+    "syntaxWeight": 0.3,
+    "outputMatchWeight": 0.7
+  },
+  "tags": ["measure", "running-total", "calculate", "filter", "advanced", "contoso"]
+}

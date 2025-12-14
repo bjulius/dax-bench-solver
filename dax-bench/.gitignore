@@ -1,0 +1,14 @@
+# Power BI files (too large for git)
+*.pbix
+
+# Python cache
+__pycache__/
+*.pyc
+
+# API caches
+models_cache.json
+gemini_results.json
+gemini_pro_responses.json
+
+# Temporary files
+*.tmp

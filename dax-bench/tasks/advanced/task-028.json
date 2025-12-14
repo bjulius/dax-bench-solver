@@ -1,0 +1,56 @@
+{
+  "id": "task-028",
+  "version": "1.0",
+  "title": "3-Month Rolling Average",
+  "description": "Calculate a moving average over a rolling time window using DATESINPERIOD.",
+  "complexity": "advanced",
+  "category": "time-intelligence",
+  "prompt": {
+    "system": "You are a DAX expert. Generate only the DAX code without any explanation or markdown formatting. Return the measure definition starting with the name followed by an equals sign.",
+    "user": "Create a measure called 'Rolling 3M Avg Sales' that calculates the average monthly Net Price sales over the current month and the two preceding months (3-month rolling average). For each month, sum the sales of that month plus the previous 2 months, then divide by 3.",
+    "dataModelContext": "You are working with a sales database. Sales contains: Net Price (decimal), Order Date (date). Date contains: Date, Year, Month. Relationship: Date[Date] 1→M Sales[Order Date]."
+  },
+  "expectedOutput": {
+    "dax": "Rolling 3M Avg Sales = DIVIDE(CALCULATE(SUM(Sales[Net Price]), DATESINPERIOD('Date'[Date], MAX('Date'[Date]), -3, MONTH)), 3)",
+    "alternativeCorrect": [
+      "Rolling 3M Avg Sales = VAR Period = DATESINPERIOD('Date'[Date], MAX('Date'[Date]), -3, MONTH) VAR TotalSales = CALCULATE(SUM(Sales[Net Price]), Period) RETURN DIVIDE(TotalSales, 3)",
+      "Rolling 3M Avg Sales = AVERAGEX(DATESINPERIOD('Date'[Date], MAX('Date'[Date]), -3, MONTH), CALCULATE(SUM(Sales[Net Price])))",
+      "Rolling 3M Avg Sales = VAR LastDate = MAX('Date'[Date]) VAR Rolling3M = DATESINPERIOD('Date'[Date], LastDate, -3, MONTH) RETURN AVERAGEX(Rolling3M, CALCULATE(SUM(Sales[Net Price])))"
+    ],
+    "expectedResult": {
+      "columns": ["Month", "Year", "Rolling 3M Avg Sales"],
+      "rows": [
+        {"Month": 3, "Year": 2021, "Rolling 3M Avg Sales": 1234567.89},
+        {"Month": 6, "Year": 2021, "Rolling 3M Avg Sales": 1345678.90}
+      ]
+    }
+  },
+  "evaluationCriteria": {
+    "syntaxWeight": 0.3,
+    "outputMatchWeight": 0.7,
+    "requiredElements": ["DATESINPERIOD"],
+    "partialCreditRules": [
+      { "condition": "contains_DATESINPERIOD", "credit": 0.4 },
+      { "condition": "contains_DIVIDE", "credit": 0.3 },
+      { "condition": "contains_CALCULATE", "credit": 0.2 }
+    ],
+    "bestPractices": {
+      "required": [],
+      "preferred": ["VAR", "RETURN"],
+      "antiPatterns": []
+    },
+    "dimensionWeights": {
+      "correctness": 0.45,
+      "bestPractices": 0.20,
+      "performance": 0.20,
+      "clarity": 0.15
+    },
+    "performanceNotes": "DATESINPERIOD is more efficient than manual date filtering for rolling windows"
+  },
+  "hints": [
+    "DATESINPERIOD creates a table of dates within a rolling window",
+    "Use negative number for lookback (-3 months)",
+    "AVERAGEX can iterate over the date period for monthly averages"
+  ],
+  "tags": ["measure", "datesinperiod", "moving-average", "time-intelligence", "advanced", "contoso"]
+}

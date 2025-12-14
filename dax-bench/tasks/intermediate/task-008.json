@@ -1,0 +1,25 @@
+{
+  "id": "task-008",
+  "version": "2.0",
+  "title": "Sales by Category Filter",
+  "description": "Create a measure that calculates sales for a specific product category using CALCULATE.",
+  "complexity": "intermediate",
+  "category": "filtering",
+  "prompt": {
+    "system": "You are a DAX expert. Generate only the DAX code without any explanation or markdown formatting. Return the measure definition starting with the name followed by an equals sign.",
+    "user": "Create a DAX measure called 'Audio Sales' that calculates the total Net Price only for products in the 'Audio' category.",
+    "dataModelContext": "You are working with a sales database. Sales relates to Product via ProductKey. Product has a Category column with values including: Audio, TV and Video, Computers, Cameras and camcorders, Cell phones, Music, Movies and Audiobooks, Games and Toys, Home Appliances."
+  },
+  "expectedOutput": {
+    "dax": "Audio Sales = CALCULATE(SUM(Sales[Net Price]), Product[Category] = \"Audio\")",
+    "alternativeCorrect": [
+      "Audio Sales = CALCULATE(SUM(Sales[Net Price]), FILTER(Product, Product[Category] = \"Audio\"))",
+      "Audio Sales = CALCULATE(SUM(Sales[Net Price]), KEEPFILTERS(Product[Category] = \"Audio\"))"
+    ]
+  },
+  "evaluationCriteria": {
+    "syntaxWeight": 0.3,
+    "outputMatchWeight": 0.7
+  },
+  "tags": ["measure", "calculate", "filter", "contoso"]
+}

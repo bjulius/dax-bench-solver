@@ -1,0 +1,52 @@
+{
+  "id": "task-027",
+  "version": "1.0",
+  "title": "Safe Year-over-Year with Missing Data",
+  "description": "Handle edge cases in time intelligence calculations when prior year data doesn't exist.",
+  "complexity": "intermediate",
+  "category": "time-intelligence",
+  "prompt": {
+    "system": "You are a DAX expert. Generate only the DAX code without any explanation or markdown formatting. Return the measure definition starting with the name followed by an equals sign.",
+    "user": "Create a measure called 'Safe YoY Change' that calculates the year-over-year change in Net Price. If there is no previous year data (e.g., for the first year in the dataset), return the current year's sales instead of BLANK. If both years have no data, return 0.",
+    "dataModelContext": "You are working with a sales database. Sales contains: Net Price (decimal), Order Date (date). Date contains: Date, Year. Relationship: Date[Date] 1→M Sales[Order Date]. The dataset starts in 2020, so 2020 has no prior year data."
+  },
+  "expectedOutput": {
+    "dax": "Safe YoY Change = VAR CurrentSales = SUM(Sales[Net Price]) VAR PriorSales = CALCULATE(SUM(Sales[Net Price]), SAMEPERIODLASTYEAR('Date'[Date])) RETURN IF(ISBLANK(CurrentSales), 0, IF(ISBLANK(PriorSales), CurrentSales, CurrentSales - PriorSales))",
+    "alternativeCorrect": [
+      "Safe YoY Change = VAR CurrentSales = COALESCE(SUM(Sales[Net Price]), 0) VAR PriorSales = COALESCE(CALCULATE(SUM(Sales[Net Price]), SAMEPERIODLASTYEAR('Date'[Date])), 0) RETURN CurrentSales - PriorSales",
+      "Safe YoY Change = COALESCE(SUM(Sales[Net Price]), 0) - COALESCE(CALCULATE(SUM(Sales[Net Price]), SAMEPERIODLASTYEAR('Date'[Date])), 0)",
+      "Safe YoY Change = VAR Current = SUM(Sales[Net Price]) VAR Prior = CALCULATE(SUM(Sales[Net Price]), DATEADD('Date'[Date], -1, YEAR)) RETURN SWITCH(TRUE(), ISBLANK(Current), 0, ISBLANK(Prior), Current, Current - Prior)"
+    ],
+    "expectedResult": {
+      "columns": ["Year", "Safe YoY Change"],
+      "rows": [
+        {"Year": 2020, "Safe YoY Change": 5000000.00},
+        {"Year": 2021, "Safe YoY Change": 750000.00},
+        {"Year": 2022, "Safe YoY Change": 500000.00}
+      ]
+    }
+  },
+  "evaluationCriteria": {
+    "syntaxWeight": 0.3,
+    "outputMatchWeight": 0.7,
+    "requiredElements": ["SAMEPERIODLASTYEAR", "CALCULATE"],
+    "partialCreditRules": [
+      { "condition": "contains_SAMEPERIODLASTYEAR", "credit": 0.3 },
+      { "condition": "contains_CALCULATE", "credit": 0.2 },
+      { "condition": "contains_ISBLANK", "credit": 0.2 },
+      { "condition": "handles_first_year", "credit": 0.2 }
+    ],
+    "bestPractices": {
+      "required": [],
+      "preferred": ["VAR", "RETURN", "COALESCE"],
+      "antiPatterns": []
+    },
+    "performanceNotes": "VAR pattern prevents recalculating SAMEPERIODLASTYEAR multiple times"
+  },
+  "hints": [
+    "SAMEPERIODLASTYEAR returns BLANK when there's no prior year data",
+    "Use ISBLANK or COALESCE to handle missing prior year",
+    "Consider edge case where current year also has no data"
+  ],
+  "tags": ["measure", "time-intelligence", "error-handling", "yoy", "contoso"]
+}

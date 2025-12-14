@@ -1,0 +1,51 @@
+{
+  "id": "task-025",
+  "version": "1.0",
+  "title": "Handle Missing Data with BLANK",
+  "description": "Handle missing or BLANK values gracefully using ISBLANK and conditional logic.",
+  "complexity": "basic",
+  "category": "calculation",
+  "prompt": {
+    "system": "You are a DAX expert. Generate only the DAX code without any explanation or markdown formatting. Return the measure definition starting with the name followed by an equals sign.",
+    "user": "Create a measure called 'Safe Quantity' that returns the total Quantity from Sales. If there are no sales (result is BLANK), return 0 instead of BLANK.",
+    "dataModelContext": "You are working with a sales database. Sales contains: Quantity (integer), Net Price (decimal). Some filter contexts may result in no matching rows."
+  },
+  "expectedOutput": {
+    "dax": "Safe Quantity = IF(ISBLANK(SUM(Sales[Quantity])), 0, SUM(Sales[Quantity]))",
+    "alternativeCorrect": [
+      "Safe Quantity = COALESCE(SUM(Sales[Quantity]), 0)",
+      "Safe Quantity = SUM(Sales[Quantity]) + 0",
+      "Safe Quantity = VAR TotalQty = SUM(Sales[Quantity]) RETURN IF(ISBLANK(TotalQty), 0, TotalQty)",
+      "Safe Quantity = IF(SUM(Sales[Quantity]) = BLANK(), 0, SUM(Sales[Quantity]))"
+    ],
+    "expectedResult": {
+      "columns": ["Category", "Safe Quantity"],
+      "rows": [
+        {"Category": "Audio", "Safe Quantity": 15000},
+        {"Category": "New Category (No Sales)", "Safe Quantity": 0}
+      ]
+    }
+  },
+  "evaluationCriteria": {
+    "syntaxWeight": 0.3,
+    "outputMatchWeight": 0.7,
+    "requiredElements": [],
+    "partialCreditRules": [
+      { "condition": "contains_ISBLANK", "credit": 0.3 },
+      { "condition": "contains_COALESCE", "credit": 0.4 },
+      { "condition": "contains_IF", "credit": 0.2 }
+    ],
+    "bestPractices": {
+      "required": [],
+      "preferred": ["COALESCE"],
+      "antiPatterns": []
+    },
+    "performanceNotes": "COALESCE is more concise than IF(ISBLANK(...)) for simple cases"
+  },
+  "hints": [
+    "ISBLANK checks if a value is BLANK",
+    "COALESCE returns the first non-BLANK value from a list",
+    "Adding 0 to a BLANK converts it to 0"
+  ],
+  "tags": ["measure", "blank", "error-handling", "basic", "contoso"]
+}

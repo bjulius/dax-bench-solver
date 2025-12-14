@@ -49,16 +49,63 @@ Each task JSON contains:
 - `expectedOutput.alternativeCorrect`: Other valid solutions
 - `expectedOutput.expectedResult`: (some tasks) Actual values to validate
 
-### Step 2: Select Model(s)
+### Step 2: Discover & Select Model(s)
 
-Read model options from `.claude/skills/dax-bench-solver/models.json`:
+**Use `fetch_models.py` to discover available models:**
 
-| Tier | Models |
-|------|--------|
-| Frontier | Claude Opus 4.5, GPT-5.2, Gemini 3 Pro |
-| Strong | GPT-OSS-120B, DeepSeek V3.2, Claude Sonnet 4.5 |
-| Efficient | Gemini 2.5 Flash, Grok Code Fast, Qwen3 Coder |
-| Small | Devstral |
+```bash
+cd dax-bench
+
+# Refresh model cache from OpenRouter API (caches for 24h)
+python fetch_models.py refresh
+
+# View stats on available models
+python fetch_models.py stats
+
+# Find best FREE models (ranked by capability)
+python fetch_models.py free
+
+# Find cheapest FLASH/efficient models
+python fetch_models.py flash
+
+# Find FRONTIER (top-tier) models
+python fetch_models.py frontier
+
+# Find best VALUE under a cost threshold
+python fetch_models.py value --max-cost 0.5
+
+# Find REASONING-specialized models (R1, o1, etc.)
+python fetch_models.py reasoning
+
+# Search by name
+python fetch_models.py search --query "gemini"
+
+# Find models by provider
+python fetch_models.py provider --query "anthropic"
+
+# Output as JSON for scripting
+python fetch_models.py free --json
+```
+
+**Model Tiers:**
+
+| Tier | Description | Examples |
+|------|-------------|----------|
+| **free** | $0 cost, rate-limited | gemini-2.0-flash-exp:free, llama-3.3-70b:free |
+| **flash** | Fast, cheap, efficient | Gemini 2.5 Flash, Haiku, Ministral |
+| **strong** | Good performance, moderate cost | Sonnet, DeepSeek V3, GPT-4o |
+| **frontier** | Top accuracy, premium cost | Opus 4.5, GPT-5.2, Gemini 3 Pro |
+| **reasoning** | Extended thinking (slower) | DeepSeek R1, o1, o3 |
+
+**Quick Picks by Use Case:**
+
+| Goal | Recommended Model(s) |
+|------|---------------------|
+| Best accuracy | `anthropic/claude-opus-4.5` |
+| Best value | `anthropic/claude-3.5-haiku` |
+| Best free | `meta-llama/llama-3.3-70b-instruct:free` |
+| Cheapest | `mistralai/ministral-3b` ($0.04/1M) |
+| Largest context | `google/gemini-2.5-flash` (1M tokens) |
 
 For comparison runs, select two models (Model A vs Model B).
 

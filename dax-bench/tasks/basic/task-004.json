@@ -1,0 +1,25 @@
+{
+  "id": "task-004",
+  "version": "2.0",
+  "title": "Distinct Product Count",
+  "description": "Create a measure that counts the number of distinct products sold.",
+  "complexity": "basic",
+  "category": "aggregation",
+  "prompt": {
+    "system": "You are a DAX expert. Generate only the DAX code without any explanation or markdown formatting. Return the measure definition starting with the name followed by an equals sign.",
+    "user": "Create a DAX measure called 'Products Sold' that counts the distinct number of products (using ProductKey) from the 'Sales' table.",
+    "dataModelContext": "You are working with a sales database. The Sales table contains: Order Number, Line Number, Order Date, Delivery Date, CustomerKey, StoreKey, ProductKey (foreign key to Product), Quantity, Unit Price, Net Price, Unit Cost."
+  },
+  "expectedOutput": {
+    "dax": "Products Sold = DISTINCTCOUNT(Sales[ProductKey])",
+    "alternativeCorrect": [
+      "[Products Sold] = DISTINCTCOUNT(Sales[ProductKey])",
+      "Products Sold = COUNTROWS(DISTINCT(Sales[ProductKey]))"
+    ]
+  },
+  "evaluationCriteria": {
+    "syntaxWeight": 0.3,
+    "outputMatchWeight": 0.7
+  },
+  "tags": ["measure", "distinctcount", "basic-aggregation", "contoso"]
+}

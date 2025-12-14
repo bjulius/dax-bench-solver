@@ -1,0 +1,55 @@
+{
+  "id": "task-013",
+  "version": "1.0",
+  "title": "Union of High-Value Transactions",
+  "description": "Combine multiple filtered tables using UNION to identify special transactions.",
+  "complexity": "advanced",
+  "category": "table-manipulation",
+  "prompt": {
+    "system": "You are a DAX expert. Generate only the DAX code without any explanation or markdown formatting. Return the table expression starting with the name followed by an equals sign.",
+    "user": "Create a calculated table called 'Special Orders' that combines two sets of orders: (1) orders with Net Price greater than 1000, and (2) orders with Quantity greater than 10. Use UNION to combine these two filtered result sets. Include Order Number, Net Price, and Quantity columns.",
+    "dataModelContext": "You are working with a sales database. Sales contains: Order Number (integer), Line Number (integer), Net Price (decimal), Quantity (integer)."
+  },
+  "expectedOutput": {
+    "dax": "Special Orders = UNION(SELECTCOLUMNS(FILTER(Sales, Sales[Net Price] > 1000), \"Order Number\", Sales[Order Number], \"Net Price\", Sales[Net Price], \"Quantity\", Sales[Quantity]), SELECTCOLUMNS(FILTER(Sales, Sales[Quantity] > 10), \"Order Number\", Sales[Order Number], \"Net Price\", Sales[Net Price], \"Quantity\", Sales[Quantity]))",
+    "alternativeCorrect": [
+      "Special Orders = VAR HighValue = SELECTCOLUMNS(FILTER(Sales, Sales[Net Price] > 1000), \"Order Number\", Sales[Order Number], \"Net Price\", Sales[Net Price], \"Quantity\", Sales[Quantity]) VAR HighQuantity = SELECTCOLUMNS(FILTER(Sales, Sales[Quantity] > 10), \"Order Number\", Sales[Order Number], \"Net Price\", Sales[Net Price], \"Quantity\", Sales[Quantity]) RETURN UNION(HighValue, HighQuantity)",
+      "Special Orders = DISTINCT(UNION(SELECTCOLUMNS(FILTER(Sales, Sales[Net Price] > 1000), \"Order Number\", Sales[Order Number], \"Net Price\", Sales[Net Price], \"Quantity\", Sales[Quantity]), SELECTCOLUMNS(FILTER(Sales, Sales[Quantity] > 10), \"Order Number\", Sales[Order Number], \"Net Price\", Sales[Net Price], \"Quantity\", Sales[Quantity])))"
+    ],
+    "expectedResult": {
+      "columns": ["Order Number", "Net Price", "Quantity"],
+      "rows": [
+        {"Order Number": 1001, "Net Price": 1500.00, "Quantity": 5},
+        {"Order Number": 1002, "Net Price": 200.00, "Quantity": 15}
+      ]
+    }
+  },
+  "evaluationCriteria": {
+    "syntaxWeight": 0.3,
+    "outputMatchWeight": 0.7,
+    "requiredElements": ["UNION", "FILTER"],
+    "partialCreditRules": [
+      { "condition": "contains_UNION", "credit": 0.4 },
+      { "condition": "contains_FILTER", "credit": 0.3 },
+      { "condition": "contains_SELECTCOLUMNS", "credit": 0.2 }
+    ],
+    "bestPractices": {
+      "required": [],
+      "preferred": ["VAR", "RETURN"],
+      "antiPatterns": []
+    },
+    "dimensionWeights": {
+      "correctness": 0.45,
+      "bestPractices": 0.20,
+      "performance": 0.20,
+      "clarity": 0.15
+    },
+    "performanceNotes": "VAR pattern improves readability for complex UNION operations"
+  },
+  "hints": [
+    "UNION requires tables with matching columns",
+    "Use SELECTCOLUMNS to ensure both tables have identical structure",
+    "UNION does not remove duplicates - use DISTINCT if needed"
+  ],
+  "tags": ["table", "union", "filter", "table-manipulation", "advanced", "contoso"]
+}

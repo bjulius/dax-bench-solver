@@ -1,0 +1,48 @@
+{
+  "id": "task-019",
+  "version": "1.0",
+  "title": "Multiple Filter Conditions",
+  "description": "Apply multiple filter conditions in CALCULATE using AND logic.",
+  "complexity": "intermediate",
+  "category": "filtering",
+  "prompt": {
+    "system": "You are a DAX expert. Generate only the DAX code without any explanation or markdown formatting. Return the measure definition starting with the name followed by an equals sign.",
+    "user": "Create a measure called 'Premium Audio Sales' that calculates the total Net Price only for products in the 'Audio' category AND with a Unit Price greater than 100.",
+    "dataModelContext": "You are working with a sales database. Sales contains: Net Price (decimal), ProductKey. Product contains: ProductKey, Category (text), Unit Price (decimal). The relationship is Product[ProductKey] 1→M Sales[ProductKey]."
+  },
+  "expectedOutput": {
+    "dax": "Premium Audio Sales = CALCULATE(SUM(Sales[Net Price]), Product[Category] = \"Audio\", Product[Unit Price] > 100)",
+    "alternativeCorrect": [
+      "Premium Audio Sales = CALCULATE(SUM(Sales[Net Price]), FILTER(Product, Product[Category] = \"Audio\" && Product[Unit Price] > 100))",
+      "Premium Audio Sales = CALCULATE(SUM(Sales[Net Price]), Product[Category] = \"Audio\", FILTER(ALL(Product[Unit Price]), Product[Unit Price] > 100))",
+      "Premium Audio Sales = CALCULATE(SUM(Sales[Net Price]), FILTER(ALL(Product), Product[Category] = \"Audio\" && Product[Unit Price] > 100))"
+    ],
+    "expectedResult": {
+      "columns": ["Premium Audio Sales"],
+      "rows": [
+        {"Premium Audio Sales": 4567890.12}
+      ]
+    }
+  },
+  "evaluationCriteria": {
+    "syntaxWeight": 0.3,
+    "outputMatchWeight": 0.7,
+    "requiredElements": ["CALCULATE"],
+    "partialCreditRules": [
+      { "condition": "contains_CALCULATE", "credit": 0.4 },
+      { "condition": "references_column_Category", "credit": 0.2 },
+      { "condition": "references_column_Unit Price", "credit": 0.2 }
+    ],
+    "bestPractices": {
+      "required": [],
+      "preferred": [],
+      "antiPatterns": ["nested_calculate"]
+    },
+    "performanceNotes": "Direct predicates in CALCULATE are more efficient than FILTER for simple conditions"
+  },
+  "hints": [
+    "Multiple filter arguments in CALCULATE are combined with AND logic",
+    "Direct column predicates are more efficient than FILTER for simple conditions"
+  ],
+  "tags": ["measure", "calculate", "multiple-filters", "filtering", "contoso"]
+}

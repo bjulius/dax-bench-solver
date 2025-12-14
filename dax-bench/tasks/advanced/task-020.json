@@ -1,0 +1,56 @@
+{
+  "id": "task-020",
+  "version": "1.0",
+  "title": "Percentage of Total with ALLEXCEPT",
+  "description": "Calculate percentage of total while preserving specific dimension filters using ALLEXCEPT.",
+  "complexity": "advanced",
+  "category": "filtering",
+  "prompt": {
+    "system": "You are a DAX expert. Generate only the DAX code without any explanation or markdown formatting. Return the measure definition starting with the name followed by an equals sign.",
+    "user": "Create a measure called 'Category % of Year' that calculates each category's sales as a percentage of the total sales for the current year. When viewing Audio sales in 2020, it should show Audio's percentage of all 2020 sales. The result should be a decimal (e.g., 0.25 for 25%).",
+    "dataModelContext": "You are working with a sales database. Sales contains: Net Price (decimal), Order Date. Date contains: Year (integer). Product contains: Category (text). Relationships: Date[Date] 1→M Sales[Order Date], Product[ProductKey] 1→M Sales[ProductKey]."
+  },
+  "expectedOutput": {
+    "dax": "Category % of Year = VAR CategorySales = SUM(Sales[Net Price]) VAR YearTotal = CALCULATE(SUM(Sales[Net Price]), ALLEXCEPT('Date', 'Date'[Year]), ALL(Product)) RETURN DIVIDE(CategorySales, YearTotal)",
+    "alternativeCorrect": [
+      "Category % of Year = DIVIDE(SUM(Sales[Net Price]), CALCULATE(SUM(Sales[Net Price]), ALL(Product), ALLEXCEPT('Date', 'Date'[Year])))",
+      "Category % of Year = VAR CategorySales = SUM(Sales[Net Price]) VAR YearTotal = CALCULATE(SUM(Sales[Net Price]), ALL(Product[Category]), ALL(Product[Subcategory]), ALL(Product[Product Name])) RETURN DIVIDE(CategorySales, YearTotal)",
+      "Category % of Year = DIVIDE(SUM(Sales[Net Price]), CALCULATE(SUM(Sales[Net Price]), REMOVEFILTERS(Product)))"
+    ],
+    "expectedResult": {
+      "columns": ["Year", "Category", "Category % of Year"],
+      "rows": [
+        {"Year": 2020, "Category": "Audio", "Category % of Year": 0.25},
+        {"Year": 2020, "Category": "Computers", "Category % of Year": 0.45}
+      ]
+    }
+  },
+  "evaluationCriteria": {
+    "syntaxWeight": 0.3,
+    "outputMatchWeight": 0.7,
+    "requiredElements": ["CALCULATE", "DIVIDE"],
+    "partialCreditRules": [
+      { "condition": "contains_CALCULATE", "credit": 0.3 },
+      { "condition": "contains_ALLEXCEPT", "credit": 0.3 },
+      { "condition": "contains_DIVIDE", "credit": 0.2 }
+    ],
+    "bestPractices": {
+      "required": ["DIVIDE"],
+      "preferred": ["VAR", "RETURN", "ALLEXCEPT"],
+      "antiPatterns": ["division_by_zero_unhandled"]
+    },
+    "dimensionWeights": {
+      "correctness": 0.40,
+      "bestPractices": 0.25,
+      "performance": 0.20,
+      "clarity": 0.15
+    },
+    "performanceNotes": "ALLEXCEPT is more efficient than explicitly removing multiple columns with ALL"
+  },
+  "hints": [
+    "ALLEXCEPT removes all filters EXCEPT on specified columns",
+    "Need to remove Product filters while keeping Date[Year] filter",
+    "Use DIVIDE for safe division"
+  ],
+  "tags": ["measure", "allexcept", "percentage", "filtering", "advanced", "contoso"]
+}
