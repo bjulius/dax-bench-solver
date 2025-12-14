@@ -1,0 +1,68 @@
+{
+  "timestamp": "2025-12-14T06:10:42.804392",
+  "schema_format": "compact",
+  "total_tasks": 30,
+  "total_models": 4,
+  "total_results": 120,
+  "static_passed": 89,
+  "static_pass_rate": 74.16666666666667,
+  "by_model": {
+    "opus": {
+      "total": 30,
+      "passed": 22,
+      "pass_rate": 73.33333333333333
+    },
+    "sonnet": {
+      "total": 30,
+      "passed": 23,
+      "pass_rate": 76.66666666666667
+    },
+    "haiku": {
+      "total": 30,
+      "passed": 23,
+      "pass_rate": 76.66666666666667
+    },
+    "mistral": {
+      "total": 30,
+      "passed": 21,
+      "pass_rate": 70.0
+    }
+  },
+  "common_failures": [
+    {
+      "task_id": "task-011",
+      "title": "Sales Summary by Category",
+      "fail_count": 4
+    },
+    {
+      "task_id": "task-012",
+      "title": "Product List with Renamed Columns",
+      "fail_count": 4
+    },
+    {
+      "task_id": "task-026",
+      "title": "Safe Ratio with Cascading Fallbacks",
+      "fail_count": 3
+    },
+    {
+      "task_id": "task-009",
+      "title": "Year-over-Year Growth Percentage",
+      "fail_count": 4
+    },
+    {
+      "task_id": "task-013",
+      "title": "Union of High-Value Transactions",
+      "fail_count": 4
+    },
+    {
+      "task_id": "task-014",
+      "title": "Year-Category Analysis Matrix",
+      "fail_count": 4
+    },
+    {
+      "task_id": "task-016",
+      "title": "Virtual Relationship with TREATAS",
+      "fail_count": 4
+    }
+  ]
+}

@@ -1,0 +1,57 @@
+================================================================================
+DATE TABLE FOR BIGFOOT DAX PROJECT
+================================================================================
+
+This DateTable is required for the time intelligence measures to work properly.
+
+STEP 1: Create a new calculated table in Power BI Desktop
+- Go to Modeling tab > New Table
+- Paste the DAX below
+
+================================================================================
+DATE TABLE DAX (Copy everything below this line)
+================================================================================
+
+DateTable =
+VAR MinDate = MIN(bfro_reports[date])
+VAR MaxDate = MAX(bfro_reports[date])
+RETURN
+ADDCOLUMNS(
+    CALENDAR(MinDate, MaxDate),
+    "Year", YEAR([Date]),
+    "Month", MONTH([Date]),
+    "MonthName", FORMAT([Date], "MMMM"),
+    "MonthShort", FORMAT([Date], "MMM"),
+    "Quarter", "Q" & QUARTER([Date]),
+    "Day", DAY([Date]),
+    "DayOfWeek", WEEKDAY([Date]),
+    "DayName", FORMAT([Date], "dddd"),
+    "WeekNum", WEEKNUM([Date]),
+    "YearMonth", FORMAT([Date], "YYYY-MM"),
+    "Decade", FLOOR(YEAR([Date]), 10) & "s",
+    "Season",
+        SWITCH(
+            TRUE(),
+            MONTH([Date]) IN {12, 1, 2}, "Winter",
+            MONTH([Date]) IN {3, 4, 5}, "Spring",
+            MONTH([Date]) IN {6, 7, 8}, "Summer",
+            "Fall"
+        )
+)
+
+================================================================================
+STEP 2: Mark as Date Table
+================================================================================
+After creating the table:
+1. Select the DateTable in the Data view
+2. Go to Table tools > Mark as date table
+3. Select the "Date" column
+
+================================================================================
+STEP 3: Create Relationship
+================================================================================
+1. Go to Model view
+2. Drag DateTable[Date] to bfro_reports[date]
+3. Ensure it's a one-to-many relationship (DateTable is the "one" side)
+
+================================================================================
