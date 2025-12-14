@@ -35,3 +35,20 @@ desktop.ini
 
 # Crash dumps
 *.stackdump
+
+# Power BI files (large binaries)
+*.pbix
+pbix/
+
+# Screenshots and images (debug artifacts)
+*.png
+
+# Windows null device artifact
+nul
+
+# DAX Bench run artifacts (regenerable)
+dax-bench/runs/*_api_responses*.json
+dax-bench/runs/validation_batch.json
+dax-bench/runs/validation_commands.json
+dax-bench/runs/validation_records.json
+dax-bench/test_schema.json
