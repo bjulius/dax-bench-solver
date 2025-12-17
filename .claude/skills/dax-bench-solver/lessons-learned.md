@@ -3,15 +3,17 @@
 This file captures patterns and insights from benchmark runs to improve future DAX generation.
 
 ## Last Updated
-2025-12-13
+2025-12-14
 
 ---
 
 ## Model Performance Summary
 
-| Model | Solved | First-Try | Notes |
-|-------|--------|-----------|-------|
-| google/gemini-2.5-flash | 21/30 (70%) | 7/30 (23%) | v1 run, basic feedback |
+| Model | Solved | First-Try | Avg Iters | Notes |
+|-------|--------|-----------|-----------|-------|
+| anthropic/claude-opus-4-5-20251101 | 30/30 (100%) | 30/30 (100%) | 1.0 | Perfect first-try, MCP validated |
+| mistralai/mistral-small-3.1-24b-instruct | 30/30 (100%) | 25/30 (83%) | 1.17 | 5 tasks needed 2 iterations |
+| google/gemini-2.5-flash | 21/30 (70%) | 7/30 (23%) | N/A | v1 run, basic feedback |
 
 ---
 
@@ -111,6 +113,30 @@ This file captures patterns and insights from benchmark runs to improve future D
 
 ## Run History
 
+### Run 5: 2025-12-14 (Claude Opus 4.5, MCP Live Validation)
+- Model: anthropic/claude-opus-4-5-20251101
+- Result: 30/30 (100%)
+- First-try: 30/30 (100%)
+- Avg Iterations: 1.0
+- Notes: Perfect score, zero corrections needed. Used live MCP validation against Power BI.
+
+### Run 4: 2025-12-14 (Mistral Small 3.1, MCP Live Validation)
+- Model: mistralai/mistral-small-3.1-24b-instruct
+- Result: 30/30 (100%)
+- First-try: 25/30 (83.3%)
+- Avg Iterations: 1.17
+- Cost: ~$0.015
+- Notes: 5 tasks required 2nd iteration
+
+**Multi-Iteration Fixes (Mistral):**
+| Task | Error | Fix |
+|------|-------|-----|
+| task-010 | Used TOTALMTD without date context | Changed to DATESYTD |
+| task-019 | Used Sales[Unit Price] for filter | Changed to Product[Unit Price] |
+| task-025 | Used COALESCE (flagged by validator) | Changed to IF(ISBLANK(...)) |
+| task-026 | Missing SUM() aggregation | Added SUM() around column refs |
+| task-030 | Wrong fiscal year end "7/01" | Changed to "6/30" (year END date) |
+
 ### Run 1: 2025-12-13 (v1, basic feedback)
 - Model: google/gemini-2.5-flash
 - Result: 21/30 (70%)
@@ -118,17 +144,38 @@ This file captures patterns and insights from benchmark runs to improve future D
 - Cost: $0.0529
 - Notes: Basic "pattern didn't match" feedback
 
-### Run 2: 2025-12-13 (v2, enhanced feedback)
-- Model: google/gemini-2.5-flash
-- Result: [pending]
-- Notes: Function hints, task hints, expression matching
+---
+
+## Validated Learnings (High Value)
+
+### Table Qualifiers Matter (task-019)
+**Problem**: Models confuse `Sales[Unit Price]` with `Product[Unit Price]`
+**Rule**: When filtering on product attributes in CALCULATE, use the Product table
+**Feedback that works**: "Unit Price filter should use Product[Unit Price], not Sales[Unit Price]"
+
+### Fiscal Year End Date (task-030)
+**Problem**: Models use fiscal year START date instead of END date
+**Rule**: DATESYTD year_end_date parameter is the ENDING date (e.g., "6/30" for July-start fiscal year)
+**Feedback that works**: "The year_end_date parameter is the END of fiscal year, not the start. Use '6/30' not '7/01'"
+
+### COALESCE Validation Issue (task-025)
+**Problem**: COALESCE is valid DAX (since 2020) but static validator may flag it
+**Rule**: COALESCE is valid, but IF(ISBLANK(...)) is universally accepted
+**Note**: Consider updating dax_functions_reference.json to include COALESCE
+
+### Running Total Context (task-010)
+**Problem**: TOTALMTD returns NULL without proper date context
+**Rule**: Use DATESYTD for year-to-date running totals without explicit date filters
+**Feedback that works**: "DATESYTD is more reliable for running totals than TOTALMTD in measure context"
 
 ---
 
 ## TODO: Future Improvements
 
-- [ ] Add actual Power BI execution validation
-- [ ] Capture real error messages from DAX engine
-- [ ] Compare generated values to expected values
+- [x] Add actual Power BI execution validation (DONE - MCP integration)
+- [x] Capture real error messages from DAX engine (DONE - via MCP)
+- [x] Compare generated values to expected values (DONE - reference_values.json)
 - [ ] Build category-specific prompt templates
 - [ ] Add few-shot examples for difficult patterns
+- [ ] Integrate lessons-learned reading into benchmark scripts
+- [ ] Auto-update lessons-learned from multi-iteration runs

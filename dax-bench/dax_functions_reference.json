@@ -132,7 +132,7 @@
 
   "common_sql_functions_not_in_dax": [
     "DENSE_RANK", "ROW_NUMBER", "NTILE", "LAG", "LEAD",
-    "PARTITION BY", "OVER", "CASE WHEN", "COALESCE", "NVL", "ISNULL"
+    "PARTITION BY", "OVER", "CASE WHEN", "NVL", "ISNULL"
   ],
 
   "invented_functions_seen_in_benchmarks": [
@@ -143,8 +143,9 @@
   ],
 
   "notes": {
-    "COALESCE": "Actually IS valid in DAX (added in 2020)",
-    "IFERROR": "Actually IS valid in DAX",
-    "COUNTA": "Actually IS valid in DAX - counts non-blank values"
+    "COALESCE": "Valid DAX since 2020 - removed from SQL list after false positive in Mistral benchmark (2025-12-14)",
+    "IFERROR": "Valid DAX function",
+    "COUNTA": "Valid DAX function - counts non-blank values",
+    "INDEX": "Note: INDEX exists in both Excel and DAX but with different syntax. DAX INDEX is valid."
   }
 }

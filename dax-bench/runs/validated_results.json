@@ -1,0 +1,150 @@
+{
+  "anthropic/claude-opus-4.5": {
+    "model_short": "claude-opus-4.5",
+    "passed": 24,
+    "failed": 6,
+    "total_tasks": 30,
+    "pass_rate": 80.0,
+    "total_input_tokens": 4258,
+    "total_output_tokens": 1853,
+    "total_tokens": 6111,
+    "total_cost": 0.067615,
+    "total_time": 91.64326524734497,
+    "avg_time_per_task": 3.0547755082448322,
+    "failed_tasks": [
+      {
+        "task_id": "task-007",
+        "reason": "SAMEPERIODLASTYEAR with [Total Sales] in standalone context"
+      },
+      {
+        "task_id": "task-017",
+        "reason": "Date[Month] column reference issue"
+      },
+      {
+        "task_id": "task-009",
+        "reason": "SAMEPERIODLASTYEAR in standalone context"
+      },
+      {
+        "task_id": "task-014",
+        "reason": "Model-specific syntax error (missing quotes)"
+      },
+      {
+        "task_id": "task-016",
+        "reason": "Budget table does not exist in model"
+      },
+      {
+        "task_id": "task-018",
+        "reason": "EARLIER requires row context"
+      }
+    ],
+    "efficiency_score": 349.7777453909495
+  },
+  "anthropic/claude-sonnet-4.5": {
+    "model_short": "claude-sonnet-4.5",
+    "passed": 25,
+    "failed": 5,
+    "total_tasks": 30,
+    "pass_rate": 83.33333333333334,
+    "total_input_tokens": 4258,
+    "total_output_tokens": 2224,
+    "total_tokens": 6482,
+    "total_cost": 0.046134,
+    "total_time": 70.20920920372009,
+    "avg_time_per_task": 2.3403069734573365,
+    "failed_tasks": [
+      {
+        "task_id": "task-007",
+        "reason": "SAMEPERIODLASTYEAR with [Total Sales] in standalone context"
+      },
+      {
+        "task_id": "task-017",
+        "reason": "Date[Month] column reference issue"
+      },
+      {
+        "task_id": "task-009",
+        "reason": "SAMEPERIODLASTYEAR in standalone context"
+      },
+      {
+        "task_id": "task-016",
+        "reason": "Budget table does not exist in model"
+      },
+      {
+        "task_id": "task-018",
+        "reason": "EARLIER requires row context"
+      }
+    ],
+    "efficiency_score": 530.4026817159587
+  },
+  "anthropic/claude-haiku-4.5": {
+    "model_short": "claude-haiku-4.5",
+    "passed": 25,
+    "failed": 5,
+    "total_tasks": 30,
+    "pass_rate": 83.33333333333334,
+    "total_input_tokens": 4258,
+    "total_output_tokens": 2030,
+    "total_tokens": 6288,
+    "total_cost": 0.014408,
+    "total_time": 65.09360909461975,
+    "avg_time_per_task": 2.169786969820658,
+    "failed_tasks": [
+      {
+        "task_id": "task-007",
+        "reason": "SAMEPERIODLASTYEAR with [Total Sales] in standalone context"
+      },
+      {
+        "task_id": "task-017",
+        "reason": "Date[Month] column reference issue"
+      },
+      {
+        "task_id": "task-009",
+        "reason": "SAMEPERIODLASTYEAR in standalone context"
+      },
+      {
+        "task_id": "task-016",
+        "reason": "Budget table does not exist in model"
+      },
+      {
+        "task_id": "task-018",
+        "reason": "EARLIER requires row context"
+      }
+    ],
+    "efficiency_score": 1622.5337487019729
+  },
+  "mistralai/mistral-small-3.1-24b-instruct": {
+    "model_short": "mistral-small-3.1-24b-instruct",
+    "passed": 25,
+    "failed": 5,
+    "total_tasks": 30,
+    "pass_rate": 83.33333333333334,
+    "total_input_tokens": 4098,
+    "total_output_tokens": 1398,
+    "total_tokens": 5496,
+    "total_cost": 0.00027672,
+    "total_time": 244.02355456352234,
+    "avg_time_per_task": 8.134118485450745,
+    "failed_tasks": [
+      {
+        "task_id": "task-007",
+        "reason": "SAMEPERIODLASTYEAR with [Total Sales] in standalone context"
+      },
+      {
+        "task_id": "task-017",
+        "reason": "Date[Month] column reference issue"
+      },
+      {
+        "task_id": "task-009",
+        "reason": "SAMEPERIODLASTYEAR in standalone context"
+      },
+      {
+        "task_id": "task-016",
+        "reason": "Budget table does not exist in model"
+      },
+      {
+        "task_id": "task-018",
+        "reason": "EARLIER requires row context"
+      }
+    ],
+    "efficiency_score": 19581.427407732313
+  }
+}

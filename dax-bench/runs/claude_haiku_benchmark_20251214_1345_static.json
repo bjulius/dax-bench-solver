@@ -1,0 +1,1268 @@
+{
+  "model": "anthropic/claude-3-5-haiku-20241022",
+  "model_key": "haiku",
+  "model_name": "Claude Haiku",
+  "timestamp": "2025-12-14T13:45:36.268557",
+  "status": "static_complete",
+  "summary": {
+    "total_tasks": 30,
+    "static_pass": 0,
+    "static_fail": 30,
+    "first_try_success": 0,
+    "first_try_rate": 0.0,
+    "avg_iterations": 5.0,
+    "total_time": 82.5
+  },
+  "complexity_breakdown": {
+    "basic": {
+      "passed": 0,
+      "total": 6,
+      "first_try": 0,
+      "avg_iterations": 5.0
+    },
+    "intermediate": {
+      "passed": 0,
+      "total": 13,
+      "first_try": 0,
+      "avg_iterations": 5.0
+    },
+    "advanced": {
+      "passed": 0,
+      "total": 11,
+      "first_try": 0,
+      "avg_iterations": 5.0
+    }
+  },
+  "results": [
+    {
+      "task_id": "task-001",
+      "title": "Total Sales Amount",
+      "complexity": "basic",
+      "category": "aggregation",
+      "attempts": [
+        {
+          "iteration": 1,
+          "error": "{\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"anthropic/claude-3.5-haiku-20241022 is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Google\"}},\"user_id\":\"user_2tsSIuSAxDMYKP7X6YbWZaK19xm\"}",
+          "status": "api_error"
+        },
+        {
+          "iteration": 2,
+          "error": "{\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"anthropic/claude-3.5-haiku-20241022 is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Google\"}},\"user_id\":\"user_2tsSIuSAxDMYKP7X6YbWZaK19xm\"}",
+          "status": "api_error"
+        },
+        {
+          "iteration": 3,
+          "error": "{\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"anthropic/claude-3.5-haiku-20241022 is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Google\"}},\"user_id\":\"user_2tsSIuSAxDMYKP7X6YbWZaK19xm\"}",
+          "status": "api_error"
+        },
+        {
+          "iteration": 4,
+          "error": "{\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"anthropic/claude-3.5-haiku-20241022 is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Google\"}},\"user_id\":\"user_2tsSIuSAxDMYKP7X6YbWZaK19xm\"}",
+          "status": "api_error"
+        },
+        {
+          "iteration": 5,
+          "error": "{\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"anthropic/claude-3.5-haiku-20241022 is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Google\"}},\"user_id\":\"user_2tsSIuSAxDMYKP7X6YbWZaK19xm\"}",
+          "status": "api_error"
+        }
+      ],
+      "final_status": "max_iterations",
+      "final_expression": null,
+      "iterations": 5,
+      "total_time": 2.8806447982788086,
+      "total_tokens": {
+        "input": 0,
+        "output": 0
+      }
+    },
+    {
+      "task_id": "task-002",
+      "title": "Count of Customers",
+      "complexity": "basic",
+      "category": "aggregation",
+      "attempts": [
+        {
+          "iteration": 1,
+          "error": "{\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"anthropic/claude-3.5-haiku-20241022 is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Google\"}},\"user_id\":\"user_2tsSIuSAxDMYKP7X6YbWZaK19xm\"}",
+          "status": "api_error"
+        },
+        {
+          "iteration": 2,
+          "error": "{\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"anthropic/claude-3.5-haiku-20241022 is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Google\"}},\"user_id\":\"user_2tsSIuSAxDMYKP7X6YbWZaK19xm\"}",
+          "status": "api_error"
+        },
+        {
+          "iteration": 3,
+          "error": "{\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"anthropic/claude-3.5-haiku-20241022 is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Google\"}},\"user_id\":\"user_2tsSIuSAxDMYKP7X6YbWZaK19xm\"}",
+          "status": "api_error"
+        },
+        {
+          "iteration": 4,
+          "error": "{\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"anthropic/claude-3.5-haiku-20241022 is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Google\"}},\"user_id\":\"user_2tsSIuSAxDMYKP7X6YbWZaK19xm\"}",
+          "status": "api_error"
+        },
+        {
+          "iteration": 5,
+          "error": "{\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"anthropic/claude-3.5-haiku-20241022 is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Google\"}},\"user_id\":\"user_2tsSIuSAxDMYKP7X6YbWZaK19xm\"}",
+          "status": "api_error"
+        }
+      ],
+      "final_status": "max_iterations",
+      "final_expression": null,
+      "iterations": 5,
+      "total_time": 2.7114555835723877,
+      "total_tokens": {
+        "input": 0,
+        "output": 0
+      }
+    },
+    {
+      "task_id": "task-003",
+      "title": "Average Unit Price",
+      "complexity": "basic",
+      "category": "aggregation",
+      "attempts": [
+        {
+          "iteration": 1,
+          "error": "{\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"anthropic/claude-3.5-haiku-20241022 is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Google\"}},\"user_id\":\"user_2tsSIuSAxDMYKP7X6YbWZaK19xm\"}",
+          "status": "api_error"
+        },
+        {
+          "iteration": 2,
+          "error": "{\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"anthropic/claude-3.5-haiku-20241022 is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Google\"}},\"user_id\":\"user_2tsSIuSAxDMYKP7X6YbWZaK19xm\"}",
+          "status": "api_error"
+        },
+        {
+          "iteration": 3,
+          "error": "{\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"anthropic/claude-3.5-haiku-20241022 is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Google\"}},\"user_id\":\"user_2tsSIuSAxDMYKP7X6YbWZaK19xm\"}",
+          "status": "api_error"
+        },
+        {
+          "iteration": 4,
+          "error": "{\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"anthropic/claude-3.5-haiku-20241022 is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Google\"}},\"user_id\":\"user_2tsSIuSAxDMYKP7X6YbWZaK19xm\"}",
+          "status": "api_error"
+        },
+        {
+          "iteration": 5,
+          "error": "{\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"anthropic/claude-3.5-haiku-20241022 is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Google\"}},\"user_id\":\"user_2tsSIuSAxDMYKP7X6YbWZaK19xm\"}",
+          "status": "api_error"
+        }
+      ],
+      "final_status": "max_iterations",
+      "final_expression": null,
+      "iterations": 5,
+      "total_time": 2.8662140369415283,
+      "total_tokens": {
+        "input": 0,
+        "output": 0
+      }
+    },
+    {
+      "task_id": "task-004",
+      "title": "Distinct Product Count",
+      "complexity": "basic",
+      "category": "aggregation",
+      "attempts": [
+        {
+          "iteration": 1,
+          "error": "{\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"anthropic/claude-3.5-haiku-20241022 is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Google\"}},\"user_id\":\"user_2tsSIuSAxDMYKP7X6YbWZaK19xm\"}",
+          "status": "api_error"
+        },
+        {
+          "iteration": 2,
+          "error": "{\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"anthropic/claude-3.5-haiku-20241022 is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Google\"}},\"user_id\":\"user_2tsSIuSAxDMYKP7X6YbWZaK19xm\"}",
+          "status": "api_error"
+        },
+        {
+          "iteration": 3,
+          "error": "{\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"anthropic/claude-3.5-haiku-20241022 is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Google\"}},\"user_id\":\"user_2tsSIuSAxDMYKP7X6YbWZaK19xm\"}",
+          "status": "api_error"
+        },
+        {
+          "iteration": 4,
+          "error": "{\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"anthropic/claude-3.5-haiku-20241022 is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Google\"}},\"user_id\":\"user_2tsSIuSAxDMYKP7X6YbWZaK19xm\"}",
+          "status": "api_error"
+        },
+        {
+          "iteration": 5,
+          "error": "{\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"anthropic/claude-3.5-haiku-20241022 is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Google\"}},\"user_id\":\"user_2tsSIuSAxDMYKP7X6YbWZaK19xm\"}",
+          "status": "api_error"
+        }
+      ],
+      "final_status": "max_iterations",
+      "final_expression": null,
+      "iterations": 5,
+      "total_time": 2.7303731441497803,
+      "total_tokens": {
+        "input": 0,
+        "output": 0
+      }
+    },
+    {
+      "task_id": "task-005",
+      "title": "Total Order Quantity",
+      "complexity": "basic",
+      "category": "aggregation",
+      "attempts": [
+        {
+          "iteration": 1,
+          "error": "{\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"anthropic/claude-3.5-haiku-20241022 is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Google\"}},\"user_id\":\"user_2tsSIuSAxDMYKP7X6YbWZaK19xm\"}",
+          "status": "api_error"
+        },
+        {
+          "iteration": 2,
+          "error": "{\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"anthropic/claude-3.5-haiku-20241022 is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Google\"}},\"user_id\":\"user_2tsSIuSAxDMYKP7X6YbWZaK19xm\"}",
+          "status": "api_error"
+        },
+        {
+          "iteration": 3,
+          "error": "{\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"anthropic/claude-3.5-haiku-20241022 is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Google\"}},\"user_id\":\"user_2tsSIuSAxDMYKP7X6YbWZaK19xm\"}",
+          "status": "api_error"
+        },
+        {
+          "iteration": 4,
+          "error": "{\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"anthropic/claude-3.5-haiku-20241022 is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Google\"}},\"user_id\":\"user_2tsSIuSAxDMYKP7X6YbWZaK19xm\"}",
+          "status": "api_error"
+        },
+        {
+          "iteration": 5,
+          "error": "{\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"anthropic/claude-3.5-haiku-20241022 is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Google\"}},\"user_id\":\"user_2tsSIuSAxDMYKP7X6YbWZaK19xm\"}",
+          "status": "api_error"
+        }
+      ],
+      "final_status": "max_iterations",
+      "final_expression": null,
+      "iterations": 5,
+      "total_time": 2.6508126258850098,
+      "total_tokens": {
+        "input": 0,
+        "output": 0
+      }
+    },
+    {
+      "task_id": "task-006",
+      "title": "Year-to-Date Sales",
+      "complexity": "intermediate",
+      "category": "time-intelligence",
+      "attempts": [
+        {
+          "iteration": 1,
+          "error": "{\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"anthropic/claude-3.5-haiku-20241022 is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Google\"}},\"user_id\":\"user_2tsSIuSAxDMYKP7X6YbWZaK19xm\"}",
+          "status": "api_error"
+        },
+        {
+          "iteration": 2,
+          "error": "{\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"anthropic/claude-3.5-haiku-20241022 is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Google\"}},\"user_id\":\"user_2tsSIuSAxDMYKP7X6YbWZaK19xm\"}",
+          "status": "api_error"
+        },
+        {
+          "iteration": 3,
+          "error": "{\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"anthropic/claude-3.5-haiku-20241022 is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Google\"}},\"user_id\":\"user_2tsSIuSAxDMYKP7X6YbWZaK19xm\"}",
+          "status": "api_error"
+        },
+        {
+          "iteration": 4,
+          "error": "{\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"anthropic/claude-3.5-haiku-20241022 is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Google\"}},\"user_id\":\"user_2tsSIuSAxDMYKP7X6YbWZaK19xm\"}",
+          "status": "api_error"
+        },
+        {
+          "iteration": 5,
+          "error": "{\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"anthropic/claude-3.5-haiku-20241022 is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Google\"}},\"user_id\":\"user_2tsSIuSAxDMYKP7X6YbWZaK19xm\"}",
+          "status": "api_error"
+        }
+      ],
+      "final_status": "max_iterations",
+      "final_expression": null,
+      "iterations": 5,
+      "total_time": 3.209545850753784,
+      "total_tokens": {
+        "input": 0,
+        "output": 0
+      }
+    },
+    {
+      "task_id": "task-007",
+      "title": "Previous Year Sales",
+      "complexity": "intermediate",
+      "category": "time-intelligence",
+      "attempts": [
+        {
+          "iteration": 1,
+          "error": "{\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"anthropic/claude-3.5-haiku-20241022 is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Google\"}},\"user_id\":\"user_2tsSIuSAxDMYKP7X6YbWZaK19xm\"}",
+          "status": "api_error"
+        },
+        {
+          "iteration": 2,
+          "error": "{\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"anthropic/claude-3.5-haiku-20241022 is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Google\"}},\"user_id\":\"user_2tsSIuSAxDMYKP7X6YbWZaK19xm\"}",
+          "status": "api_error"
+        },
+        {
+          "iteration": 3,
+          "error": "{\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"anthropic/claude-3.5-haiku-20241022 is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Google\"}},\"user_id\":\"user_2tsSIuSAxDMYKP7X6YbWZaK19xm\"}",
+          "status": "api_error"
+        },
+        {
+          "iteration": 4,
+          "error": "{\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"anthropic/claude-3.5-haiku-20241022 is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Google\"}},\"user_id\":\"user_2tsSIuSAxDMYKP7X6YbWZaK19xm\"}",
+          "status": "api_error"
+        },
+        {
+          "iteration": 5,
+          "error": "{\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"anthropic/claude-3.5-haiku-20241022 is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Google\"}},\"user_id\":\"user_2tsSIuSAxDMYKP7X6YbWZaK19xm\"}",
+          "status": "api_error"
+        }
+      ],
+      "final_status": "max_iterations",
+      "final_expression": null,
+      "iterations": 5,
+      "total_time": 2.6111838817596436,
+      "total_tokens": {
+        "input": 0,
+        "output": 0
+      }
+    },
+    {
+      "task_id": "task-008",
+      "title": "Sales by Category Filter",
+      "complexity": "intermediate",
+      "category": "filtering",
+      "attempts": [
+        {
+          "iteration": 1,
+          "error": "{\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"anthropic/claude-3.5-haiku-20241022 is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Google\"}},\"user_id\":\"user_2tsSIuSAxDMYKP7X6YbWZaK19xm\"}",
+          "status": "api_error"
+        },
+        {
+          "iteration": 2,
+          "error": "{\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"anthropic/claude-3.5-haiku-20241022 is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Google\"}},\"user_id\":\"user_2tsSIuSAxDMYKP7X6YbWZaK19xm\"}",
+          "status": "api_error"
+        },
+        {
+          "iteration": 3,
+          "error": "{\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"anthropic/claude-3.5-haiku-20241022 is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Google\"}},\"user_id\":\"user_2tsSIuSAxDMYKP7X6YbWZaK19xm\"}",
+          "status": "api_error"
+        },
+        {
+          "iteration": 4,
+          "error": "{\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"anthropic/claude-3.5-haiku-20241022 is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Google\"}},\"user_id\":\"user_2tsSIuSAxDMYKP7X6YbWZaK19xm\"}",
+          "status": "api_error"
+        },
+        {
+          "iteration": 5,
+          "error": "{\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"anthropic/claude-3.5-haiku-20241022 is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Google\"}},\"user_id\":\"user_2tsSIuSAxDMYKP7X6YbWZaK19xm\"}",
+          "status": "api_error"
+        }
+      ],
+      "final_status": "max_iterations",
+      "final_expression": null,
+      "iterations": 5,
+      "total_time": 2.701643705368042,
+      "total_tokens": {
+        "input": 0,
+        "output": 0
+      }
+    },
+    {
+      "task_id": "task-009",
+      "title": "Year-over-Year Growth Percentage",
+      "complexity": "advanced",
+      "category": "calculation",
+      "attempts": [
+        {
+          "iteration": 1,
+          "error": "{\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"anthropic/claude-3.5-haiku-20241022 is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Google\"}},\"user_id\":\"user_2tsSIuSAxDMYKP7X6YbWZaK19xm\"}",
+          "status": "api_error"
+        },
+        {
+          "iteration": 2,
+          "error": "{\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"anthropic/claude-3.5-haiku-20241022 is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Google\"}},\"user_id\":\"user_2tsSIuSAxDMYKP7X6YbWZaK19xm\"}",
+          "status": "api_error"
+        },
+        {
+          "iteration": 3,
+          "error": "{\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"anthropic/claude-3.5-haiku-20241022 is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Google\"}},\"user_id\":\"user_2tsSIuSAxDMYKP7X6YbWZaK19xm\"}",
+          "status": "api_error"
+        },
+        {
+          "iteration": 4,
+          "error": "{\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"anthropic/claude-3.5-haiku-20241022 is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Google\"}},\"user_id\":\"user_2tsSIuSAxDMYKP7X6YbWZaK19xm\"}",
+          "status": "api_error"
+        },
+        {
+          "iteration": 5,
+          "error": "{\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"anthropic/claude-3.5-haiku-20241022 is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Google\"}},\"user_id\":\"user_2tsSIuSAxDMYKP7X6YbWZaK19xm\"}",
+          "status": "api_error"
+        }
+      ],
+      "final_status": "max_iterations",
+      "final_expression": null,
+      "iterations": 5,
+      "total_time": 2.669774293899536,
+      "total_tokens": {
+        "input": 0,
+        "output": 0
+      }
+    },
+    {
+      "task_id": "task-010",
+      "title": "Running Total with CALCULATE and FILTER",
+      "complexity": "advanced",
+      "category": "iterator",
+      "attempts": [
+        {
+          "iteration": 1,
+          "error": "{\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"anthropic/claude-3.5-haiku-20241022 is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Google\"}},\"user_id\":\"user_2tsSIuSAxDMYKP7X6YbWZaK19xm\"}",
+          "status": "api_error"
+        },
+        {
+          "iteration": 2,
+          "error": "{\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"anthropic/claude-3.5-haiku-20241022 is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Google\"}},\"user_id\":\"user_2tsSIuSAxDMYKP7X6YbWZaK19xm\"}",
+          "status": "api_error"
+        },
+        {
+          "iteration": 3,
+          "error": "{\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"anthropic/claude-3.5-haiku-20241022 is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Google\"}},\"user_id\":\"user_2tsSIuSAxDMYKP7X6YbWZaK19xm\"}",
+          "status": "api_error"
+        },
+        {
+          "iteration": 4,
+          "error": "{\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"anthropic/claude-3.5-haiku-20241022 is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Google\"}},\"user_id\":\"user_2tsSIuSAxDMYKP7X6YbWZaK19xm\"}",
+          "status": "api_error"
+        },
+        {
+          "iteration": 5,
+          "error": "{\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"anthropic/claude-3.5-haiku-20241022 is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Google\"}},\"user_id\":\"user_2tsSIuSAxDMYKP7X6YbWZaK19xm\"}",
+          "status": "api_error"
+        }
+      ],
+      "final_status": "max_iterations",
+      "final_expression": null,
+      "iterations": 5,
+      "total_time": 2.5801186561584473,
+      "total_tokens": {
+        "input": 0,
+        "output": 0
+      }
+    },
+    {
+      "task_id": "task-011",
+      "title": "Sales Summary by Category",
+      "complexity": "intermediate",
+      "category": "table-manipulation",
+      "attempts": [
+        {
+          "iteration": 1,
+          "error": "{\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"anthropic/claude-3.5-haiku-20241022 is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Google\"}},\"user_id\":\"user_2tsSIuSAxDMYKP7X6YbWZaK19xm\"}",
+          "status": "api_error"
+        },
+        {
+          "iteration": 2,
+          "error": "{\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"anthropic/claude-3.5-haiku-20241022 is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Google\"}},\"user_id\":\"user_2tsSIuSAxDMYKP7X6YbWZaK19xm\"}",
+          "status": "api_error"
+        },
+        {
+          "iteration": 3,
+          "error": "{\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"anthropic/claude-3.5-haiku-20241022 is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Google\"}},\"user_id\":\"user_2tsSIuSAxDMYKP7X6YbWZaK19xm\"}",
+          "status": "api_error"
+        },
+        {
+          "iteration": 4,
+          "error": "{\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"anthropic/claude-3.5-haiku-20241022 is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Google\"}},\"user_id\":\"user_2tsSIuSAxDMYKP7X6YbWZaK19xm\"}",
+          "status": "api_error"
+        },
+        {
+          "iteration": 5,
+          "error": "{\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"anthropic/claude-3.5-haiku-20241022 is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Google\"}},\"user_id\":\"user_2tsSIuSAxDMYKP7X6YbWZaK19xm\"}",
+          "status": "api_error"
+        }
+      ],
+      "final_status": "max_iterations",
+      "final_expression": null,
+      "iterations": 5,
+      "total_time": 2.641089916229248,
+      "total_tokens": {
+        "input": 0,
+        "output": 0
+      }
+    },
+    {
+      "task_id": "task-012",
+      "title": "Product List with Renamed Columns",
+      "complexity": "intermediate",
+      "category": "table-manipulation",
+      "attempts": [
+        {
+          "iteration": 1,
+          "error": "{\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"anthropic/claude-3.5-haiku-20241022 is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Google\"}},\"user_id\":\"user_2tsSIuSAxDMYKP7X6YbWZaK19xm\"}",
+          "status": "api_error"
+        },
+        {
+          "iteration": 2,
+          "error": "{\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"anthropic/claude-3.5-haiku-20241022 is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Google\"}},\"user_id\":\"user_2tsSIuSAxDMYKP7X6YbWZaK19xm\"}",
+          "status": "api_error"
+        },
+        {
+          "iteration": 3,
+          "error": "{\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"anthropic/claude-3.5-haiku-20241022 is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Google\"}},\"user_id\":\"user_2tsSIuSAxDMYKP7X6YbWZaK19xm\"}",
+          "status": "api_error"
+        },
+        {
+          "iteration": 4,
+          "error": "{\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"anthropic/claude-3.5-haiku-20241022 is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Google\"}},\"user_id\":\"user_2tsSIuSAxDMYKP7X6YbWZaK19xm\"}",
+          "status": "api_error"
+        },
+        {
+          "iteration": 5,
+          "error": "{\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"anthropic/claude-3.5-haiku-20241022 is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Google\"}},\"user_id\":\"user_2tsSIuSAxDMYKP7X6YbWZaK19xm\"}",
+          "status": "api_error"
+        }
+      ],
+      "final_status": "max_iterations",
+      "final_expression": null,
+      "iterations": 5,
+      "total_time": 2.8696532249450684,
+      "total_tokens": {
+        "input": 0,
+        "output": 0
+      }
+    },
+    {
+      "task_id": "task-013",
+      "title": "Union of High-Value Transactions",
+      "complexity": "advanced",
+      "category": "table-manipulation",
+      "attempts": [
+        {
+          "iteration": 1,
+          "error": "{\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"anthropic/claude-3.5-haiku-20241022 is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Google\"}},\"user_id\":\"user_2tsSIuSAxDMYKP7X6YbWZaK19xm\"}",
+          "status": "api_error"
+        },
+        {
+          "iteration": 2,
+          "error": "{\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"anthropic/claude-3.5-haiku-20241022 is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Google\"}},\"user_id\":\"user_2tsSIuSAxDMYKP7X6YbWZaK19xm\"}",
+          "status": "api_error"
+        },
+        {
+          "iteration": 3,
+          "error": "{\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"anthropic/claude-3.5-haiku-20241022 is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Google\"}},\"user_id\":\"user_2tsSIuSAxDMYKP7X6YbWZaK19xm\"}",
+          "status": "api_error"
+        },
+        {
+          "iteration": 4,
+          "error": "{\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"anthropic/claude-3.5-haiku-20241022 is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Google\"}},\"user_id\":\"user_2tsSIuSAxDMYKP7X6YbWZaK19xm\"}",
+          "status": "api_error"
+        },
+        {
+          "iteration": 5,
+          "error": "{\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"anthropic/claude-3.5-haiku-20241022 is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Google\"}},\"user_id\":\"user_2tsSIuSAxDMYKP7X6YbWZaK19xm\"}",
+          "status": "api_error"
+        }
+      ],
+      "final_status": "max_iterations",
+      "final_expression": null,
+      "iterations": 5,
+      "total_time": 2.7701363563537598,
+      "total_tokens": {
+        "input": 0,
+        "output": 0
+      }
+    },
+    {
+      "task_id": "task-014",
+      "title": "Year-Category Analysis Matrix",
+      "complexity": "advanced",
+      "category": "table-manipulation",
+      "attempts": [
+        {
+          "iteration": 1,
+          "error": "{\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"anthropic/claude-3.5-haiku-20241022 is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Google\"}},\"user_id\":\"user_2tsSIuSAxDMYKP7X6YbWZaK19xm\"}",
+          "status": "api_error"
+        },
+        {
+          "iteration": 2,
+          "error": "{\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"anthropic/claude-3.5-haiku-20241022 is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Google\"}},\"user_id\":\"user_2tsSIuSAxDMYKP7X6YbWZaK19xm\"}",
+          "status": "api_error"
+        },
+        {
+          "iteration": 3,
+          "error": "{\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"anthropic/claude-3.5-haiku-20241022 is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Google\"}},\"user_id\":\"user_2tsSIuSAxDMYKP7X6YbWZaK19xm\"}",
+          "status": "api_error"
+        },
+        {
+          "iteration": 4,
+          "error": "{\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"anthropic/claude-3.5-haiku-20241022 is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Google\"}},\"user_id\":\"user_2tsSIuSAxDMYKP7X6YbWZaK19xm\"}",
+          "status": "api_error"
+        },
+        {
+          "iteration": 5,
+          "error": "{\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"anthropic/claude-3.5-haiku-20241022 is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Google\"}},\"user_id\":\"user_2tsSIuSAxDMYKP7X6YbWZaK19xm\"}",
+          "status": "api_error"
+        }
+      ],
+      "final_status": "max_iterations",
+      "final_expression": null,
+      "iterations": 5,
+      "total_time": 2.682162284851074,
+      "total_tokens": {
+        "input": 0,
+        "output": 0
+      }
+    },
+    {
+      "task_id": "task-015",
+      "title": "Product Percentage of Category Total",
+      "complexity": "intermediate",
+      "category": "context-transition",
+      "attempts": [
+        {
+          "iteration": 1,
+          "error": "{\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"anthropic/claude-3.5-haiku-20241022 is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Google\"}},\"user_id\":\"user_2tsSIuSAxDMYKP7X6YbWZaK19xm\"}",
+          "status": "api_error"
+        },
+        {
+          "iteration": 2,
+          "error": "{\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"anthropic/claude-3.5-haiku-20241022 is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Google\"}},\"user_id\":\"user_2tsSIuSAxDMYKP7X6YbWZaK19xm\"}",
+          "status": "api_error"
+        },
+        {
+          "iteration": 3,
+          "error": "{\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"anthropic/claude-3.5-haiku-20241022 is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Google\"}},\"user_id\":\"user_2tsSIuSAxDMYKP7X6YbWZaK19xm\"}",
+          "status": "api_error"
+        },
+        {
+          "iteration": 4,
+          "error": "{\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"anthropic/claude-3.5-haiku-20241022 is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Google\"}},\"user_id\":\"user_2tsSIuSAxDMYKP7X6YbWZaK19xm\"}",
+          "status": "api_error"
+        },
+        {
+          "iteration": 5,
+          "error": "{\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"anthropic/claude-3.5-haiku-20241022 is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Google\"}},\"user_id\":\"user_2tsSIuSAxDMYKP7X6YbWZaK19xm\"}",
+          "status": "api_error"
+        }
+      ],
+      "final_status": "max_iterations",
+      "final_expression": null,
+      "iterations": 5,
+      "total_time": 2.602160930633545,
+      "total_tokens": {
+        "input": 0,
+        "output": 0
+      }
+    },
+    {
+      "task_id": "task-016",
+      "title": "Virtual Relationship with TREATAS",
+      "complexity": "advanced",
+      "category": "context-transition",
+      "attempts": [
+        {
+          "iteration": 1,
+          "error": "{\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"anthropic/claude-3.5-haiku-20241022 is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Google\"}},\"user_id\":\"user_2tsSIuSAxDMYKP7X6YbWZaK19xm\"}",
+          "status": "api_error"
+        },
+        {
+          "iteration": 2,
+          "error": "{\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"anthropic/claude-3.5-haiku-20241022 is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Google\"}},\"user_id\":\"user_2tsSIuSAxDMYKP7X6YbWZaK19xm\"}",
+          "status": "api_error"
+        },
+        {
+          "iteration": 3,
+          "error": "{\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"anthropic/claude-3.5-haiku-20241022 is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Google\"}},\"user_id\":\"user_2tsSIuSAxDMYKP7X6YbWZaK19xm\"}",
+          "status": "api_error"
+        },
+        {
+          "iteration": 4,
+          "error": "{\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"anthropic/claude-3.5-haiku-20241022 is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Google\"}},\"user_id\":\"user_2tsSIuSAxDMYKP7X6YbWZaK19xm\"}",
+          "status": "api_error"
+        },
+        {
+          "iteration": 5,
+          "error": "{\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"anthropic/claude-3.5-haiku-20241022 is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Google\"}},\"user_id\":\"user_2tsSIuSAxDMYKP7X6YbWZaK19xm\"}",
+          "status": "api_error"
+        }
+      ],
+      "final_status": "max_iterations",
+      "final_expression": null,
+      "iterations": 5,
+      "total_time": 2.7391200065612793,
+      "total_tokens": {
+        "input": 0,
+        "output": 0
+      }
+    },
+    {
+      "task_id": "task-017",
+      "title": "Granularity-Aware Measure with VALUES",
+      "complexity": "intermediate",
+      "category": "context-transition",
+      "attempts": [
+        {
+          "iteration": 1,
+          "error": "{\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"anthropic/claude-3.5-haiku-20241022 is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Google\"}},\"user_id\":\"user_2tsSIuSAxDMYKP7X6YbWZaK19xm\"}",
+          "status": "api_error"
+        },
+        {
+          "iteration": 2,
+          "error": "{\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"anthropic/claude-3.5-haiku-20241022 is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Google\"}},\"user_id\":\"user_2tsSIuSAxDMYKP7X6YbWZaK19xm\"}",
+          "status": "api_error"
+        },
+        {
+          "iteration": 3,
+          "error": "{\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"anthropic/claude-3.5-haiku-20241022 is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Google\"}},\"user_id\":\"user_2tsSIuSAxDMYKP7X6YbWZaK19xm\"}",
+          "status": "api_error"
+        },
+        {
+          "iteration": 4,
+          "error": "{\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"anthropic/claude-3.5-haiku-20241022 is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Google\"}},\"user_id\":\"user_2tsSIuSAxDMYKP7X6YbWZaK19xm\"}",
+          "status": "api_error"
+        },
+        {
+          "iteration": 5,
+          "error": "{\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"anthropic/claude-3.5-haiku-20241022 is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Google\"}},\"user_id\":\"user_2tsSIuSAxDMYKP7X6YbWZaK19xm\"}",
+          "status": "api_error"
+        }
+      ],
+      "final_status": "max_iterations",
+      "final_expression": null,
+      "iterations": 5,
+      "total_time": 2.6432089805603027,
+      "total_tokens": {
+        "input": 0,
+        "output": 0
+      }
+    },
+    {
+      "task_id": "task-018",
+      "title": "Running Count with EARLIER",
+      "complexity": "advanced",
+      "category": "context-transition",
+      "attempts": [
+        {
+          "iteration": 1,
+          "error": "{\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"anthropic/claude-3.5-haiku-20241022 is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Google\"}},\"user_id\":\"user_2tsSIuSAxDMYKP7X6YbWZaK19xm\"}",
+          "status": "api_error"
+        },
+        {
+          "iteration": 2,
+          "error": "{\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"anthropic/claude-3.5-haiku-20241022 is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Google\"}},\"user_id\":\"user_2tsSIuSAxDMYKP7X6YbWZaK19xm\"}",
+          "status": "api_error"
+        },
+        {
+          "iteration": 3,
+          "error": "{\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"anthropic/claude-3.5-haiku-20241022 is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Google\"}},\"user_id\":\"user_2tsSIuSAxDMYKP7X6YbWZaK19xm\"}",
+          "status": "api_error"
+        },
+        {
+          "iteration": 4,
+          "error": "{\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"anthropic/claude-3.5-haiku-20241022 is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Google\"}},\"user_id\":\"user_2tsSIuSAxDMYKP7X6YbWZaK19xm\"}",
+          "status": "api_error"
+        },
+        {
+          "iteration": 5,
+          "error": "{\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"anthropic/claude-3.5-haiku-20241022 is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Google\"}},\"user_id\":\"user_2tsSIuSAxDMYKP7X6YbWZaK19xm\"}",
+          "status": "api_error"
+        }
+      ],
+      "final_status": "max_iterations",
+      "final_expression": null,
+      "iterations": 5,
+      "total_time": 2.637698173522949,
+      "total_tokens": {
+        "input": 0,
+        "output": 0
+      }
+    },
+    {
+      "task_id": "task-019",
+      "title": "Multiple Filter Conditions",
+      "complexity": "intermediate",
+      "category": "filtering",
+      "attempts": [
+        {
+          "iteration": 1,
+          "error": "{\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"anthropic/claude-3.5-haiku-20241022 is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Google\"}},\"user_id\":\"user_2tsSIuSAxDMYKP7X6YbWZaK19xm\"}",
+          "status": "api_error"
+        },
+        {
+          "iteration": 2,
+          "error": "{\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"anthropic/claude-3.5-haiku-20241022 is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Google\"}},\"user_id\":\"user_2tsSIuSAxDMYKP7X6YbWZaK19xm\"}",
+          "status": "api_error"
+        },
+        {
+          "iteration": 3,
+          "error": "{\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"anthropic/claude-3.5-haiku-20241022 is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Google\"}},\"user_id\":\"user_2tsSIuSAxDMYKP7X6YbWZaK19xm\"}",
+          "status": "api_error"
+        },
+        {
+          "iteration": 4,
+          "error": "{\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"anthropic/claude-3.5-haiku-20241022 is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Google\"}},\"user_id\":\"user_2tsSIuSAxDMYKP7X6YbWZaK19xm\"}",
+          "status": "api_error"
+        },
+        {
+          "iteration": 5,
+          "error": "{\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"anthropic/claude-3.5-haiku-20241022 is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Google\"}},\"user_id\":\"user_2tsSIuSAxDMYKP7X6YbWZaK19xm\"}",
+          "status": "api_error"
+        }
+      ],
+      "final_status": "max_iterations",
+      "final_expression": null,
+      "iterations": 5,
+      "total_time": 2.831084966659546,
+      "total_tokens": {
+        "input": 0,
+        "output": 0
+      }
+    },
+    {
+      "task_id": "task-020",
+      "title": "Percentage of Total with ALLEXCEPT",
+      "complexity": "advanced",
+      "category": "filtering",
+      "attempts": [
+        {
+          "iteration": 1,
+          "error": "{\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"anthropic/claude-3.5-haiku-20241022 is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Google\"}},\"user_id\":\"user_2tsSIuSAxDMYKP7X6YbWZaK19xm\"}",
+          "status": "api_error"
+        },
+        {
+          "iteration": 2,
+          "error": "{\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"anthropic/claude-3.5-haiku-20241022 is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Google\"}},\"user_id\":\"user_2tsSIuSAxDMYKP7X6YbWZaK19xm\"}",
+          "status": "api_error"
+        },
+        {
+          "iteration": 3,
+          "error": "{\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"anthropic/claude-3.5-haiku-20241022 is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Google\"}},\"user_id\":\"user_2tsSIuSAxDMYKP7X6YbWZaK19xm\"}",
+          "status": "api_error"
+        },
+        {
+          "iteration": 4,
+          "error": "{\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"anthropic/claude-3.5-haiku-20241022 is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Google\"}},\"user_id\":\"user_2tsSIuSAxDMYKP7X6YbWZaK19xm\"}",
+          "status": "api_error"
+        },
+        {
+          "iteration": 5,
+          "error": "{\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"anthropic/claude-3.5-haiku-20241022 is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Google\"}},\"user_id\":\"user_2tsSIuSAxDMYKP7X6YbWZaK19xm\"}",
+          "status": "api_error"
+        }
+      ],
+      "final_status": "max_iterations",
+      "final_expression": null,
+      "iterations": 5,
+      "total_time": 2.7741096019744873,
+      "total_tokens": {
+        "input": 0,
+        "output": 0
+      }
+    },
+    {
+      "task_id": "task-021",
+      "title": "Filter Intersection with KEEPFILTERS",
+      "complexity": "advanced",
+      "category": "filtering",
+      "attempts": [
+        {
+          "iteration": 1,
+          "error": "{\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"anthropic/claude-3.5-haiku-20241022 is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Google\"}},\"user_id\":\"user_2tsSIuSAxDMYKP7X6YbWZaK19xm\"}",
+          "status": "api_error"
+        },
+        {
+          "iteration": 2,
+          "error": "{\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"anthropic/claude-3.5-haiku-20241022 is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Google\"}},\"user_id\":\"user_2tsSIuSAxDMYKP7X6YbWZaK19xm\"}",
+          "status": "api_error"
+        },
+        {
+          "iteration": 3,
+          "error": "{\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"anthropic/claude-3.5-haiku-20241022 is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Google\"}},\"user_id\":\"user_2tsSIuSAxDMYKP7X6YbWZaK19xm\"}",
+          "status": "api_error"
+        },
+        {
+          "iteration": 4,
+          "error": "{\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"anthropic/claude-3.5-haiku-20241022 is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Google\"}},\"user_id\":\"user_2tsSIuSAxDMYKP7X6YbWZaK19xm\"}",
+          "status": "api_error"
+        },
+        {
+          "iteration": 5,
+          "error": "{\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"anthropic/claude-3.5-haiku-20241022 is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Google\"}},\"user_id\":\"user_2tsSIuSAxDMYKP7X6YbWZaK19xm\"}",
+          "status": "api_error"
+        }
+      ],
+      "final_status": "max_iterations",
+      "final_expression": null,
+      "iterations": 5,
+      "total_time": 2.592991828918457,
+      "total_tokens": {
+        "input": 0,
+        "output": 0
+      }
+    },
+    {
+      "task_id": "task-022",
+      "title": "Product Ranking with RANKX",
+      "complexity": "intermediate",
+      "category": "iterator",
+      "attempts": [
+        {
+          "iteration": 1,
+          "error": "{\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"anthropic/claude-3.5-haiku-20241022 is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Google\"}},\"user_id\":\"user_2tsSIuSAxDMYKP7X6YbWZaK19xm\"}",
+          "status": "api_error"
+        },
+        {
+          "iteration": 2,
+          "error": "{\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"anthropic/claude-3.5-haiku-20241022 is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Google\"}},\"user_id\":\"user_2tsSIuSAxDMYKP7X6YbWZaK19xm\"}",
+          "status": "api_error"
+        },
+        {
+          "iteration": 3,
+          "error": "{\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"anthropic/claude-3.5-haiku-20241022 is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Google\"}},\"user_id\":\"user_2tsSIuSAxDMYKP7X6YbWZaK19xm\"}",
+          "status": "api_error"
+        },
+        {
+          "iteration": 4,
+          "error": "{\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"anthropic/claude-3.5-haiku-20241022 is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Google\"}},\"user_id\":\"user_2tsSIuSAxDMYKP7X6YbWZaK19xm\"}",
+          "status": "api_error"
+        },
+        {
+          "iteration": 5,
+          "error": "{\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"anthropic/claude-3.5-haiku-20241022 is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Google\"}},\"user_id\":\"user_2tsSIuSAxDMYKP7X6YbWZaK19xm\"}",
+          "status": "api_error"
+        }
+      ],
+      "final_status": "max_iterations",
+      "final_expression": null,
+      "iterations": 5,
+      "total_time": 2.588160753250122,
+      "total_tokens": {
+        "input": 0,
+        "output": 0
+      }
+    },
+    {
+      "task_id": "task-023",
+      "title": "Top 5 Products with TOPN",
+      "complexity": "intermediate",
+      "category": "table-manipulation",
+      "attempts": [
+        {
+          "iteration": 1,
+          "error": "{\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"anthropic/claude-3.5-haiku-20241022 is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Google\"}},\"user_id\":\"user_2tsSIuSAxDMYKP7X6YbWZaK19xm\"}",
+          "status": "api_error"
+        },
+        {
+          "iteration": 2,
+          "error": "{\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"anthropic/claude-3.5-haiku-20241022 is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Google\"}},\"user_id\":\"user_2tsSIuSAxDMYKP7X6YbWZaK19xm\"}",
+          "status": "api_error"
+        },
+        {
+          "iteration": 3,
+          "error": "{\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"anthropic/claude-3.5-haiku-20241022 is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Google\"}},\"user_id\":\"user_2tsSIuSAxDMYKP7X6YbWZaK19xm\"}",
+          "status": "api_error"
+        },
+        {
+          "iteration": 4,
+          "error": "{\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"anthropic/claude-3.5-haiku-20241022 is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Google\"}},\"user_id\":\"user_2tsSIuSAxDMYKP7X6YbWZaK19xm\"}",
+          "status": "api_error"
+        },
+        {
+          "iteration": 5,
+          "error": "{\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"anthropic/claude-3.5-haiku-20241022 is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Google\"}},\"user_id\":\"user_2tsSIuSAxDMYKP7X6YbWZaK19xm\"}",
+          "status": "api_error"
+        }
+      ],
+      "final_status": "max_iterations",
+      "final_expression": null,
+      "iterations": 5,
+      "total_time": 2.7659499645233154,
+      "total_tokens": {
+        "input": 0,
+        "output": 0
+      }
+    },
+    {
+      "task_id": "task-024",
+      "title": "90th Percentile Order Value",
+      "complexity": "advanced",
+      "category": "iterator",
+      "attempts": [
+        {
+          "iteration": 1,
+          "error": "{\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"anthropic/claude-3.5-haiku-20241022 is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Google\"}},\"user_id\":\"user_2tsSIuSAxDMYKP7X6YbWZaK19xm\"}",
+          "status": "api_error"
+        },
+        {
+          "iteration": 2,
+          "error": "{\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"anthropic/claude-3.5-haiku-20241022 is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Google\"}},\"user_id\":\"user_2tsSIuSAxDMYKP7X6YbWZaK19xm\"}",
+          "status": "api_error"
+        },
+        {
+          "iteration": 3,
+          "error": "{\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"anthropic/claude-3.5-haiku-20241022 is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Google\"}},\"user_id\":\"user_2tsSIuSAxDMYKP7X6YbWZaK19xm\"}",
+          "status": "api_error"
+        },
+        {
+          "iteration": 4,
+          "error": "{\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"anthropic/claude-3.5-haiku-20241022 is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Google\"}},\"user_id\":\"user_2tsSIuSAxDMYKP7X6YbWZaK19xm\"}",
+          "status": "api_error"
+        },
+        {
+          "iteration": 5,
+          "error": "{\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"anthropic/claude-3.5-haiku-20241022 is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Google\"}},\"user_id\":\"user_2tsSIuSAxDMYKP7X6YbWZaK19xm\"}",
+          "status": "api_error"
+        }
+      ],
+      "final_status": "max_iterations",
+      "final_expression": null,
+      "iterations": 5,
+      "total_time": 2.634371042251587,
+      "total_tokens": {
+        "input": 0,
+        "output": 0
+      }
+    },
+    {
+      "task_id": "task-025",
+      "title": "Handle Missing Data with BLANK",
+      "complexity": "basic",
+      "category": "calculation",
+      "attempts": [
+        {
+          "iteration": 1,
+          "error": "{\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"anthropic/claude-3.5-haiku-20241022 is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Google\"}},\"user_id\":\"user_2tsSIuSAxDMYKP7X6YbWZaK19xm\"}",
+          "status": "api_error"
+        },
+        {
+          "iteration": 2,
+          "error": "{\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"anthropic/claude-3.5-haiku-20241022 is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Google\"}},\"user_id\":\"user_2tsSIuSAxDMYKP7X6YbWZaK19xm\"}",
+          "status": "api_error"
+        },
+        {
+          "iteration": 3,
+          "error": "{\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"anthropic/claude-3.5-haiku-20241022 is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Google\"}},\"user_id\":\"user_2tsSIuSAxDMYKP7X6YbWZaK19xm\"}",
+          "status": "api_error"
+        },
+        {
+          "iteration": 4,
+          "error": "{\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"anthropic/claude-3.5-haiku-20241022 is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Google\"}},\"user_id\":\"user_2tsSIuSAxDMYKP7X6YbWZaK19xm\"}",
+          "status": "api_error"
+        },
+        {
+          "iteration": 5,
+          "error": "{\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"anthropic/claude-3.5-haiku-20241022 is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Google\"}},\"user_id\":\"user_2tsSIuSAxDMYKP7X6YbWZaK19xm\"}",
+          "status": "api_error"
+        }
+      ],
+      "final_status": "max_iterations",
+      "final_expression": null,
+      "iterations": 5,
+      "total_time": 2.5760765075683594,
+      "total_tokens": {
+        "input": 0,
+        "output": 0
+      }
+    },
+    {
+      "task_id": "task-026",
+      "title": "Safe Ratio with Cascading Fallbacks",
+      "complexity": "intermediate",
+      "category": "calculation",
+      "attempts": [
+        {
+          "iteration": 1,
+          "error": "{\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"anthropic/claude-3.5-haiku-20241022 is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Google\"}},\"user_id\":\"user_2tsSIuSAxDMYKP7X6YbWZaK19xm\"}",
+          "status": "api_error"
+        },
+        {
+          "iteration": 2,
+          "error": "{\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"anthropic/claude-3.5-haiku-20241022 is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Google\"}},\"user_id\":\"user_2tsSIuSAxDMYKP7X6YbWZaK19xm\"}",
+          "status": "api_error"
+        },
+        {
+          "iteration": 3,
+          "error": "{\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"anthropic/claude-3.5-haiku-20241022 is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Google\"}},\"user_id\":\"user_2tsSIuSAxDMYKP7X6YbWZaK19xm\"}",
+          "status": "api_error"
+        },
+        {
+          "iteration": 4,
+          "error": "{\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"anthropic/claude-3.5-haiku-20241022 is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Google\"}},\"user_id\":\"user_2tsSIuSAxDMYKP7X6YbWZaK19xm\"}",
+          "status": "api_error"
+        },
+        {
+          "iteration": 5,
+          "error": "{\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"anthropic/claude-3.5-haiku-20241022 is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Google\"}},\"user_id\":\"user_2tsSIuSAxDMYKP7X6YbWZaK19xm\"}",
+          "status": "api_error"
+        }
+      ],
+      "final_status": "max_iterations",
+      "final_expression": null,
+      "iterations": 5,
+      "total_time": 2.826282024383545,
+      "total_tokens": {
+        "input": 0,
+        "output": 0
+      }
+    },
+    {
+      "task_id": "task-027",
+      "title": "Safe Year-over-Year with Missing Data",
+      "complexity": "intermediate",
+      "category": "time-intelligence",
+      "attempts": [
+        {
+          "iteration": 1,
+          "error": "{\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"anthropic/claude-3.5-haiku-20241022 is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Google\"}},\"user_id\":\"user_2tsSIuSAxDMYKP7X6YbWZaK19xm\"}",
+          "status": "api_error"
+        },
+        {
+          "iteration": 2,
+          "error": "{\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"anthropic/claude-3.5-haiku-20241022 is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Google\"}},\"user_id\":\"user_2tsSIuSAxDMYKP7X6YbWZaK19xm\"}",
+          "status": "api_error"
+        },
+        {
+          "iteration": 3,
+          "error": "{\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"anthropic/claude-3.5-haiku-20241022 is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Google\"}},\"user_id\":\"user_2tsSIuSAxDMYKP7X6YbWZaK19xm\"}",
+          "status": "api_error"
+        },
+        {
+          "iteration": 4,
+          "error": "{\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"anthropic/claude-3.5-haiku-20241022 is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Google\"}},\"user_id\":\"user_2tsSIuSAxDMYKP7X6YbWZaK19xm\"}",
+          "status": "api_error"
+        },
+        {
+          "iteration": 5,
+          "error": "{\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"anthropic/claude-3.5-haiku-20241022 is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Google\"}},\"user_id\":\"user_2tsSIuSAxDMYKP7X6YbWZaK19xm\"}",
+          "status": "api_error"
+        }
+      ],
+      "final_status": "max_iterations",
+      "final_expression": null,
+      "iterations": 5,
+      "total_time": 3.2012441158294678,
+      "total_tokens": {
+        "input": 0,
+        "output": 0
+      }
+    },
+    {
+      "task_id": "task-028",
+      "title": "3-Month Rolling Average",
+      "complexity": "advanced",
+      "category": "time-intelligence",
+      "attempts": [
+        {
+          "iteration": 1,
+          "error": "{\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"anthropic/claude-3.5-haiku-20241022 is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Google\"}},\"user_id\":\"user_2tsSIuSAxDMYKP7X6YbWZaK19xm\"}",
+          "status": "api_error"
+        },
+        {
+          "iteration": 2,
+          "error": "{\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"anthropic/claude-3.5-haiku-20241022 is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Google\"}},\"user_id\":\"user_2tsSIuSAxDMYKP7X6YbWZaK19xm\"}",
+          "status": "api_error"
+        },
+        {
+          "iteration": 3,
+          "error": "{\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"anthropic/claude-3.5-haiku-20241022 is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Google\"}},\"user_id\":\"user_2tsSIuSAxDMYKP7X6YbWZaK19xm\"}",
+          "status": "api_error"
+        },
+        {
+          "iteration": 4,
+          "error": "{\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"anthropic/claude-3.5-haiku-20241022 is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Google\"}},\"user_id\":\"user_2tsSIuSAxDMYKP7X6YbWZaK19xm\"}",
+          "status": "api_error"
+        },
+        {
+          "iteration": 5,
+          "error": "{\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"anthropic/claude-3.5-haiku-20241022 is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Google\"}},\"user_id\":\"user_2tsSIuSAxDMYKP7X6YbWZaK19xm\"}",
+          "status": "api_error"
+        }
+      ],
+      "final_status": "max_iterations",
+      "final_expression": null,
+      "iterations": 5,
+      "total_time": 2.5856995582580566,
+      "total_tokens": {
+        "input": 0,
+        "output": 0
+      }
+    },
+    {
+      "task_id": "task-029",
+      "title": "Same Month Previous Year Comparison",
+      "complexity": "intermediate",
+      "category": "time-intelligence",
+      "attempts": [
+        {
+          "iteration": 1,
+          "error": "{\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"anthropic/claude-3.5-haiku-20241022 is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Google\"}},\"user_id\":\"user_2tsSIuSAxDMYKP7X6YbWZaK19xm\"}",
+          "status": "api_error"
+        },
+        {
+          "iteration": 2,
+          "error": "{\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"anthropic/claude-3.5-haiku-20241022 is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Google\"}},\"user_id\":\"user_2tsSIuSAxDMYKP7X6YbWZaK19xm\"}",
+          "status": "api_error"
+        },
+        {
+          "iteration": 3,
+          "error": "{\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"anthropic/claude-3.5-haiku-20241022 is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Google\"}},\"user_id\":\"user_2tsSIuSAxDMYKP7X6YbWZaK19xm\"}",
+          "status": "api_error"
+        },
+        {
+          "iteration": 4,
+          "error": "{\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"anthropic/claude-3.5-haiku-20241022 is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Google\"}},\"user_id\":\"user_2tsSIuSAxDMYKP7X6YbWZaK19xm\"}",
+          "status": "api_error"
+        },
+        {
+          "iteration": 5,
+          "error": "{\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"anthropic/claude-3.5-haiku-20241022 is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Google\"}},\"user_id\":\"user_2tsSIuSAxDMYKP7X6YbWZaK19xm\"}",
+          "status": "api_error"
+        }
+      ],
+      "final_status": "max_iterations",
+      "final_expression": null,
+      "iterations": 5,
+      "total_time": 2.916867971420288,
+      "total_tokens": {
+        "input": 0,
+        "output": 0
+      }
+    },
+    {
+      "task_id": "task-030",
+      "title": "Fiscal Year-to-Date (July Start)",
+      "complexity": "advanced",
+      "category": "time-intelligence",
+      "attempts": [
+        {
+          "iteration": 1,
+          "error": "{\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"anthropic/claude-3.5-haiku-20241022 is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Google\"}},\"user_id\":\"user_2tsSIuSAxDMYKP7X6YbWZaK19xm\"}",
+          "status": "api_error"
+        },
+        {
+          "iteration": 2,
+          "error": "{\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"anthropic/claude-3.5-haiku-20241022 is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Google\"}},\"user_id\":\"user_2tsSIuSAxDMYKP7X6YbWZaK19xm\"}",
+          "status": "api_error"
+        },
+        {
+          "iteration": 3,
+          "error": "{\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"anthropic/claude-3.5-haiku-20241022 is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Google\"}},\"user_id\":\"user_2tsSIuSAxDMYKP7X6YbWZaK19xm\"}",
+          "status": "api_error"
+        },
+        {
+          "iteration": 4,
+          "error": "{\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"anthropic/claude-3.5-haiku-20241022 is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Google\"}},\"user_id\":\"user_2tsSIuSAxDMYKP7X6YbWZaK19xm\"}",
+          "status": "api_error"
+        },
+        {
+          "iteration": 5,
+          "error": "{\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"anthropic/claude-3.5-haiku-20241022 is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Google\"}},\"user_id\":\"user_2tsSIuSAxDMYKP7X6YbWZaK19xm\"}",
+          "status": "api_error"
+        }
+      ],
+      "final_status": "max_iterations",
+      "final_expression": null,
+      "iterations": 5,
+      "total_time": 2.785155773162842,
+      "total_tokens": {
+        "input": 0,
+        "output": 0
+      }
+    }
+  ]
+}

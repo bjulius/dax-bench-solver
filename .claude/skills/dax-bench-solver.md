@@ -21,14 +21,130 @@ Use this skill when the user wants to:
 2. **Power BI Desktop**: Open with `Contoso.pbix` from `dax-bench/` folder
 3. **Power BI MCP Server**: Connected to the Contoso model
 
+## CRITICAL: Pre-Run and Post-Run Steps
+
+### BEFORE EVERY RUN: Read Lessons Learned
+
+**You MUST read the lessons-learned file before starting any benchmark run:**
+
+```
+Read: .claude/skills/dax-bench-solver/lessons-learned.md
+```
+
+This file contains:
+- Common failure patterns and how to avoid them
+- Effective feedback strategies that work
+- Model-specific quirks discovered in previous runs
+- Tasks that commonly need multiple iterations
+
+**Apply these learnings** to:
+- Craft better initial prompts
+- Provide more targeted feedback on failures
+- Anticipate likely error patterns
+
+### AFTER EVERY RUN: Write Lessons Learned
+
+**You MUST update the lessons-learned file after completing a benchmark run:**
+
+1. **Update the "Last Updated" date**
+2. **Add to Model Performance Summary table** with new results
+3. **Document any multi-iteration fixes** - If a task took >1 iteration to solve:
+   - What was the initial error?
+   - What feedback fixed it?
+   - What pattern should be remembered?
+4. **Add new failure patterns** discovered
+5. **Update successful patterns** with new techniques that worked
+
+**Example entry for multi-iteration fix:**
+```markdown
+### Run X: task-019 (2 iterations)
+- **Initial Error**: Model used `Sales[Unit Price]` instead of `Product[Unit Price]`
+- **Feedback Given**: "Unit Price filter should use Product table, not Sales"
+- **Lesson**: When filtering on product attributes, always check if column is in Product vs Sales table
+```
+
+### Model Names: ALWAYS Use Local Cache
+
+**NEVER hardcode or guess model identifiers.** Always pull from the local model cache:
+
+```bash
+# Refresh and view available models
+python dax-bench/fetch_models.py refresh
+python dax-bench/fetch_models.py list
+```
+
+Or read directly from cache file:
+```
+Read: dax-bench/cache/openrouter_models.json
+```
+
+**Required fields from cache:**
+- `id`: The exact model identifier (e.g., `anthropic/claude-opus-4-5-20251101`)
+- `pricing.prompt`: Input cost per token
+- `pricing.completion`: Output cost per token
+
+**DO NOT use:**
+- Shortened names like "opus" or "claude-opus"
+- Outdated model IDs
+- Guessed version numbers
+
 ## File Locations
 
 - **Tasks**: `dax-bench/tasks/{basic,intermediate,advanced}/task-XXX.json`
-- **Model Config**: `.claude/skills/dax-bench-solver/models.json`
+- **Lessons Learned**: `.claude/skills/dax-bench-solver/lessons-learned.md` ⚠️ READ BEFORE RUN, WRITE AFTER
+- **Model Cache**: `dax-bench/cache/openrouter_models.json` ⚠️ SOURCE FOR MODEL IDs
+- **Reference Values**: `dax-bench/reference_values.json` (expected outputs)
+- **DAX Functions**: `dax-bench/dax_functions_reference.json` (static validation)
 - **Run Logs**: `dax-bench/runs/` (created per run)
 - **Contoso Model**: `dax-bench/Contoso.pbix`
 
 ## Workflow
+
+### Step 0: Initialize (REQUIRED)
+
+**Before any benchmark work:**
+
+1. **Read lessons learned:**
+   ```
+   Read: .claude/skills/dax-bench-solver/lessons-learned.md
+   ```
+   Pay attention to:
+   - "Validated Learnings" section for common pitfalls
+   - "Multi-Iteration Fixes" tables for specific task issues
+   - Model-specific notes
+
+2. **Check DAX validation list currency:**
+   ```
+   Read: dax-bench/dax_functions_reference.json (check "last_updated" field)
+   ```
+
+   **Ask the user:**
+   > "The DAX function validation list was last updated on {last_updated}.
+   > Would you like me to check DAX.guide for any new functions added since then?
+   > - Yes: I'll scrape https://dax.guide/functions/ for updates
+   > - No: Proceed with current list"
+
+   **If user says YES:**
+   - Fetch https://dax.guide/functions/
+   - Extract all function names from the page
+   - Compare against current `valid_functions` list
+   - Add any new functions found
+   - Update `last_updated` to today's date
+   - Report: "Added X new functions: {list}" or "No new functions found"
+
+   **If user says NO:**
+   - Proceed with workflow
+
+3. **Load model cache:**
+   ```bash
+   python dax-bench/fetch_models.py refresh  # if cache >24h old
+   ```
+   Then read `dax-bench/cache/openrouter_models.json` to get exact model IDs.
+
+4. **Verify Power BI connection:**
+   ```
+   mcp__powerbi-desktop__manage_model_connection(operation: "get_current")
+   ```
 
 ### Step 1: Select Task(s)
 
@@ -223,10 +339,90 @@ For dual-model runs, create `dax-bench/runs/{timestamp}_comparison.md`:
 
 ## Key Insight
 Both models solve all 30 tasks successfully. Claude Opus 4.5 is **faster**
-and requires **fewer iterations**, but DeepSeek V3.2 is **13x cheaper**.
+```
 
-For production use where cost matters: DeepSeek
-For time-critical or complex tasks: Opus
+### Step 6: Update Lessons Learned (REQUIRED)
+
+**After completing any benchmark run, you MUST update the lessons-learned file:**
+
+```
+Edit: .claude/skills/dax-bench-solver/lessons-learned.md
+```
+
+**Required updates:**
+
+1. **Update "Last Updated" date** to today
+
+2. **Add row to Model Performance Summary table:**
+   ```markdown
+   | {model_id} | {solved}/{total} ({%}) | {first_try}/{total} ({%}) | {avg_iters} | {notes} |
+   ```
+
+3. **For each task that required >1 iteration, add to Run History:**
+   ```markdown
+   **Multi-Iteration Fixes ({Model}):**
+   | Task | Error | Fix |
+   |------|-------|-----|
+   | task-XXX | {what went wrong} | {what fixed it} |
+   ```
+
+4. **If a new pattern emerges, add to "Validated Learnings":**
+   ```markdown
+   ### {Pattern Name} (task-XXX)
+   **Problem**: {what models get wrong}
+   **Rule**: {the correct approach}
+   **Feedback that works**: "{exact feedback text that fixed it}"
+   ```
+
+**This step is NOT optional.** Future runs depend on accumulated learnings.
+
+---
+
+## Appendix: DAX.guide Function Scraping
+
+When user requests DAX function list update, follow this process:
+
+### Step 1: Fetch the page
+```
+WebFetch(url: "https://dax.guide/functions/", prompt: "Extract all DAX function names from this page. Return them as a JSON array of uppercase strings.")
+```
+
+### Step 2: Parse and compare
+```python
+# Pseudocode for comparison
+new_functions = set(fetched_functions)
+existing_functions = set(dax_functions_reference["valid_functions"])
+added = new_functions - existing_functions
+removed = existing_functions - new_functions  # Usually empty, but flag if functions deprecated
+```
+
+### Step 3: Update the file
+If new functions found:
+```json
+{
+  "source": "https://dax.guide/functions/",
+  "last_updated": "{today's date}",
+  "last_check_note": "Added: {list of new functions}",
+  "valid_functions": [... updated list ...]
+}
+```
+
+### Step 4: Report to user
+```
+✅ DAX function list updated:
+- Previous count: {old_count}
+- New count: {new_count}
+- Added functions: {list or "none"}
+- Removed functions: {list or "none"}
+- Last updated: {today}
+```
+
+### Known DAX.guide Structure
+The functions page lists functions in alphabetical sections. Each function is a link.
+Look for patterns like:
+- Function names in `<a>` tags with href to `/functions/{name}/`
+- All caps or title case function names
+- Exclude navigation elements, headers
 
 ## Per-Task Breakdown
 

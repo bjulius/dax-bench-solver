@@ -1,0 +1,27 @@
+{
+  "task_id": "task-001",
+  "title": "Total Sales Amount",
+  "complexity": "basic",
+  "category": "aggregation",
+  "model": "google/gemini-2.5-flash",
+  "solved": true,
+  "first_try": true,
+  "iteration_count": 1,
+  "iterations": [
+    {
+      "dax": "Total Sales = SUM(Sales[Net Price])",
+      "input_tokens": 120,
+      "output_tokens": 10,
+      "time": 0.85,
+      "valid": true,
+      "actual_result": 721780827.523
+    }
+  ],
+  "total_input_tokens": 120,
+  "total_output_tokens": 10,
+  "total_cost": 0,
+  "total_time": 0.85,
+  "final_dax": "Total Sales = SUM(Sales[Net Price])",
+  "final_measure_name": "task-001_Total_Sales",
+  "validation_method": "powerbi_execution"
+}

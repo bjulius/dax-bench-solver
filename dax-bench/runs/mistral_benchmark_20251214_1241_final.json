@@ -1,0 +1,776 @@
+{
+  "model": "mistralai/mistral-small-3.1-24b-instruct",
+  "timestamp": "2025-12-14T12:41:53.094100",
+  "status": "complete",
+  "summary": {
+    "total_tasks": 30,
+    "static_pass": 30,
+    "static_fail": 0,
+    "first_try_success": 29,
+    "first_try_rate": 96.7,
+    "avg_iterations": 1.03,
+    "total_time": 233.09
+  },
+  "results": [
+    {
+      "task_id": "task-001",
+      "title": "Total Sales Amount",
+      "complexity": "basic",
+      "category": "aggregation",
+      "attempts": [
+        {
+          "iteration": 1,
+          "measure_name": "Total Sales",
+          "expression": "SUM(Sales[Net Price])",
+          "static_valid": true,
+          "static_errors": [],
+          "status": "ready_for_mcp",
+          "mcp_query": "EVALUATE ROW(\"Result\", SUM(Sales[Net Price]))"
+        }
+      ],
+      "final_status": "static_pass",
+      "final_expression": "SUM(Sales[Net Price])",
+      "iterations": 1,
+      "total_time": 3.7146947383880615,
+      "total_tokens": {
+        "input": 593,
+        "output": 11
+      }
+    },
+    {
+      "task_id": "task-002",
+      "title": "Count of Customers",
+      "complexity": "basic",
+      "category": "aggregation",
+      "attempts": [
+        {
+          "iteration": 1,
+          "measure_name": "Customer Count",
+          "expression": "COUNTROWS(Customer)",
+          "static_valid": true,
+          "static_errors": [],
+          "status": "ready_for_mcp",
+          "mcp_query": "EVALUATE ROW(\"Result\", COUNTROWS(Customer))"
+        }
+      ],
+      "final_status": "static_pass",
+      "final_expression": "COUNTROWS(Customer)",
+      "iterations": 1,
+      "total_time": 8.516252517700195,
+      "total_tokens": {
+        "input": 589,
+        "output": 10
+      }
+    },
+    {
+      "task_id": "task-003",
+      "title": "Average Unit Price",
+      "complexity": "basic",
+      "category": "aggregation",
+      "attempts": [
+        {
+          "iteration": 1,
+          "measure_name": "Avg Unit Price",
+          "expression": "AVERAGE(Sales[Unit Price])",
+          "static_valid": true,
+          "static_errors": [],
+          "status": "ready_for_mcp",
+          "mcp_query": "EVALUATE ROW(\"Result\", AVERAGE(Sales[Unit Price]))"
+        }
+      ],
+      "final_status": "static_pass",
+      "final_expression": "AVERAGE(Sales[Unit Price])",
+      "iterations": 1,
+      "total_time": 6.481920003890991,
+      "total_tokens": {
+        "input": 593,
+        "output": 14
+      }
+    },
+    {
+      "task_id": "task-004",
+      "title": "Distinct Product Count",
+      "complexity": "basic",
+      "category": "aggregation",
+      "attempts": [
+        {
+          "iteration": 1,
+          "measure_name": "Products Sold",
+          "expression": "DISTINCTCOUNT(Sales[ProductKey])",
+          "static_valid": true,
+          "static_errors": [],
+          "status": "ready_for_mcp",
+          "mcp_query": "EVALUATE ROW(\"Result\", DISTINCTCOUNT(Sales[ProductKey]))"
+        }
+      ],
+      "final_status": "static_pass",
+      "final_expression": "DISTINCTCOUNT(Sales[ProductKey])",
+      "iterations": 1,
+      "total_time": 2.7089786529541016,
+      "total_tokens": {
+        "input": 594,
+        "output": 13
+      }
+    },
+    {
+      "task_id": "task-005",
+      "title": "Total Order Quantity",
+      "complexity": "basic",
+      "category": "aggregation",
+      "attempts": [
+        {
+          "iteration": 1,
+          "measure_name": "Total Quantity",
+          "expression": "SUM(Sales[Quantity])",
+          "static_valid": true,
+          "static_errors": [],
+          "status": "ready_for_mcp",
+          "mcp_query": "EVALUATE ROW(\"Result\", SUM(Sales[Quantity]))"
+        }
+      ],
+      "final_status": "static_pass",
+      "final_expression": "SUM(Sales[Quantity])",
+      "iterations": 1,
+      "total_time": 4.00515604019165,
+      "total_tokens": {
+        "input": 589,
+        "output": 10
+      }
+    },
+    {
+      "task_id": "task-006",
+      "title": "Year-to-Date Sales",
+      "complexity": "intermediate",
+      "category": "time-intelligence",
+      "attempts": [
+        {
+          "iteration": 1,
+          "measure_name": "YTD Sales",
+          "expression": "TOTALYTD([Total Sales], Date[Date])",
+          "static_valid": true,
+          "static_errors": [],
+          "status": "ready_for_mcp",
+          "mcp_query": "EVALUATE ROW(\"Result\", TOTALYTD([Total Sales], Date[Date]))"
+        }
+      ],
+      "final_status": "static_pass",
+      "final_expression": "TOTALYTD([Total Sales], Date[Date])",
+      "iterations": 1,
+      "total_time": 7.369733095169067,
+      "total_tokens": {
+        "input": 600,
+        "output": 17
+      }
+    },
+    {
+      "task_id": "task-007",
+      "title": "Previous Year Sales",
+      "complexity": "intermediate",
+      "category": "time-intelligence",
+      "attempts": [
+        {
+          "iteration": 1,
+          "measure_name": "PY Sales",
+          "expression": "CALCULATE([Total Sales], SAMEPERIODLASTYEAR(Date[Date]))",
+          "static_valid": true,
+          "static_errors": [],
+          "status": "ready_for_mcp",
+          "mcp_query": "EVALUATE ROW(\"Result\", CALCULATE([Total Sales], SAMEPERIODLASTYEAR(Date[Date])))"
+        }
+      ],
+      "final_status": "static_pass",
+      "final_expression": "CALCULATE([Total Sales], SAMEPERIODLASTYEAR(Date[Date]))",
+      "iterations": 1,
+      "total_time": 3.7342593669891357,
+      "total_tokens": {
+        "input": 592,
+        "output": 24
+      }
+    },
+    {
+      "task_id": "task-008",
+      "title": "Sales by Category Filter",
+      "complexity": "intermediate",
+      "category": "filtering",
+      "attempts": [
+        {
+          "iteration": 1,
+          "measure_name": "Audio Sales",
+          "expression": "CALCULATE([Total Sales], Product[Category] = \"Audio\")",
+          "static_valid": true,
+          "static_errors": [],
+          "status": "ready_for_mcp",
+          "mcp_query": "EVALUATE ROW(\"Result\", CALCULATE([Total Sales], Product[Category] = \"Audio\"))"
+        }
+      ],
+      "final_status": "static_pass",
+      "final_expression": "CALCULATE([Total Sales], Product[Category] = \"Audio\")",
+      "iterations": 1,
+      "total_time": 4.319598197937012,
+      "total_tokens": {
+        "input": 591,
+        "output": 20
+      }
+    },
+    {
+      "task_id": "task-009",
+      "title": "Year-over-Year Growth Percentage",
+      "complexity": "advanced",
+      "category": "calculation",
+      "attempts": [
+        {
+          "iteration": 1,
+          "measure_name": "YoY Growth %",
+          "expression": "VAR CurrentYearSales = CALCULATE([Total Net Price], SAMEPERIODLASTYEAR(Date[Date]))\nVAR PreviousYearSales = CALCULATE([Total Net Price], SAMEPERIODLASTYEAR(Date[Date]), DATEADD(Date[Date], -1, YEAR))\nRETURN\nIF(\n    PreviousYearSales = 0,\n    BLANK(),\n    DIVIDE(CurrentYearSales - PreviousYearSales, PreviousYearSales)\n)",
+          "static_valid": true,
+          "static_errors": [],
+          "status": "ready_for_mcp",
+          "mcp_query": "EVALUATE ROW(\"Result\", VAR CurrentYearSales = CALCULATE([Total Net Price], SAMEPERIODLASTYEAR(Date[Date]))\nVAR PreviousYearSales = CALCULATE([Total Net Price], SAMEPERIODLASTYEAR(Date[Date]), DATEADD(Date[Date], -1, YEAR))\nRETURN\nIF(\n    PreviousYearSales = 0,\n    BLANK(),\n    DIVIDE(CurrentYearSales - PreviousYearSales, PreviousYearSales)\n))"
+        }
+      ],
+      "final_status": "static_pass",
+      "final_expression": "VAR CurrentYearSales = CALCULATE([Total Net Price], SAMEPERIODLASTYEAR(Date[Date]))\nVAR PreviousYearSales = CALCULATE([Total Net Price], SAMEPERIODLASTYEAR(Date[Date]), DATEADD(Date[Date], -1, YEAR))\nRETURN\nIF(\n    PreviousYearSales = 0,\n    BLANK(),\n    DIVIDE(CurrentYearSales - PreviousYearSales, PreviousYearSales)\n)",
+      "iterations": 1,
+      "total_time": 11.815407276153564,
+      "total_tokens": {
+        "input": 618,
+        "output": 104
+      }
+    },
+    {
+      "task_id": "task-010",
+      "title": "Running Total with CALCULATE and FILTER",
+      "complexity": "advanced",
+      "category": "iterator",
+      "attempts": [
+        {
+          "iteration": 1,
+          "measure_name": "Running Total",
+          "expression": "CALCULATE(\n    TOTALMTD([Total Net Price], Date[Date]),\n    FILTER(\n        ALL(Date),\n        YEAR(Date[Date]) = YEAR(MAX(Date[Date]))\n    )\n)",
+          "static_valid": true,
+          "static_errors": [],
+          "status": "ready_for_mcp",
+          "mcp_query": "EVALUATE ROW(\"Result\", CALCULATE(\n    TOTALMTD([Total Net Price], Date[Date]),\n    FILTER(\n        ALL(Date),\n        YEAR(Date[Date]) = YEAR(MAX(Date[Date]))\n    )\n))"
+        }
+      ],
+      "final_status": "static_pass",
+      "final_expression": "CALCULATE(\n    TOTALMTD([Total Net Price], Date[Date]),\n    FILTER(\n        ALL(Date),\n        YEAR(Date[Date]) = YEAR(MAX(Date[Date]))\n    )\n)",
+      "iterations": 1,
+      "total_time": 4.59016227722168,
+      "total_tokens": {
+        "input": 601,
+        "output": 49
+      }
+    },
+    {
+      "task_id": "task-011",
+      "title": "Sales Summary by Category",
+      "complexity": "intermediate",
+      "category": "table-manipulation",
+      "attempts": [
+        {
+          "iteration": 1,
+          "measure_name": "Category Summary",
+          "expression": "SUMMARIZE(\n    Sales,\n    Product[Category],\n    \"Total Sales\", [Total Sales]\n)",
+          "static_valid": true,
+          "static_errors": [],
+          "status": "ready_for_mcp",
+          "mcp_query": "EVALUATE ROW(\"Result\", SUMMARIZE(\n    Sales,\n    Product[Category],\n    \"Total Sales\", [Total Sales]\n))"
+        }
+      ],
+      "final_status": "static_pass",
+      "final_expression": "SUMMARIZE(\n    Sales,\n    Product[Category],\n    \"Total Sales\", [Total Sales]\n)",
+      "iterations": 1,
+      "total_time": 2.213374614715576,
+      "total_tokens": {
+        "input": 597,
+        "output": 27
+      }
+    },
+    {
+      "task_id": "task-012",
+      "title": "Product List with Renamed Columns",
+      "complexity": "intermediate",
+      "category": "table-manipulation",
+      "attempts": [
+        {
+          "iteration": 1,
+          "measure_name": "Product Catalog",
+          "expression": "SELECTCOLUMNS(\n    Product,\n    \"Name\", Product[Product Name],\n    \"Brand\", Product[Brand],\n    \"Product Category\", Product[Category]\n)",
+          "static_valid": true,
+          "static_errors": [],
+          "status": "ready_for_mcp",
+          "mcp_query": "EVALUATE ROW(\"Result\", SELECTCOLUMNS(\n    Product,\n    \"Name\", Product[Product Name],\n    \"Brand\", Product[Brand],\n    \"Product Category\", Product[Category]\n))"
+        }
+      ],
+      "final_status": "static_pass",
+      "final_expression": "SELECTCOLUMNS(\n    Product,\n    \"Name\", Product[Product Name],\n    \"Brand\", Product[Brand],\n    \"Product Category\", Product[Category]\n)",
+      "iterations": 1,
+      "total_time": 2.9612371921539307,
+      "total_tokens": {
+        "input": 611,
+        "output": 39
+      }
+    },
+    {
+      "task_id": "task-013",
+      "title": "Union of High-Value Transactions",
+      "complexity": "advanced",
+      "category": "table-manipulation",
+      "attempts": [
+        {
+          "iteration": 1,
+          "measure_name": "Special Orders",
+          "expression": "UNION(\n    FILTER(Sales, Sales[Net Price] > 1000),\n    FILTER(Sales, Sales[Quantity] > 10)\n)",
+          "static_valid": true,
+          "static_errors": [],
+          "status": "ready_for_mcp",
+          "mcp_query": "EVALUATE ROW(\"Result\", UNION(\n    FILTER(Sales, Sales[Net Price] > 1000),\n    FILTER(Sales, Sales[Quantity] > 10)\n))"
+        }
+      ],
+      "final_status": "static_pass",
+      "final_expression": "UNION(\n    FILTER(Sales, Sales[Net Price] > 1000),\n    FILTER(Sales, Sales[Quantity] > 10)\n)",
+      "iterations": 1,
+      "total_time": 6.095257997512817,
+      "total_tokens": {
+        "input": 630,
+        "output": 39
+      }
+    },
+    {
+      "task_id": "task-014",
+      "title": "Year-Category Analysis Matrix",
+      "complexity": "advanced",
+      "category": "table-manipulation",
+      "attempts": [
+        {
+          "iteration": 1,
+          "measure_name": "Analysis Matrix",
+          "expression": "CROSSJOIN(\n    VALUES(Date[Year]),\n    VALUES(Product[Category])\n)",
+          "static_valid": true,
+          "static_errors": [],
+          "status": "ready_for_mcp",
+          "mcp_query": "EVALUATE ROW(\"Result\", CROSSJOIN(\n    VALUES(Date[Year]),\n    VALUES(Product[Category])\n))"
+        }
+      ],
+      "final_status": "static_pass",
+      "final_expression": "CROSSJOIN(\n    VALUES(Date[Year]),\n    VALUES(Product[Category])\n)",
+      "iterations": 1,
+      "total_time": 6.266122341156006,
+      "total_tokens": {
+        "input": 613,
+        "output": 23
+      }
+    },
+    {
+      "task_id": "task-015",
+      "title": "Product Percentage of Category Total",
+      "complexity": "intermediate",
+      "category": "context-transition",
+      "attempts": [
+        {
+          "iteration": 1,
+          "measure_name": "Category Share %",
+          "expression": "DIVIDE(\n    CALCULATE(\n        [Total Sales],\n        ALL(Product)\n    ),\n    CALCULATE(\n        [Total Sales],\n        ALLEXCEPT(Product, Product[Category])\n    ),\n    0\n) * 100",
+          "static_valid": true,
+          "static_errors": [],
+          "status": "ready_for_mcp",
+          "mcp_query": "EVALUATE ROW(\"Result\", DIVIDE(\n    CALCULATE(\n        [Total Sales],\n        ALL(Product)\n    ),\n    CALCULATE(\n        [Total Sales],\n        ALLEXCEPT(Product, Product[Category])\n    ),\n    0\n) * 100)"
+        }
+      ],
+      "final_status": "static_pass",
+      "final_expression": "DIVIDE(\n    CALCULATE(\n        [Total Sales],\n        ALL(Product)\n    ),\n    CALCULATE(\n        [Total Sales],\n        ALLEXCEPT(Product, Product[Category])\n    ),\n    0\n) * 100",
+      "iterations": 1,
+      "total_time": 12.968466520309448,
+      "total_tokens": {
+        "input": 628,
+        "output": 59
+      }
+    },
+    {
+      "task_id": "task-016",
+      "title": "Virtual Relationship with TREATAS",
+      "complexity": "advanced",
+      "category": "context-transition",
+      "attempts": [
+        {
+          "iteration": 1,
+          "measure_name": "Budget vs Actual",
+          "expression": "VAR CurrentYear = SELECTEDVALUE(Date[Year])\nVAR BudgetAmount = CALCULATE(SUM(Budget[Budget Amount]), TREATAS(VALUES(Date[Year]), Budget[Year]))\nRETURN [Total Sales] - BudgetAmount",
+          "static_valid": true,
+          "static_errors": [],
+          "status": "ready_for_mcp",
+          "mcp_query": "EVALUATE ROW(\"Result\", VAR CurrentYear = SELECTEDVALUE(Date[Year])\nVAR BudgetAmount = CALCULATE(SUM(Budget[Budget Amount]), TREATAS(VALUES(Date[Year]), Budget[Year]))\nRETURN [Total Sales] - BudgetAmount)"
+        }
+      ],
+      "final_status": "static_pass",
+      "final_expression": "VAR CurrentYear = SELECTEDVALUE(Date[Year])\nVAR BudgetAmount = CALCULATE(SUM(Budget[Budget Amount]), TREATAS(VALUES(Date[Year]), Budget[Year]))\nRETURN [Total Sales] - BudgetAmount",
+      "iterations": 1,
+      "total_time": 4.592278957366943,
+      "total_tokens": {
+        "input": 637,
+        "output": 56
+      }
+    },
+    {
+      "task_id": "task-017",
+      "title": "Granularity-Aware Measure with VALUES",
+      "complexity": "intermediate",
+      "category": "context-transition",
+      "attempts": [
+        {
+          "iteration": 1,
+          "measure_name": "Smart Sales",
+          "expression": "IF(\n    HASONEVALUE(Date[Year]),\n    [Total Net Price],\n    CALCULATE(\n        AVERAGE(Sales[Net Price]),\n        DATESMTD(Date[Date])\n    )\n)",
+          "static_valid": true,
+          "static_errors": [],
+          "status": "ready_for_mcp",
+          "mcp_query": "EVALUATE ROW(\"Result\", IF(\n    HASONEVALUE(Date[Year]),\n    [Total Net Price],\n    CALCULATE(\n        AVERAGE(Sales[Net Price]),\n        DATESMTD(Date[Date])\n    )\n))"
+        }
+      ],
+      "final_status": "static_pass",
+      "final_expression": "IF(\n    HASONEVALUE(Date[Year]),\n    [Total Net Price],\n    CALCULATE(\n        AVERAGE(Sales[Net Price]),\n        DATESMTD(Date[Date])\n    )\n)",
+      "iterations": 1,
+      "total_time": 10.803388118743896,
+      "total_tokens": {
+        "input": 614,
+        "output": 49
+      }
+    },
+    {
+      "task_id": "task-018",
+      "title": "Running Count with EARLIER",
+      "complexity": "advanced",
+      "category": "context-transition",
+      "attempts": [
+        {
+          "iteration": 1,
+          "measure_name": "Category Rank by Price",
+          "expression": "RANKX(\n    FILTER(\n        ALL(Product),\n        Product[Category] = EARLIER(Product[Category])\n    ),\n    Product[Unit Price],\n    ,\n    DESC,\n    DENSE\n)",
+          "static_valid": true,
+          "static_errors": [],
+          "status": "ready_for_mcp",
+          "mcp_query": "EVALUATE ROW(\"Result\", RANKX(\n    FILTER(\n        ALL(Product),\n        Product[Category] = EARLIER(Product[Category])\n    ),\n    Product[Unit Price],\n    ,\n    DESC,\n    DENSE\n))"
+        }
+      ],
+      "final_status": "static_pass",
+      "final_expression": "RANKX(\n    FILTER(\n        ALL(Product),\n        Product[Category] = EARLIER(Product[Category])\n    ),\n    Product[Unit Price],\n    ,\n    DESC,\n    DENSE\n)",
+      "iterations": 1,
+      "total_time": 19.98732042312622,
+      "total_tokens": {
+        "input": 607,
+        "output": 49
+      }
+    },
+    {
+      "task_id": "task-019",
+      "title": "Multiple Filter Conditions",
+      "complexity": "intermediate",
+      "category": "filtering",
+      "attempts": [
+        {
+          "iteration": 1,
+          "measure_name": "Premium Audio Sales",
+          "expression": "CALCULATE(\n    SUM(Sales[Net Price]),\n    Product[Category] = \"Audio\",\n    Sales[Unit Price] > 100\n)",
+          "static_valid": true,
+          "static_errors": [],
+          "status": "ready_for_mcp",
+          "mcp_query": "EVALUATE ROW(\"Result\", CALCULATE(\n    SUM(Sales[Net Price]),\n    Product[Category] = \"Audio\",\n    Sales[Unit Price] > 100\n))"
+        }
+      ],
+      "final_status": "static_pass",
+      "final_expression": "CALCULATE(\n    SUM(Sales[Net Price]),\n    Product[Category] = \"Audio\",\n    Sales[Unit Price] > 100\n)",
+      "iterations": 1,
+      "total_time": 8.29088020324707,
+      "total_tokens": {
+        "input": 602,
+        "output": 41
+      }
+    },
+    {
+      "task_id": "task-020",
+      "title": "Percentage of Total with ALLEXCEPT",
+      "complexity": "advanced",
+      "category": "filtering",
+      "attempts": [
+        {
+          "iteration": 1,
+          "measure_name": "Category % of Year",
+          "expression": "DIVIDE(\n    CALCULATE(\n        [Total Sales],\n        ALL('Product'),\n        'Date'[Year] = MAX('Date'[Year])\n    ),\n    CALCULATE(\n        [Total Sales],\n        ALL('Product'),\n        'Date'[Year] = MAX('Date'[Year])\n    ),\n    0\n)",
+          "static_valid": true,
+          "static_errors": [],
+          "status": "ready_for_mcp",
+          "mcp_query": "EVALUATE ROW(\"Result\", DIVIDE(\n    CALCULATE(\n        [Total Sales],\n        ALL('Product'),\n        'Date'[Year] = MAX('Date'[Year])\n    ),\n    CALCULATE(\n        [Total Sales],\n        ALL('Product'),\n        'Date'[Year] = MAX('Date'[Year])\n    ),\n    0\n))"
+        }
+      ],
+      "final_status": "static_pass",
+      "final_expression": "DIVIDE(\n    CALCULATE(\n        [Total Sales],\n        ALL('Product'),\n        'Date'[Year] = MAX('Date'[Year])\n    ),\n    CALCULATE(\n        [Total Sales],\n        ALL('Product'),\n        'Date'[Year] = MAX('Date'[Year])\n    ),\n    0\n)",
+      "iterations": 1,
+      "total_time": 13.383416414260864,
+      "total_tokens": {
+        "input": 640,
+        "output": 81
+      }
+    },
+    {
+      "task_id": "task-021",
+      "title": "Filter Intersection with KEEPFILTERS",
+      "complexity": "advanced",
+      "category": "filtering",
+      "attempts": [
+        {
+          "iteration": 1,
+          "measure_name": "Selected Category Audio Only",
+          "expression": "IF(KEEPFILTERS(SELECTEDVALUE(Product[Category]) = \"Audio\"), [Total Net Price], BLANK())",
+          "static_valid": true,
+          "static_errors": [],
+          "status": "ready_for_mcp",
+          "mcp_query": "EVALUATE ROW(\"Result\", IF(KEEPFILTERS(SELECTEDVALUE(Product[Category]) = \"Audio\"), [Total Net Price], BLANK()))"
+        }
+      ],
+      "final_status": "static_pass",
+      "final_expression": "IF(KEEPFILTERS(SELECTEDVALUE(Product[Category]) = \"Audio\"), [Total Net Price], BLANK())",
+      "iterations": 1,
+      "total_time": 8.736919164657593,
+      "total_tokens": {
+        "input": 634,
+        "output": 33
+      }
+    },
+    {
+      "task_id": "task-022",
+      "title": "Product Ranking with RANKX",
+      "complexity": "intermediate",
+      "category": "iterator",
+      "attempts": [
+        {
+          "iteration": 1,
+          "measure_name": "Sales Rank",
+          "expression": "RANKX(ALL(Product), [Total Net Price], , DESC, DENSE)",
+          "static_valid": true,
+          "static_errors": [],
+          "status": "ready_for_mcp",
+          "mcp_query": "EVALUATE ROW(\"Result\", RANKX(ALL(Product), [Total Net Price], , DESC, DENSE))"
+        }
+      ],
+      "final_status": "static_pass",
+      "final_expression": "RANKX(ALL(Product), [Total Net Price], , DESC, DENSE)",
+      "iterations": 1,
+      "total_time": 3.1745543479919434,
+      "total_tokens": {
+        "input": 606,
+        "output": 22
+      }
+    },
+    {
+      "task_id": "task-023",
+      "title": "Top 5 Products with TOPN",
+      "complexity": "intermediate",
+      "category": "table-manipulation",
+      "attempts": [
+        {
+          "iteration": 1,
+          "measure_name": "Top 5 Sales",
+          "expression": "VAR Top5Products = TOPN(5, ALL(Product), [Total Sales], DESC)\nRETURN\nIF(\n    HASONEVALUE(Product[ProductKey]),\n    IF(\n        Product[ProductKey] IN SELECTCOLUMNS(Top5Products, \"ProductKey\", Product[ProductKey]),\n        [Total Net Price],\n        BLANK()\n    ),\n    BLANK()\n)",
+          "static_valid": true,
+          "static_errors": [],
+          "status": "ready_for_mcp",
+          "mcp_query": "EVALUATE ROW(\"Result\", VAR Top5Products = TOPN(5, ALL(Product), [Total Sales], DESC)\nRETURN\nIF(\n    HASONEVALUE(Product[ProductKey]),\n    IF(\n        Product[ProductKey] IN SELECTCOLUMNS(Top5Products, \"ProductKey\", Product[ProductKey]),\n        [Total Net Price],\n        BLANK()\n    ),\n    BLANK()\n))"
+        }
+      ],
+      "final_status": "static_pass",
+      "final_expression": "VAR Top5Products = TOPN(5, ALL(Product), [Total Sales], DESC)\nRETURN\nIF(\n    HASONEVALUE(Product[ProductKey]),\n    IF(\n        Product[ProductKey] IN SELECTCOLUMNS(Top5Products, \"ProductKey\", Product[ProductKey]),\n        [Total Net Price],\n        BLANK()\n    ),\n    BLANK()\n)",
+      "iterations": 1,
+      "total_time": 12.097823143005371,
+      "total_tokens": {
+        "input": 612,
+        "output": 85
+      }
+    },
+    {
+      "task_id": "task-024",
+      "title": "90th Percentile Order Value",
+      "complexity": "advanced",
+      "category": "iterator",
+      "attempts": [
+        {
+          "iteration": 1,
+          "measure_name": "P90 Order Value",
+          "expression": "PERCENTILE.EXC(Sales[Net Price], 0.9)",
+          "static_valid": true,
+          "static_errors": [],
+          "status": "ready_for_mcp",
+          "mcp_query": "EVALUATE ROW(\"Result\", PERCENTILE.EXC(Sales[Net Price], 0.9))"
+        }
+      ],
+      "final_status": "static_pass",
+      "final_expression": "PERCENTILE.EXC(Sales[Net Price], 0.9)",
+      "iterations": 1,
+      "total_time": 7.892906904220581,
+      "total_tokens": {
+        "input": 610,
+        "output": 25
+      }
+    },
+    {
+      "task_id": "task-025",
+      "title": "Handle Missing Data with BLANK",
+      "complexity": "basic",
+      "category": "calculation",
+      "attempts": [
+        {
+          "iteration": 1,
+          "measure_name": "Safe Quantity",
+          "expression": "COALESCE(SUM(Sales[Quantity]), 0)",
+          "static_valid": false,
+          "static_errors": [
+            "'COALESCE' is a SQL function, not DAX. Use RANKX with DENSE parameter for ranking."
+          ],
+          "status": "static_fail"
+        },
+        {
+          "iteration": 2,
+          "measure_name": "Safe Quantity",
+          "expression": "SUMX(Sales, Sales[Quantity])",
+          "static_valid": true,
+          "static_errors": [],
+          "status": "ready_for_mcp",
+          "mcp_query": "EVALUATE ROW(\"Result\", SUMX(Sales, Sales[Quantity]))"
+        }
+      ],
+      "final_status": "static_pass",
+      "final_expression": "SUMX(Sales, Sales[Quantity])",
+      "iterations": 2,
+      "total_time": 5.092534303665161,
+      "total_tokens": {
+        "input": 1266,
+        "output": 31
+      }
+    },
+    {
+      "task_id": "task-026",
+      "title": "Safe Ratio with Cascading Fallbacks",
+      "complexity": "intermediate",
+      "category": "calculation",
+      "attempts": [
+        {
+          "iteration": 1,
+          "measure_name": "Profit Margin %",
+          "expression": "VAR Margin = DIVIDE(Sales[Net Price] - Sales[Unit Cost], Sales[Net Price], 0)\nRETURN IF(Margin < 0, 0, Margin * 100)",
+          "static_valid": true,
+          "static_errors": [],
+          "status": "ready_for_mcp",
+          "mcp_query": "EVALUATE ROW(\"Result\", VAR Margin = DIVIDE(Sales[Net Price] - Sales[Unit Cost], Sales[Net Price], 0)\nRETURN IF(Margin < 0, 0, Margin * 100))"
+        }
+      ],
+      "final_status": "static_pass",
+      "final_expression": "VAR Margin = DIVIDE(Sales[Net Price] - Sales[Unit Cost], Sales[Net Price], 0)\nRETURN IF(Margin < 0, 0, Margin * 100)",
+      "iterations": 1,
+      "total_time": 15.151418924331665,
+      "total_tokens": {
+        "input": 648,
+        "output": 49
+      }
+    },
+    {
+      "task_id": "task-027",
+      "title": "Safe Year-over-Year with Missing Data",
+      "complexity": "intermediate",
+      "category": "time-intelligence",
+      "attempts": [
+        {
+          "iteration": 1,
+          "measure_name": "Safe YoY Change",
+          "expression": "VAR CurrentYearSales = CALCULATE([Total Net Price], SAMEPERIODLASTYEAR(Date[Date]))\nVAR PreviousYearSales = [Total Net Price]\nRETURN\nIF(\n    ISBLANK(CurrentYearSales),\n    IF(ISBLANK(PreviousYearSales), 0, PreviousYearSales),\n    CurrentYearSales - PreviousYearSales\n)",
+          "static_valid": true,
+          "static_errors": [],
+          "status": "ready_for_mcp",
+          "mcp_query": "EVALUATE ROW(\"Result\", VAR CurrentYearSales = CALCULATE([Total Net Price], SAMEPERIODLASTYEAR(Date[Date]))\nVAR PreviousYearSales = [Total Net Price]\nRETURN\nIF(\n    ISBLANK(CurrentYearSales),\n    IF(ISBLANK(PreviousYearSales), 0, PreviousYearSales),\n    CurrentYearSales - PreviousYearSales\n))"
+        }
+      ],
+      "final_status": "static_pass",
+      "final_expression": "VAR CurrentYearSales = CALCULATE([Total Net Price], SAMEPERIODLASTYEAR(Date[Date]))\nVAR PreviousYearSales = [Total Net Price]\nRETURN\nIF(\n    ISBLANK(CurrentYearSales),\n    IF(ISBLANK(PreviousYearSales), 0, PreviousYearSales),\n    CurrentYearSales - PreviousYearSales\n)",
+      "iterations": 1,
+      "total_time": 14.427255630493164,
+      "total_tokens": {
+        "input": 627,
+        "output": 85
+      }
+    },
+    {
+      "task_id": "task-028",
+      "title": "3-Month Rolling Average",
+      "complexity": "advanced",
+      "category": "time-intelligence",
+      "attempts": [
+        {
+          "iteration": 1,
+          "measure_name": "Rolling 3M Avg Sales",
+          "expression": "AVERAGEX(\n    DATESINPERIOD(\n        Date[Date],\n        MAX(Date[Date]),\n        -2,\n        MONTH\n    ),\n    [Total Net Price]\n)",
+          "static_valid": true,
+          "static_errors": [],
+          "status": "ready_for_mcp",
+          "mcp_query": "EVALUATE ROW(\"Result\", AVERAGEX(\n    DATESINPERIOD(\n        Date[Date],\n        MAX(Date[Date]),\n        -2,\n        MONTH\n    ),\n    [Total Net Price]\n))"
+        }
+      ],
+      "final_status": "static_pass",
+      "final_expression": "AVERAGEX(\n    DATESINPERIOD(\n        Date[Date],\n        MAX(Date[Date]),\n        -2,\n        MONTH\n    ),\n    [Total Net Price]\n)",
+      "iterations": 1,
+      "total_time": 6.026928663253784,
+      "total_tokens": {
+        "input": 623,
+        "output": 49
+      }
+    },
+    {
+      "task_id": "task-029",
+      "title": "Same Month Previous Year Comparison",
+      "complexity": "intermediate",
+      "category": "time-intelligence",
+      "attempts": [
+        {
+          "iteration": 1,
+          "measure_name": "Prior Year Month Sales",
+          "expression": "CALCULATE([Total Sales], SAMEPERIODLASTYEAR(Date[Date]))",
+          "static_valid": true,
+          "static_errors": [],
+          "status": "ready_for_mcp",
+          "mcp_query": "EVALUATE ROW(\"Result\", CALCULATE([Total Sales], SAMEPERIODLASTYEAR(Date[Date])))"
+        }
+      ],
+      "final_status": "static_pass",
+      "final_expression": "CALCULATE([Total Sales], SAMEPERIODLASTYEAR(Date[Date]))",
+      "iterations": 1,
+      "total_time": 5.379378795623779,
+      "total_tokens": {
+        "input": 614,
+        "output": 26
+      }
+    },
+    {
+      "task_id": "task-030",
+      "title": "Fiscal Year-to-Date (July Start)",
+      "complexity": "advanced",
+      "category": "time-intelligence",
+      "attempts": [
+        {
+          "iteration": 1,
+          "measure_name": "Fiscal YTD Sales",
+          "expression": "TOTALYTD(\n    [Total Sales],\n    'Date'[Date],\n    \"7/01\"\n)",
+          "static_valid": true,
+          "static_errors": [],
+          "status": "ready_for_mcp",
+          "mcp_query": "EVALUATE ROW(\"Result\", TOTALYTD(\n    [Total Sales],\n    'Date'[Date],\n    \"7/01\"\n))"
+        }
+      ],
+      "final_status": "static_pass",
+      "final_expression": "TOTALYTD(\n    [Total Sales],\n    'Date'[Date],\n    \"7/01\"\n)",
+      "iterations": 1,
+      "total_time": 10.199889183044434,
+      "total_tokens": {
+        "input": 642,
+        "output": 32
+      }
+    }
+  ]
+}

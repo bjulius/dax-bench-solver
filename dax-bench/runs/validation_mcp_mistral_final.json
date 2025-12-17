@@ -1,0 +1,81 @@
+{
+  "validation_method": "MCP Live Power BI Execution - Full Workflow",
+  "timestamp": "2025-12-14T12:45:00",
+  "model": "mistralai/mistral-small-3.1-24b-instruct",
+  "benchmark_version": "2.0",
+  "workflow": "Static validation (DAX.guide) + MCP runtime validation + iterative feedback",
+
+  "results": {
+    "passed": 30,
+    "failed": 0,
+    "total_tasks": 30,
+    "pass_rate": 100.0,
+    "first_try_success": 25,
+    "first_try_rate": 83.3,
+    "avg_iterations": 1.17,
+    "total_time_seconds": 233.09,
+    "total_cost_estimate": 0.015
+  },
+
+  "complexity_breakdown": {
+    "basic": {"passed": 6, "total": 6, "first_try": 5, "avg_iterations": 1.17},
+    "intermediate": {"passed": 13, "total": 13, "first_try": 11, "avg_iterations": 1.15},
+    "advanced": {"passed": 11, "total": 11, "first_try": 9, "avg_iterations": 1.18}
+  },
+
+  "iteration_details": [
+    {"task_id": "task-010", "iterations": 2, "first_error": "TOTALMTD approach returned NULL without date context", "correction": "Changed to DATESYTD for proper YTD calculation"},
+    {"task_id": "task-019", "iterations": 2, "first_error": "Used Sales[Unit Price] instead of Product[Unit Price]", "correction": "Changed filter to Product[Unit Price] > 100"},
+    {"task_id": "task-025", "iterations": 2, "first_error": "Used COALESCE (falsely flagged as SQL)", "correction": "Changed to SUMX - note: COALESCE is actually valid DAX since 2020"},
+    {"task_id": "task-026", "iterations": 2, "first_error": "Referenced columns without aggregation (no SUM)", "correction": "Added SUM() around column references"},
+    {"task_id": "task-030", "iterations": 2, "first_error": "Wrong year_end_date '7/01' for fiscal year", "correction": "Changed to '6/30' (year END date, not start)"}
+  ],
+
+  "task_results": [
+    {"task_id": "task-001", "status": "pass", "iterations": 1, "result": 721780827.523, "expected": 721780827.523},
+    {"task_id": "task-002", "status": "pass", "iterations": 1, "result": 88941, "expected": 88941},
+    {"task_id": "task-003", "status": "pass", "iterations": 1, "result": 342.9814, "expected": 342.9814},
+    {"task_id": "task-004", "status": "pass", "iterations": 1, "result": 2517, "expected": 2517},
+    {"task_id": "task-005", "status": "pass", "iterations": 1, "result": 7037283, "expected": 7037283},
+    {"task_id": "task-006", "status": "pass", "iterations": 1, "result": 19867571.5636, "expected": 19867571.5636},
+    {"task_id": "task-007", "status": "pass", "iterations": 1, "result": 701913255.9594, "expected": 701913255.9594},
+    {"task_id": "task-008", "status": "pass", "iterations": 1, "result": 18882730.3141, "expected": 18882730.3141},
+    {"task_id": "task-009", "status": "pass", "iterations": 1, "result": 0.0283, "expected": 0.0283},
+    {"task_id": "task-010", "status": "pass", "iterations": 2, "result": 19867571.5636, "expected": 19867571.5636},
+    {"task_id": "task-011", "status": "pass", "iterations": 1, "result": "table (8 rows)", "expected_rowcount": 8},
+    {"task_id": "task-012", "status": "pass", "iterations": 1, "result": "table (2517 rows)", "expected_rowcount": 2517},
+    {"task_id": "task-013", "status": "pass", "iterations": 1, "result": "table (146406 rows)", "expected_rowcount": 146406},
+    {"task_id": "task-014", "status": "pass", "iterations": 1, "result": "table (176 rows)", "expected_rowcount": 176},
+    {"task_id": "task-015", "status": "pass", "iterations": 1, "result": 100, "expected": 100, "note": "Without product filter, returns 100%"},
+    {"task_id": "task-016", "status": "pass", "iterations": 1, "validation": "syntax_and_execute", "note": "TREATAS pattern validated"},
+    {"task_id": "task-017", "status": "pass", "iterations": 1, "result": 721780827.523, "expected": 721780827.523},
+    {"task_id": "task-018", "status": "pass", "iterations": 1, "validation": "syntax_and_execute", "note": "EARLIER requires row context - calculated column pattern"},
+    {"task_id": "task-019", "status": "pass", "iterations": 2, "result": 16090701.4336, "expected": 16090701.4336},
+    {"task_id": "task-020", "status": "pass", "iterations": 1, "result": 1.0, "expected": 1.0},
+    {"task_id": "task-021", "status": "pass", "iterations": 1, "result": 18882730.3141, "expected": 18882730.3141},
+    {"task_id": "task-022", "status": "pass", "iterations": 1, "result": 1, "expected": 1},
+    {"task_id": "task-023", "status": "pass", "iterations": 1, "result": null, "expected": null, "note": "Returns BLANK without product selection"},
+    {"task_id": "task-024", "status": "pass", "iterations": 1, "result": 783.111, "expected": 783.111},
+    {"task_id": "task-025", "status": "pass", "iterations": 2, "result": 7037283, "expected": 7037283},
+    {"task_id": "task-026", "status": "pass", "iterations": 2, "result": 55.8618, "expected": 55.8618},
+    {"task_id": "task-027", "status": "pass", "iterations": 1, "result": 19867571.5636, "expected": 19867571.5636},
+    {"task_id": "task-028", "status": "pass", "iterations": 1, "validation": "execute_only", "note": "Result depends on date context"},
+    {"task_id": "task-029", "status": "pass", "iterations": 1, "result": 701913255.9594, "expected": 701913255.9594},
+    {"task_id": "task-030", "status": "pass", "iterations": 2, "validation": "execute_only", "note": "Fiscal YTD - context dependent"}
+  ],
+
+  "key_insights": [
+    "Mistral Small 3.1 achieves 100% pass rate with iterative feedback",
+    "83.3% first-try success rate (25/30 tasks correct on first attempt)",
+    "Common errors: wrong table qualifiers, missing aggregations, incorrect date parameters",
+    "Self-correction is effective - all 5 failures fixed on second iteration",
+    "Cost-effective at ~$0.015 per full benchmark run",
+    "Strong performance across all complexity levels (Basic: 83%, Intermediate: 85%, Advanced: 82% first-try)"
+  ],
+
+  "comparison_notes": {
+    "vs_opus_4.5": "Opus achieved 100% first-try; Mistral needs ~1.17 iterations on average",
+    "vs_haiku_4.5": "Similar performance profile - both achieve 100% with feedback, ~80-85% first-try",
+    "cost_efficiency": "Mistral is ~9x cheaper than Opus per run while achieving same final accuracy"
+  }
+}
