@@ -1,0 +1,868 @@
+{
+  "timestamp": "2025-12-17T00:25:55.277611",
+  "models": [
+    "deepseek-v3",
+    "haiku-4.5",
+    "opus-4.5"
+  ],
+  "tasks": [
+    "bigfoot-001",
+    "bigfoot-002",
+    "bigfoot-003",
+    "bigfoot-004",
+    "bigfoot-005",
+    "bigfoot-006",
+    "bigfoot-007",
+    "bigfoot-008",
+    "bigfoot-009",
+    "bigfoot-010"
+  ],
+  "results": {
+    "deepseek-v3": {
+      "bigfoot-001": {
+        "task_title": "Longest Sighting Streak",
+        "expected": 9,
+        "dax_generated": "Longest Sighting Streak =\nVAR SightingsWithDates =\n    SUMMARIZE(\n        bfro_reports,\n        bfro_reports[date]\n    )\nVAR DatesWithSightings =\n    ADDCOLUMNS(\n        SightingsWithDates,\n        \"DateValue\", bfro_reports[date]\n    )\nVAR RankedDates =\n    ADDCOLUMNS(\n        DatesWithSightings,\n        \"DateRank\", RANKX(\n            DatesWithSightings,\n            [DateValue],\n            ,\n            ASC,\n            DENSE\n        )\n    )\nVAR DateGroups =\n    ADDCOLUMNS(\n        RankedDates,\n        \"Group\", [DateValue] - [DateRank]\n    )\nVAR StreakLengths =\n    SUMMARIZE(\n        DateGroups,\n        [Group],\n        \"StreakStart\", MIN([DateValue]),\n        \"StreakEnd\", MAX([DateValue]),\n        \"StreakDays\", COUNTROWS(DateGroups)\n    )\nRETURN\n    MAXX(StreakLengths, [StreakDays])",
+        "tokens": {
+          "prompt_tokens": 294,
+          "completion_tokens": 232,
+          "total_tokens": 526,
+          "cost": 0.00024734,
+          "is_byok": false,
+          "prompt_tokens_details": {
+            "cached_tokens": 0,
+            "audio_tokens": 0,
+            "video_tokens": 0
+          },
+          "cost_details": {
+            "upstream_inference_cost": null,
+            "upstream_inference_prompt_cost": 6.174e-05,
+            "upstream_inference_completions_cost": 0.0001856
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 0,
+            "image_tokens": 0
+          }
+        },
+        "time": 11.275288105010986,
+        "status": "generated"
+      },
+      "bigfoot-002": {
+        "task_title": "Missing Report Numbers Count",
+        "expected": 53593,
+        "dax_generated": "Missing Report Numbers = \nVAR MinReportNumber = MIN(bfro_reports[number])\nVAR MaxReportNumber = MAX(bfro_reports[number])\nVAR TotalExpectedReports = MaxReportNumber - MinReportNumber + 1\nVAR ActualReports = COUNTROWS(bfro_reports)\nRETURN\nTotalExpectedReports - ActualReports",
+        "tokens": {
+          "prompt_tokens": 294,
+          "completion_tokens": 78,
+          "total_tokens": 372,
+          "cost": 0.00012414,
+          "is_byok": false,
+          "prompt_tokens_details": {
+            "cached_tokens": 0,
+            "audio_tokens": 0,
+            "video_tokens": 0
+          },
+          "cost_details": {
+            "upstream_inference_cost": null,
+            "upstream_inference_prompt_cost": 6.174e-05,
+            "upstream_inference_completions_cost": 6.24e-05
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 0,
+            "image_tokens": 0
+          }
+        },
+        "time": 5.281283140182495,
+        "status": "generated"
+      },
+      "bigfoot-003": {
+        "task_title": "Cumulative Unique Counties",
+        "expected": 905,
+        "dax_generated": "Cumulative Unique Counties = \nCALCULATE(\n    DISTINCTCOUNT(bfro_reports[county]),\n    FILTER(\n        ALLSELECTED(DateTable),\n        DateTable[Date] <= MAX(DateTable[Date])\n    )\n)",
+        "tokens": {
+          "prompt_tokens": 286,
+          "completion_tokens": 57,
+          "total_tokens": 343,
+          "cost": 0.00010566,
+          "is_byok": false,
+          "prompt_tokens_details": {
+            "cached_tokens": 0,
+            "audio_tokens": 0,
+            "video_tokens": 0
+          },
+          "cost_details": {
+            "upstream_inference_cost": null,
+            "upstream_inference_prompt_cost": 6.006e-05,
+            "upstream_inference_completions_cost": 4.56e-05
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 0,
+            "image_tokens": 0
+          }
+        },
+        "time": 4.17275595664978,
+        "status": "generated"
+      },
+      "bigfoot-004": {
+        "task_title": "3rd Highest State by Sightings",
+        "expected": 283,
+        "dax_generated": "Nth Highest State Sightings = \nVAR RankPosition = 3\nVAR StateSightings = \n    SUMMARIZE(\n        bfro_reports,\n        bfro_reports[state],\n        \"Sightings\", COUNT(bfro_reports[number])\n    )\nVAR RankedStates = \n    ADDCOLUMNS(\n        StateSightings,\n        \"Rank\", RANKX(StateSightings, [Sightings], [Sightings], DESC, Dense)\n    )\nRETURN\n    MAXX(\n        FILTER(RankedStates, [Rank] = RankPosition),\n        [Sightings]\n    )",
+        "tokens": {
+          "prompt_tokens": 287,
+          "completion_tokens": 145,
+          "total_tokens": 432,
+          "cost": 0.000177992,
+          "is_byok": false,
+          "prompt_tokens_details": {
+            "cached_tokens": 0,
+            "audio_tokens": 0,
+            "video_tokens": 0
+          },
+          "cost_details": {
+            "upstream_inference_cost": null,
+            "upstream_inference_prompt_cost": 6.1992e-05,
+            "upstream_inference_completions_cost": 0.000116
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 0,
+            "image_tokens": 0
+          }
+        },
+        "time": 7.596628904342651,
+        "status": "generated"
+      },
+      "bigfoot-005": {
+        "task_title": "3rd Highest State Name",
+        "expected": "Florida",
+        "dax_generated": "Nth Highest State Name = \nVAR StateSightings = \n    SUMMARIZE(\n        bfro_reports,\n        bfro_reports[state],\n        \"TotalSightings\", COUNT(bfro_reports[number])\n    )\nVAR RankedStates = \n    ADDCOLUMNS(\n        StateSightings,\n        \"Rank\", RANKX(StateSightings, [TotalSightings], , DESC, Dense)\n    )\nRETURN\n    MAXX(\n        FILTER(RankedStates, [Rank] = 3),\n        bfro_reports[state]\n    )",
+        "tokens": {
+          "prompt_tokens": 275,
+          "completion_tokens": 138,
+          "total_tokens": 413,
+          "cost": 0.0001654,
+          "is_byok": false,
+          "prompt_tokens_details": {
+            "cached_tokens": 2,
+            "audio_tokens": 0,
+            "video_tokens": 0
+          },
+          "cost_details": {
+            "upstream_inference_cost": null,
+            "upstream_inference_prompt_cost": 5.5e-05,
+            "upstream_inference_completions_cost": 0.0001104
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 0,
+            "image_tokens": 0
+          }
+        },
+        "time": 10.55619740486145,
+        "status": "generated"
+      },
+      "bigfoot-006": {
+        "task_title": "States for 80% of Sightings (Pareto)",
+        "expected": 22,
+        "dax_generated": "States for 80 Percent = \nVAR TotalSightings = CALCULATE(COUNT(bfro_reports[number]), ALL(bfro_reports))\nVAR StateSightings = \n    SUMMARIZE(\n        bfro_reports,\n        bfro_reports[state],\n        \"Sightings\", COUNT(bfro_reports[number])\n    )\nVAR RankedStates = \n    ADDCOLUMNS(\n        StateSightings,\n        \"CumulativeSightings\", \n            VAR CurrentStateSightings = [Sightings]\n            RETURN\n            CALCULATE(\n                SUMX(StateSightings, [Sightings]),\n                FILTER(\n                    StateSightings,\n                    [Sightings] >= CurrentStateSightings\n                )\n            ),\n        \"Rank\", RANKX(StateSightings, [Sightings], , DESC, Dense)\n    )\nVAR TargetThreshold = TotalSightings * 0.8\nRETURN\nCOUNTROWS(\n    FILTER(\n        RankedStates,\n        [CumulativeSightings] <= TargetThreshold\n    )\n) + 1",
+        "tokens": {
+          "prompt_tokens": 294,
+          "completion_tokens": 254,
+          "total_tokens": 548,
+          "cost": 0.00026494,
+          "is_byok": false,
+          "prompt_tokens_details": {
+            "cached_tokens": 0,
+            "audio_tokens": 0,
+            "video_tokens": 0
+          },
+          "cost_details": {
+            "upstream_inference_cost": null,
+            "upstream_inference_prompt_cost": 6.174e-05,
+            "upstream_inference_completions_cost": 0.0002032
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 0,
+            "image_tokens": 0
+          }
+        },
+        "time": 11.07949686050415,
+        "status": "generated"
+      },
+      "bigfoot-007": {
+        "task_title": "Year-over-Year Change (2010)",
+        "expected": -23,
+        "dax_generated": "Sightings YoY Change = \nVAR Sightings2009 = \n    CALCULATE(\n        COUNT(bfro_reports[number]),\n        DateTable[Year] = 2009\n    )\nVAR Sightings2010 = \n    CALCULATE(\n        COUNT(bfro_reports[number]),\n        DateTable[Year] = 2010\n    )\nRETURN\n    Sightings2010 - Sightings2009",
+        "tokens": {
+          "prompt_tokens": 282,
+          "completion_tokens": 101,
+          "total_tokens": 383,
+          "cost": 0.00014002,
+          "is_byok": false,
+          "prompt_tokens_details": {
+            "cached_tokens": 0,
+            "audio_tokens": 0,
+            "video_tokens": 0
+          },
+          "cost_details": {
+            "upstream_inference_cost": null,
+            "upstream_inference_prompt_cost": 5.922e-05,
+            "upstream_inference_completions_cost": 8.08e-05
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 0,
+            "image_tokens": 0
+          }
+        },
+        "time": 5.9896240234375,
+        "status": "generated"
+      },
+      "bigfoot-008": {
+        "task_title": "Average High Temperature",
+        "expected": 68.82,
+        "dax_generated": "Avg Temperature = AVERAGE(bfro_reports[temperature_high])",
+        "tokens": {
+          "prompt_tokens": 281,
+          "completion_tokens": 22,
+          "total_tokens": 303,
+          "cost": 9.787e-05,
+          "is_byok": false,
+          "prompt_tokens_details": {
+            "cached_tokens": 0,
+            "audio_tokens": 0,
+            "video_tokens": 0
+          },
+          "cost_details": {
+            "upstream_inference_cost": null,
+            "upstream_inference_prompt_cost": 7.587e-05,
+            "upstream_inference_completions_cost": 2.2e-05
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 0,
+            "image_tokens": 0
+          }
+        },
+        "time": 1.4218559265136719,
+        "status": "generated"
+      },
+      "bigfoot-009": {
+        "task_title": "Total Sightings Count",
+        "expected": 4586,
+        "dax_generated": "Total Sightings = COUNTROWS(bfro_reports)",
+        "tokens": {
+          "prompt_tokens": 275,
+          "completion_tokens": 19,
+          "total_tokens": 294,
+          "cost": 7.2592e-05,
+          "is_byok": false,
+          "prompt_tokens_details": {
+            "cached_tokens": 4,
+            "audio_tokens": 0,
+            "video_tokens": 0
+          },
+          "cost_details": {
+            "upstream_inference_cost": null,
+            "upstream_inference_prompt_cost": 5.7582e-05,
+            "upstream_inference_completions_cost": 1.501e-05
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 0,
+            "image_tokens": 0
+          }
+        },
+        "time": 1.6125316619873047,
+        "status": "generated"
+      },
+      "bigfoot-010": {
+        "task_title": "Top State Sighting Count",
+        "expected": 535,
+        "dax_generated": "Top State Sightings = \nMAXX(\n    SUMMARIZE(\n        bfro_reports,\n        bfro_reports[state],\n        \"Sightings\", COUNT(bfro_reports[number])\n    ),\n    [Sightings]\n)",
+        "tokens": {
+          "prompt_tokens": 275,
+          "completion_tokens": 62,
+          "total_tokens": 337,
+          "cost": 0.000106562,
+          "is_byok": false,
+          "prompt_tokens_details": {
+            "cached_tokens": 4,
+            "audio_tokens": 0,
+            "video_tokens": 0
+          },
+          "cost_details": {
+            "upstream_inference_cost": null,
+            "upstream_inference_prompt_cost": 5.7582e-05,
+            "upstream_inference_completions_cost": 4.898e-05
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 0,
+            "image_tokens": 0
+          }
+        },
+        "time": 3.109293222427368,
+        "status": "generated"
+      }
+    },
+    "haiku-4.5": {
+      "bigfoot-001": {
+        "task_title": "Longest Sighting Streak",
+        "expected": 9,
+        "dax_generated": "Longest Sighting Streak = \nVAR DaysWithSightings = \n    SUMMARIZE(\n        bfro_reports,\n        bfro_reports[date],\n        \"HasSighting\", 1\n    )\nVAR RankedDays = \n    ADDCOLUMNS(\n        DaysWithSightings,\n        \"DayRank\", RANKX(\n            ALL(DaysWithSightings),\n            bfro_reports[date],,\n            ASC\n        ),\n        \"IslandGap\", \n            bfro_reports[date] - \n            RANKX(\n                ALL(DaysWithSightings),\n                bfro_reports[date],,\n                ASC\n            )\n    )\nVAR IslandGroups = \n    ADDCOLUMNS(\n        RankedDays,\n        \"Island\", \n            COUNTX(\n                FILTER(\n                    RankedDays,\n                    [IslandGap] = \n                        EARLIER([IslandGap])\n                ),\n                bfro_reports[date]\n            )\n    )\nRETURN\n    MAXX(\n        IslandGroups,\n        [Island]\n    )",
+        "tokens": {
+          "prompt_tokens": 322,
+          "completion_tokens": 308,
+          "total_tokens": 630,
+          "cost": 0.001862,
+          "is_byok": false,
+          "prompt_tokens_details": {
+            "cached_tokens": 0,
+            "audio_tokens": 0,
+            "video_tokens": 0
+          },
+          "cost_details": {
+            "upstream_inference_cost": null,
+            "upstream_inference_prompt_cost": 0.000322,
+            "upstream_inference_completions_cost": 0.00154
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 0,
+            "image_tokens": 0
+          }
+        },
+        "time": 3.4797255992889404,
+        "status": "generated"
+      },
+      "bigfoot-002": {
+        "task_title": "Missing Report Numbers Count",
+        "expected": 53593,
+        "dax_generated": "Missing Report Numbers = \nVAR MaxNumber = MAX(bfro_reports[number])\nVAR MinNumber = MIN(bfro_reports[number])\nVAR TotalRange = MaxNumber - MinNumber + 1\nVAR CountReports = COUNTA(bfro_reports[number])\nRETURN\n    TotalRange - CountReports",
+        "tokens": {
+          "prompt_tokens": 321,
+          "completion_tokens": 92,
+          "total_tokens": 413,
+          "cost": 0.000781,
+          "is_byok": false,
+          "prompt_tokens_details": {
+            "cached_tokens": 0,
+            "audio_tokens": 0,
+            "video_tokens": 0
+          },
+          "cost_details": {
+            "upstream_inference_cost": null,
+            "upstream_inference_prompt_cost": 0.000321,
+            "upstream_inference_completions_cost": 0.00046
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 0,
+            "image_tokens": 0
+          }
+        },
+        "time": 1.9240126609802246,
+        "status": "generated"
+      },
+      "bigfoot-003": {
+        "task_title": "Cumulative Unique Counties",
+        "expected": 905,
+        "dax_generated": "Cumulative Unique Counties = \nCALCULATE(\n    DISTINCTCOUNT(bfro_reports[county]),\n    FILTER(\n        ALL(DateTable[Date]),\n        DateTable[Date] <= MAX(DateTable[Date])\n    ),\n    REMOVEFILTERS(DateTable[Month], DateTable[Quarter], DateTable[Year])\n)",
+        "tokens": {
+          "prompt_tokens": 313,
+          "completion_tokens": 91,
+          "total_tokens": 404,
+          "cost": 0.000768,
+          "is_byok": false,
+          "prompt_tokens_details": {
+            "cached_tokens": 0,
+            "audio_tokens": 0,
+            "video_tokens": 0
+          },
+          "cost_details": {
+            "upstream_inference_cost": null,
+            "upstream_inference_prompt_cost": 0.000313,
+            "upstream_inference_completions_cost": 0.000455
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 0,
+            "image_tokens": 0
+          }
+        },
+        "time": 1.747737169265747,
+        "status": "generated"
+      },
+      "bigfoot-004": {
+        "task_title": "3rd Highest State by Sightings",
+        "expected": 283,
+        "dax_generated": "Nth Highest State Sightings = \nVAR RankPosition = 3\nVAR StateSightings = \n    SUMMARIZE(\n        bfro_reports,\n        bfro_reports[state],\n        \"SightingCount\", COUNTA(bfro_reports[number])\n    )\nVAR RankedStates = \n    ADDCOLUMNS(\n        StateSightings,\n        \"Rank\", RANKX(StateSightings, [SightingCount], , DESC)\n    )\nVAR NthHighest = \n    MAXX(\n        FILTER(RankedStates, [Rank] = RankPosition),\n        [SightingCount]\n    )\nRETURN\n    NthHighest",
+        "tokens": {
+          "prompt_tokens": 317,
+          "completion_tokens": 192,
+          "total_tokens": 509,
+          "cost": 0.001277,
+          "is_byok": false,
+          "prompt_tokens_details": {
+            "cached_tokens": 0,
+            "audio_tokens": 0,
+            "video_tokens": 0
+          },
+          "cost_details": {
+            "upstream_inference_cost": null,
+            "upstream_inference_prompt_cost": 0.000317,
+            "upstream_inference_completions_cost": 0.00096
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 0,
+            "image_tokens": 0
+          }
+        },
+        "time": 2.6490325927734375,
+        "status": "generated"
+      },
+      "bigfoot-005": {
+        "task_title": "3rd Highest State Name",
+        "expected": "Florida",
+        "dax_generated": "Nth Highest State Name = \nVAR RankedStates = \n    ADDCOLUMNS(\n        VALUES(bfro_reports[state]),\n        \"@Count\", CALCULATE(COUNTA(bfro_reports[number]))\n    )\nVAR SortedStates = \n    TOPN(3, RankedStates, [@Count], DESC)\nRETURN\n    MAXX(\n        FILTER(SortedStates, RANK([@Count], SortedStates[@Count], DESC) = 3),\n        bfro_reports[state]\n    )",
+        "tokens": {
+          "prompt_tokens": 303,
+          "completion_tokens": 152,
+          "total_tokens": 455,
+          "cost": 0.001063,
+          "is_byok": false,
+          "prompt_tokens_details": {
+            "cached_tokens": 0,
+            "audio_tokens": 0,
+            "video_tokens": 0
+          },
+          "cost_details": {
+            "upstream_inference_cost": null,
+            "upstream_inference_prompt_cost": 0.000303,
+            "upstream_inference_completions_cost": 0.00076
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 0,
+            "image_tokens": 0
+          }
+        },
+        "time": 2.3238027095794678,
+        "status": "generated"
+      },
+      "bigfoot-006": {
+        "task_title": "States for 80% of Sightings (Pareto)",
+        "expected": 22,
+        "dax_generated": "States for 80 Percent = \nVAR TotalSightings = COUNTA(bfro_reports[number])\nVAR StateRanked = \n    ADDCOLUMNS(\n        VALUES(bfro_reports[state]),\n        \"@Count\", COUNTA(bfro_reports[number]),\n        \"@RunningTotal\", \n            CALCULATE(\n                COUNTA(bfro_reports[number]),\n                FILTER(\n                    VALUES(bfro_reports[state]),\n                    COUNTA(bfro_reports[number]) >= \n                        CALCULATE(\n                            COUNTA(bfro_reports[number]),\n                            FILTER(\n                                ALL(bfro_reports[state]),\n                                bfro_reports[state] = VALUES(bfro_reports[state])\n                            )\n                        )\n                )\n            )\n    )\nVAR Threshold = TotalSightings * 0.8\nVAR Result = \n    SUMPRODUCT(\n        (MMULT(\n            --(TRANSPOSE(SORT(ADDCOLUMNS(VALUES(bfro_reports[state]), \"@Count\", COUNTA(bfro_reports[number])), [@Count], DESC)[@Count]) <= TRANSPOSE(SORT(ADDCOLUMNS(VALUES(bfro_reports[state]), \"@Count\", COUNTA(bfro_reports[number])), [@Count], DESC)[@Count]))),\n            SEQUENCE(COUNTA(VALUES(bfro_reports[state])))\n        ) <= Threshold) + 1\n    )\nRETURN\n    MINX(\n        FILTER(\n            ADDCOLUMNS(\n                TOPN(\n                    COUNTA(VALUES(bfro_reports[state])),\n                    ADDCOLUMNS(VALUES(bfro_reports[state]), \"@Count\", COUNTA(bfro_reports[number])),\n                    [@Count],\n                    DESC\n                ),\n                \"@CumulativeSum\", SUMX(TOPN(COUNTX(TOPN(COUNTA(VALUES(bfro_reports[state])), ADDCOLUMNS(VALUES(bfro_reports[state]), \"@Count\", COUNTA(bfro_reports[number])), [@Count], DESC), TOPN(COUNTA(VALUES(bfro_reports[state])), ADDCOLUMNS(VALUES(bfro_reports[state]), \"@Count\", COUNTA(bfro_reports[number])), [@Count], DESC)), TOPN(COUNTA(VALUES(bfro_reports[state])), ADDCOLUMNS(VALUES(bfro_reports[state]), \"@Count\", COUNTA(bfro_reports[number])), [@Count], DESC)), [@Count])\n            ),\n            [@CumulativeSum] >= Threshold\n        ),\n        [@Count]\n    )",
+        "tokens": {
+          "prompt_tokens": 326,
+          "completion_tokens": 703,
+          "total_tokens": 1029,
+          "cost": 0.003841,
+          "is_byok": false,
+          "prompt_tokens_details": {
+            "cached_tokens": 0,
+            "audio_tokens": 0,
+            "video_tokens": 0
+          },
+          "cost_details": {
+            "upstream_inference_cost": null,
+            "upstream_inference_prompt_cost": 0.000326,
+            "upstream_inference_completions_cost": 0.003515
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 0,
+            "image_tokens": 0
+          }
+        },
+        "time": 6.294290065765381,
+        "status": "generated"
+      },
+      "bigfoot-007": {
+        "task_title": "Year-over-Year Change (2010)",
+        "expected": -23,
+        "dax_generated": "Sightings YoY Change = \nVAR Sightings2010 = CALCULATE(COUNTA(bfro_reports[number]), YEAR(DateTable[Date]) = 2010)\nVAR Sightings2009 = CALCULATE(COUNTA(bfro_reports[number]), YEAR(DateTable[Date]) = 2009)\nRETURN\nSightings2010 - Sightings2009",
+        "tokens": {
+          "prompt_tokens": 311,
+          "completion_tokens": 115,
+          "total_tokens": 426,
+          "cost": 0.000886,
+          "is_byok": false,
+          "prompt_tokens_details": {
+            "cached_tokens": 0,
+            "audio_tokens": 0,
+            "video_tokens": 0
+          },
+          "cost_details": {
+            "upstream_inference_cost": null,
+            "upstream_inference_prompt_cost": 0.000311,
+            "upstream_inference_completions_cost": 0.000575
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 0,
+            "image_tokens": 0
+          }
+        },
+        "time": 1.8039202690124512,
+        "status": "generated"
+      },
+      "bigfoot-008": {
+        "task_title": "Average High Temperature",
+        "expected": 68.82,
+        "dax_generated": "Avg Temperature = AVERAGEA(bfro_reports[temperature_high])",
+        "tokens": {
+          "prompt_tokens": 309,
+          "completion_tokens": 28,
+          "total_tokens": 337,
+          "cost": 0.000449,
+          "is_byok": false,
+          "prompt_tokens_details": {
+            "cached_tokens": 0,
+            "audio_tokens": 0,
+            "video_tokens": 0
+          },
+          "cost_details": {
+            "upstream_inference_cost": null,
+            "upstream_inference_prompt_cost": 0.000309,
+            "upstream_inference_completions_cost": 0.00014
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 0,
+            "image_tokens": 0
+          }
+        },
+        "time": 2.051605701446533,
+        "status": "generated"
+      },
+      "bigfoot-009": {
+        "task_title": "Total Sightings Count",
+        "expected": 4586,
+        "dax_generated": "Total Sightings = COUNTA(bfro_reports[number])",
+        "tokens": {
+          "prompt_tokens": 303,
+          "completion_tokens": 27,
+          "total_tokens": 330,
+          "cost": 0.000438,
+          "is_byok": false,
+          "prompt_tokens_details": {
+            "cached_tokens": 0,
+            "audio_tokens": 0,
+            "video_tokens": 0
+          },
+          "cost_details": {
+            "upstream_inference_cost": null,
+            "upstream_inference_prompt_cost": 0.000303,
+            "upstream_inference_completions_cost": 0.000135
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 0,
+            "image_tokens": 0
+          }
+        },
+        "time": 1.6795196533203125,
+        "status": "generated"
+      },
+      "bigfoot-010": {
+        "task_title": "Top State Sighting Count",
+        "expected": 535,
+        "dax_generated": "Top State Sightings = MAXX(VALUES(bfro_reports[state]), CALCULATE(COUNTA(bfro_reports[number])))",
+        "tokens": {
+          "prompt_tokens": 306,
+          "completion_tokens": 46,
+          "total_tokens": 352,
+          "cost": 0.000536,
+          "is_byok": false,
+          "prompt_tokens_details": {
+            "cached_tokens": 0,
+            "audio_tokens": 0,
+            "video_tokens": 0
+          },
+          "cost_details": {
+            "upstream_inference_cost": null,
+            "upstream_inference_prompt_cost": 0.000306,
+            "upstream_inference_completions_cost": 0.00023
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 0,
+            "image_tokens": 0
+          }
+        },
+        "time": 1.736854076385498,
+        "status": "generated"
+      }
+    },
+    "opus-4.5": {
+      "bigfoot-001": {
+        "task_title": "Longest Sighting Streak",
+        "expected": 9,
+        "dax_generated": "Longest Sighting Streak = \nVAR SightingDates =\n    DISTINCT(bfro_reports[date])\nVAR DatesWithRank =\n    ADDCOLUMNS(\n        SightingDates,\n        \"DateRank\", RANKX(SightingDates, [date], , ASC, DENSE)\n    )\nVAR DatesWithGroup =\n    ADDCOLUMNS(\n        DatesWithRank,\n        \"GroupID\", [date] - [DateRank]\n    )\nVAR StreakLengths =\n    ADDCOLUMNS(\n        SUMMARIZE(DatesWithGroup, [GroupID]),\n        \"StreakLength\", CALCULATE(COUNTROWS(DatesWithGroup))\n    )\nRETURN\n    MAXX(StreakLengths, [StreakLength])",
+        "tokens": {
+          "prompt_tokens": 322,
+          "completion_tokens": 215,
+          "total_tokens": 537,
+          "cost": 0.006985,
+          "is_byok": false,
+          "prompt_tokens_details": {
+            "cached_tokens": 0,
+            "audio_tokens": 0,
+            "video_tokens": 0
+          },
+          "cost_details": {
+            "upstream_inference_cost": null,
+            "upstream_inference_prompt_cost": 0.00161,
+            "upstream_inference_completions_cost": 0.005375
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 0,
+            "image_tokens": 0
+          }
+        },
+        "time": 5.051276206970215,
+        "status": "generated"
+      },
+      "bigfoot-002": {
+        "task_title": "Missing Report Numbers Count",
+        "expected": 53593,
+        "dax_generated": "Missing Report Numbers = \nVAR MinNumber = MIN(bfro_reports[number])\nVAR MaxNumber = MAX(bfro_reports[number])\nVAR ExpectedCount = MaxNumber - MinNumber + 1\nVAR ActualCount = COUNTROWS(bfro_reports)\nRETURN\nExpectedCount - ActualCount",
+        "tokens": {
+          "prompt_tokens": 321,
+          "completion_tokens": 89,
+          "total_tokens": 410,
+          "cost": 0.00383,
+          "is_byok": false,
+          "prompt_tokens_details": {
+            "cached_tokens": 0,
+            "audio_tokens": 0,
+            "video_tokens": 0
+          },
+          "cost_details": {
+            "upstream_inference_cost": null,
+            "upstream_inference_prompt_cost": 0.001605,
+            "upstream_inference_completions_cost": 0.002225
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 0,
+            "image_tokens": 0
+          }
+        },
+        "time": 3.3074963092803955,
+        "status": "generated"
+      },
+      "bigfoot-003": {
+        "task_title": "Cumulative Unique Counties",
+        "expected": 905,
+        "dax_generated": "Cumulative Unique Counties = \nVAR CurrentDate = MAX(DateTable[Date])\nRETURN\n    CALCULATE(\n        DISTINCTCOUNT(bfro_reports[county]),\n        FILTER(\n            ALL(DateTable),\n            DateTable[Date] <= CurrentDate\n        ),\n        bfro_reports[date] <= CurrentDate\n    )",
+        "tokens": {
+          "prompt_tokens": 313,
+          "completion_tokens": 93,
+          "total_tokens": 406,
+          "cost": 0.00389,
+          "is_byok": false,
+          "prompt_tokens_details": {
+            "cached_tokens": 0,
+            "audio_tokens": 0,
+            "video_tokens": 0
+          },
+          "cost_details": {
+            "upstream_inference_cost": null,
+            "upstream_inference_prompt_cost": 0.001565,
+            "upstream_inference_completions_cost": 0.002325
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 0,
+            "image_tokens": 0
+          }
+        },
+        "time": 3.329274892807007,
+        "status": "generated"
+      },
+      "bigfoot-004": {
+        "task_title": "3rd Highest State by Sightings",
+        "expected": 283,
+        "dax_generated": "Nth Highest State Sightings = \nVAR RankPosition = 3\nVAR StateSightings =\n    ADDCOLUMNS(\n        VALUES(bfro_reports[state]),\n        \"@Sightings\", CALCULATE(COUNTROWS(bfro_reports))\n    )\nVAR RankedStates =\n    ADDCOLUMNS(\n        StateSightings,\n        \"@Rank\", RANKX(StateSightings, [@Sightings], , DESC, DENSE)\n    )\nVAR Result =\n    SUMX(\n        FILTER(RankedStates, [@Rank] = RankPosition),\n        [@Sightings]\n    )\nRETURN\n    Result",
+        "tokens": {
+          "prompt_tokens": 317,
+          "completion_tokens": 183,
+          "total_tokens": 500,
+          "cost": 0.00616,
+          "is_byok": false,
+          "prompt_tokens_details": {
+            "cached_tokens": 0,
+            "audio_tokens": 0,
+            "video_tokens": 0
+          },
+          "cost_details": {
+            "upstream_inference_cost": null,
+            "upstream_inference_prompt_cost": 0.001585,
+            "upstream_inference_completions_cost": 0.004575
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 0,
+            "image_tokens": 0
+          }
+        },
+        "time": 4.699723482131958,
+        "status": "generated"
+      },
+      "bigfoot-005": {
+        "task_title": "3rd Highest State Name",
+        "expected": "Florida",
+        "dax_generated": "Nth Highest State Name = \nVAR N = 3\nVAR StateRanking =\n    ADDCOLUMNS(\n        SUMMARIZE(bfro_reports, bfro_reports[state]),\n        \"@TotalSightings\", CALCULATE(COUNTROWS(bfro_reports))\n    )\nVAR RankedStates =\n    ADDCOLUMNS(\n        StateRanking,\n        \"@Rank\", RANKX(StateRanking, [@TotalSightings], , DESC, DENSE)\n    )\nVAR NthState =\n    FILTER(RankedStates, [@Rank] = N)\nRETURN\n    MAXX(NthState, bfro_reports[state])",
+        "tokens": {
+          "prompt_tokens": 303,
+          "completion_tokens": 186,
+          "total_tokens": 489,
+          "cost": 0.006165,
+          "is_byok": false,
+          "prompt_tokens_details": {
+            "cached_tokens": 0,
+            "audio_tokens": 0,
+            "video_tokens": 0
+          },
+          "cost_details": {
+            "upstream_inference_cost": null,
+            "upstream_inference_prompt_cost": 0.001515,
+            "upstream_inference_completions_cost": 0.00465
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 0,
+            "image_tokens": 0
+          }
+        },
+        "time": 4.547261953353882,
+        "status": "generated"
+      },
+      "bigfoot-006": {
+        "task_title": "States for 80% of Sightings (Pareto)",
+        "expected": 22,
+        "dax_generated": "States for 80 Percent = \nVAR TotalSightings = COUNTROWS(bfro_reports)\nVAR Threshold = TotalSightings * 0.8\nVAR StatesSummary = \n    ADDCOLUMNS(\n        SUMMARIZE(bfro_reports, bfro_reports[state]),\n        \"@Count\", CALCULATE(COUNTROWS(bfro_reports))\n    )\nVAR StatesRanked = \n    ADDCOLUMNS(\n        StatesSummary,\n        \"@Rank\", RANKX(StatesSummary, [@Count], , DESC, DENSE)\n    )\nVAR StatesWithRunning = \n    ADDCOLUMNS(\n        StatesRanked,\n        \"@RunningTotal\", \n        SUMX(\n            FILTER(StatesRanked, [@Rank] <= EARLIER([@Rank])),\n            [@Count]\n        )\n    )\nVAR StatesNeeded = \n    MINX(\n        FILTER(StatesWithRunning, [@RunningTotal] >= Threshold),\n        [@Rank]\n    )\nRETURN\n    StatesNeeded",
+        "tokens": {
+          "prompt_tokens": 326,
+          "completion_tokens": 291,
+          "total_tokens": 617,
+          "cost": 0.008905,
+          "is_byok": false,
+          "prompt_tokens_details": {
+            "cached_tokens": 0,
+            "audio_tokens": 0,
+            "video_tokens": 0
+          },
+          "cost_details": {
+            "upstream_inference_cost": null,
+            "upstream_inference_prompt_cost": 0.00163,
+            "upstream_inference_completions_cost": 0.007275
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 0,
+            "image_tokens": 0
+          }
+        },
+        "time": 5.489399433135986,
+        "status": "generated"
+      },
+      "bigfoot-007": {
+        "task_title": "Year-over-Year Change (2010)",
+        "expected": -23,
+        "dax_generated": "Sightings YoY Change = \nVAR Sightings2010 = CALCULATE(COUNTROWS(bfro_reports), DateTable[Year] = 2010)\nVAR Sightings2009 = CALCULATE(COUNTROWS(bfro_reports), DateTable[Year] = 2009)\nRETURN\nSightings2010 - Sightings2009",
+        "tokens": {
+          "prompt_tokens": 311,
+          "completion_tokens": 105,
+          "total_tokens": 416,
+          "cost": 0.00418,
+          "is_byok": false,
+          "prompt_tokens_details": {
+            "cached_tokens": 0,
+            "audio_tokens": 0,
+            "video_tokens": 0
+          },
+          "cost_details": {
+            "upstream_inference_cost": null,
+            "upstream_inference_prompt_cost": 0.001555,
+            "upstream_inference_completions_cost": 0.002625
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 0,
+            "image_tokens": 0
+          }
+        },
+        "time": 4.886224031448364,
+        "status": "generated"
+      },
+      "bigfoot-008": {
+        "task_title": "Average High Temperature",
+        "expected": 68.82,
+        "dax_generated": "Avg Temperature = AVERAGE(bfro_reports[temperature_high])",
+        "tokens": {
+          "prompt_tokens": 309,
+          "completion_tokens": 26,
+          "total_tokens": 335,
+          "cost": 0.002195,
+          "is_byok": false,
+          "prompt_tokens_details": {
+            "cached_tokens": 0,
+            "audio_tokens": 0,
+            "video_tokens": 0
+          },
+          "cost_details": {
+            "upstream_inference_cost": null,
+            "upstream_inference_prompt_cost": 0.001545,
+            "upstream_inference_completions_cost": 0.00065
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 0,
+            "image_tokens": 0
+          }
+        },
+        "time": 3.252643346786499,
+        "status": "generated"
+      },
+      "bigfoot-009": {
+        "task_title": "Total Sightings Count",
+        "expected": 4586,
+        "dax_generated": "Total Sightings = COUNTROWS(bfro_reports)",
+        "tokens": {
+          "prompt_tokens": 303,
+          "completion_tokens": 25,
+          "total_tokens": 328,
+          "cost": 0.00214,
+          "is_byok": false,
+          "prompt_tokens_details": {
+            "cached_tokens": 0,
+            "audio_tokens": 0,
+            "video_tokens": 0
+          },
+          "cost_details": {
+            "upstream_inference_cost": null,
+            "upstream_inference_prompt_cost": 0.001515,
+            "upstream_inference_completions_cost": 0.000625
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 0,
+            "image_tokens": 0
+          }
+        },
+        "time": 2.4542934894561768,
+        "status": "generated"
+      },
+      "bigfoot-010": {
+        "task_title": "Top State Sighting Count",
+        "expected": 535,
+        "dax_generated": "Top State Sightings = \nMAXX(\n    VALUES(bfro_reports[state]),\n    CALCULATE(COUNTROWS(bfro_reports))\n)",
+        "tokens": {
+          "prompt_tokens": 306,
+          "completion_tokens": 51,
+          "total_tokens": 357,
+          "cost": 0.002805,
+          "is_byok": false,
+          "prompt_tokens_details": {
+            "cached_tokens": 0,
+            "audio_tokens": 0,
+            "video_tokens": 0
+          },
+          "cost_details": {
+            "upstream_inference_cost": null,
+            "upstream_inference_prompt_cost": 0.00153,
+            "upstream_inference_completions_cost": 0.001275
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 0,
+            "image_tokens": 0
+          }
+        },
+        "time": 3.1252007484436035,
+        "status": "generated"
+      }
+    }
+  }
+}

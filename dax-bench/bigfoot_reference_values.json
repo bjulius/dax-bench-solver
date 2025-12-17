@@ -1,0 +1,157 @@
+{
+  "version": "1.0",
+  "generated": "2025-12-16",
+  "model": "BigfootDAX (Power BI)",
+  "description": "Reference values for BigfootDAX validation - validated by both R and Python",
+  "data_source": "bfro_reports_geocoded.csv",
+  "record_count": 4586,
+
+  "tasks": {
+    "bigfoot-001": {
+      "title": "Longest Sighting Streak",
+      "type": "scalar",
+      "description": "Find the longest streak of consecutive calendar days with at least one Bigfoot sighting",
+      "prompt": "Create a DAX measure called 'Longest Sighting Streak' that calculates the longest streak of consecutive calendar days that had at least one Bigfoot sighting. Use the 'islands and gaps' pattern with date ranking.",
+      "expected_value": 9,
+      "expected_details": {
+        "start_date": "2004-11-19",
+        "end_date": "2004-11-27"
+      },
+      "tolerance": 0,
+      "difficulty": "advanced",
+      "patterns": ["SUMMARIZE", "ADDCOLUMNS", "RANKX", "GROUPBY", "MAXX"]
+    },
+    "bigfoot-002": {
+      "title": "Missing Report Numbers Count",
+      "type": "scalar",
+      "description": "Count how many report numbers are missing in the sequence",
+      "prompt": "Create a DAX measure called 'Missing Report Numbers' that counts how many report numbers are missing between the minimum and maximum report number in the bfro_reports table. The 'number' column contains the report IDs.",
+      "expected_value": 53593,
+      "expected_details": {
+        "min_report": 60,
+        "max_report": 58238,
+        "expected_count": 58179,
+        "actual_count": 4586
+      },
+      "tolerance": 0,
+      "difficulty": "intermediate",
+      "patterns": ["GENERATESERIES", "COUNTROWS", "MIN", "MAX", "EXCEPT"]
+    },
+    "bigfoot-003": {
+      "title": "Cumulative Unique Counties",
+      "type": "scalar",
+      "description": "Count of unique counties with sightings up to the current date context",
+      "prompt": "Create a DAX measure called 'Cumulative Unique Counties' that shows the running distinct count of unique counties that have had at least one Bigfoot sighting up to the selected date.",
+      "expected_value": 905,
+      "expected_details": {
+        "note": "905 when filtering to rows with valid dates, 1005 for all rows"
+      },
+      "tolerance": 0,
+      "difficulty": "intermediate",
+      "patterns": ["CALCULATE", "DISTINCTCOUNT", "FILTER", "ALL"]
+    },
+    "bigfoot-004": {
+      "title": "3rd Highest State by Sightings",
+      "type": "scalar",
+      "description": "Return the sighting count for the 3rd ranked state",
+      "prompt": "Create a DAX measure called 'Nth Highest State Sightings' that returns the sighting count for the 3rd ranked state by total sightings. Use a variable for the rank position.",
+      "expected_value": 283,
+      "expected_details": {
+        "state": "Florida",
+        "rank": 3
+      },
+      "tolerance": 0,
+      "difficulty": "intermediate",
+      "patterns": ["SUMMARIZE", "ADDCOLUMNS", "RANKX", "FILTER", "MAXX"]
+    },
+    "bigfoot-005": {
+      "title": "3rd Highest State Name",
+      "type": "text",
+      "description": "Return the name of the 3rd ranked state",
+      "prompt": "Create a DAX measure called 'Nth Highest State Name' that returns the NAME of the 3rd ranked state by total sightings.",
+      "expected_value": "Florida",
+      "tolerance": 0,
+      "difficulty": "intermediate",
+      "patterns": ["SUMMARIZE", "ADDCOLUMNS", "RANKX", "FILTER", "MAXX"]
+    },
+    "bigfoot-006": {
+      "title": "States for 80% of Sightings (Pareto)",
+      "type": "scalar",
+      "description": "Calculate how many states account for 80% of all sightings",
+      "prompt": "Create a DAX measure called 'States for 80 Percent' that calculates how many states (ranked by sighting count) are needed to account for 80% of all Bigfoot sightings. This is classic Pareto analysis.",
+      "expected_value": 22,
+      "expected_details": {
+        "total_states": 49,
+        "cumulative_percentage": "81.0%"
+      },
+      "tolerance": 0,
+      "difficulty": "advanced",
+      "patterns": ["SUMMARIZE", "ADDCOLUMNS", "RANKX", "SUMX", "FILTER", "EARLIER"]
+    },
+    "bigfoot-007": {
+      "title": "Year-over-Year Change (2010)",
+      "type": "scalar",
+      "description": "Calculate the YoY change in sightings for 2010",
+      "prompt": "Create a DAX measure called 'Sightings YoY Change' that calculates the difference in sighting count between 2010 and the previous year (2009).",
+      "expected_value": -23,
+      "expected_details": {
+        "year_2010": 92,
+        "year_2009": 115,
+        "pct_change": "-20.0%"
+      },
+      "tolerance": 0,
+      "difficulty": "basic",
+      "patterns": ["CALCULATE", "COUNTROWS", "SAMEPERIODLASTYEAR", "SELECTEDVALUE"]
+    },
+    "bigfoot-008": {
+      "title": "Average High Temperature",
+      "type": "scalar",
+      "description": "Calculate the average high temperature for sightings",
+      "prompt": "Create a DAX measure called 'Avg Temperature' that calculates the average of the temperature_high column from bfro_reports, ignoring blank values.",
+      "expected_value": 68.82,
+      "tolerance": 0.1,
+      "difficulty": "basic",
+      "patterns": ["AVERAGE", "FILTER"]
+    },
+    "bigfoot-009": {
+      "title": "Total Sightings Count",
+      "type": "scalar",
+      "description": "Count total number of sightings",
+      "prompt": "Create a DAX measure called 'Total Sightings' that counts the total number of rows in the bfro_reports table.",
+      "expected_value": 4586,
+      "tolerance": 0,
+      "difficulty": "basic",
+      "patterns": ["COUNTROWS"]
+    },
+    "bigfoot-010": {
+      "title": "Top State Sighting Count",
+      "type": "scalar",
+      "description": "Return the sighting count for the #1 state",
+      "prompt": "Create a DAX measure called 'Top State Sightings' that returns the sighting count for the state with the most Bigfoot sightings.",
+      "expected_value": 535,
+      "expected_details": {
+        "state": "Washington"
+      },
+      "tolerance": 0,
+      "difficulty": "basic",
+      "patterns": ["MAXX", "SUMMARIZE", "CALCULATE", "COUNTROWS"]
+    }
+  },
+
+  "schema": {
+    "tables": {
+      "bfro_reports": {
+        "columns": ["observed", "location_details", "county", "state", "title", "latitude", "longitude", "date", "number", "classification", "geohash", "temperature_high", "temperature_mid", "temperature_low", "dew_point", "humidity", "cloud_cover", "moon_phase", "precip_intensity", "precip_probability", "precip_type", "pressure", "summary", "uv_index", "visibility", "wind_bearing", "wind_speed"]
+      },
+      "DateTable": {
+        "columns": ["Date", "Year", "Month", "MonthName", "MonthShort", "Quarter", "Day", "DayOfWeek", "DayName", "WeekNum", "YearMonth", "Decade", "Season"]
+      },
+      "_Measures": {
+        "description": "Container table for measures"
+      }
+    },
+    "relationships": [
+      {"from": "bfro_reports[date]", "to": "DateTable[Date]", "type": "many-to-one"}
+    ]
+  }
+}

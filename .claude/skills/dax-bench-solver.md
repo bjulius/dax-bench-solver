@@ -17,136 +17,358 @@ Use this skill when the user wants to:
 
 ## Prerequisites
 
-1. **OpenRouter API Key**: Set as environment variable `OPENROUTER_API_KEY`
-2. **Power BI Desktop**: Open with `Contoso.pbix` from `dax-bench/` folder
-3. **Power BI MCP Server**: Connected to the Contoso model
+1. **OpenRouter API Key**: Set as environment variable `OPENROUTER_DAXBENCH_API_KEY` (or `OPENROUTER_API_KEY`)
+2. **Power BI Desktop**: Open with the target `.pbix` file
+3. **Power BI MCP Server**: Connected to the model
 
-## CRITICAL: Pre-Run and Post-Run Steps
+---
 
-### BEFORE EVERY RUN: Read Lessons Learned
+# ⛔ MANDATORY INITIALIZATION CHECKLIST
 
-**You MUST read the lessons-learned file before starting any benchmark run:**
+## YOU MUST COMPLETE ALL STEPS BELOW BEFORE ANY BENCHMARK WORK. NO EXCEPTIONS.
+
+Every time the DAX Bench Solver skill is initiated, you MUST:
+
+1. ✅ Display this checklist to the user
+2. ✅ Execute each step in order
+3. ✅ Report status of each step before proceeding
+4. ✅ STOP if any step fails
+
+```
+╔══════════════════════════════════════════════════════════════════════╗
+║               DAX BENCH SOLVER - INITIALIZATION                       ║
+╠══════════════════════════════════════════════════════════════════════╣
+║  [ ] Step 1: Read Lessons Learned                                    ║
+║  [ ] Step 2: Refresh OpenRouter Model Cache                          ║
+║  [ ] Step 3: Offer DAX Function List Update                          ║
+║  [ ] Step 4: Verify Power BI Connection                              ║
+║  [ ] Step 5: Extract Live Schema from Power BI                       ║
+║  [ ] Step 6: Load Task Definitions                                   ║
+╚══════════════════════════════════════════════════════════════════════╝
+```
+
+---
+
+## INIT STEP 1: Read Lessons Learned (MANDATORY)
+
+**Action:** Read the lessons-learned file BEFORE any benchmark work.
 
 ```
 Read: .claude/skills/dax-bench-solver/lessons-learned.md
 ```
 
-This file contains:
+**What to extract:**
 - Common failure patterns and how to avoid them
 - Effective feedback strategies that work
 - Model-specific quirks discovered in previous runs
 - Tasks that commonly need multiple iterations
+- Run history with performance data
 
-**Apply these learnings** to:
-- Craft better initial prompts
-- Provide more targeted feedback on failures
-- Anticipate likely error patterns
+**Report to user:**
+> "📚 Lessons Learned loaded. Last updated: {date}. Key patterns: {2-3 bullet points}"
 
-### AFTER EVERY RUN: Write Lessons Learned
+---
 
-**You MUST update the lessons-learned file after completing a benchmark run:**
+## INIT STEP 2: Refresh OpenRouter Model Cache (MANDATORY)
 
-1. **Update the "Last Updated" date**
-2. **Add to Model Performance Summary table** with new results
-3. **Document any multi-iteration fixes** - If a task took >1 iteration to solve:
-   - What was the initial error?
-   - What feedback fixed it?
-   - What pattern should be remembered?
-4. **Add new failure patterns** discovered
-5. **Update successful patterns** with new techniques that worked
-
-**Example entry for multi-iteration fix:**
-```markdown
-### Run X: task-019 (2 iterations)
-- **Initial Error**: Model used `Sales[Unit Price]` instead of `Product[Unit Price]`
-- **Feedback Given**: "Unit Price filter should use Product table, not Sales"
-- **Lesson**: When filtering on product attributes, always check if column is in Product vs Sales table
-```
-
-### Model Names: ALWAYS Use Local Cache
-
-**NEVER hardcode or guess model identifiers.** Always pull from the local model cache:
+**Action:** ALWAYS refresh the model cache. Do NOT skip this step.
 
 ```bash
-# Refresh and view available models
 python dax-bench/fetch_models.py refresh
-python dax-bench/fetch_models.py list
 ```
 
-Or read directly from cache file:
-```
-Read: dax-bench/cache/openrouter_models.json
+**Then report statistics:**
+```bash
+python dax-bench/fetch_models.py stats
 ```
 
-**Required fields from cache:**
-- `id`: The exact model identifier (e.g., `anthropic/claude-opus-4-5-20251101`)
-- `pricing.prompt`: Input cost per token
-- `pricing.completion`: Output cost per token
+**Report to user:**
+> "🔄 Model cache refreshed. {total} models available. {free} free models. Top providers: {list}"
 
-**DO NOT use:**
-- Shortened names like "opus" or "claude-opus"
-- Outdated model IDs
-- Guessed version numbers
+**CRITICAL RULES:**
+- NEVER hardcode or guess model identifiers
+- ALWAYS read from cache file: `dax-bench/models_cache.json`
+- Use EXACT `id` field from cache (e.g., `anthropic/claude-opus-4-5-20251101`)
+- DO NOT use shortened names like "opus" or "claude-opus"
+
+---
+
+## INIT STEP 3: Offer DAX Function List Update (MANDATORY)
+
+**Action:** Read the DAX function reference and offer to update it.
+
+```
+Read: dax-bench/dax_functions_reference.json
+```
+
+**Extract the `last_updated` field, then ASK THE USER using AskUserQuestion tool:**
+
+> "The DAX function validation list was last updated on **{last_updated}**.
+> Would you like me to check DAX.guide for new functions?"
+>
+> Options:
+> - **Yes** - Fetch https://dax.guide/functions/ and compare
+> - **No** - Proceed with current list
+
+**If user says YES:**
+1. Fetch `https://dax.guide/functions/`
+2. Extract all function names from the page
+3. Compare against current `valid_functions` list
+4. Add any new functions found
+5. Update `last_updated` to today's date
+6. Report: "Added X new functions: {list}" or "No new functions found"
+
+**If user says NO:**
+- Proceed with workflow (but still report the last update date was noted)
+
+---
+
+## INIT STEP 4: Verify Power BI Connection (MANDATORY)
+
+**Action:** Check that Power BI MCP server is connected.
+
+```
+mcp__powerbi-desktop__manage_model_connection(operation: "get_current")
+```
+
+**Expected response:**
+- `connected: true`
+- `table_count: > 0`
+
+**If NOT connected:**
+- STOP the workflow
+- Instruct user: "Please open Power BI Desktop with your target .pbix file and ensure the MCP server is running"
+
+**Report to user:**
+> "✅ Power BI connected. Model has {table_count} tables."
+
+---
+
+## INIT STEP 5: Extract Live Schema from Power BI (MANDATORY)
+
+**Action:** Extract the ACTUAL schema from the connected Power BI model.
+
+**5a. List all tables:**
+```
+mcp__powerbi-desktop__list_objects(type: "tables")
+```
+
+**5b. For each table, list columns:**
+```
+mcp__powerbi-desktop__list_objects(type: "columns", table: "{table_name}")
+```
+
+**5c. List relationships:**
+```
+mcp__powerbi-desktop__list_objects(type: "relationships")
+```
+
+**5d. List existing measures:**
+```
+mcp__powerbi-desktop__list_objects(type: "measures")
+```
+
+**Store this schema for injection into prompts. Format as:**
+```
+Schema Summary:
+- Tables: {list of table names}
+- Key columns per table: {table: [columns]}
+- Relationships: {from -> to (type)}
+- Existing measures: {count} in {table}
+```
+
+**Report to user:**
+> "📊 Schema extracted: {N} tables, {M} relationships, {K} existing measures."
+
+**CRITICAL:** This schema MUST be injected into the `dataModelContext` section of every prompt sent to the LLM. Do NOT use static schema from task files if live schema differs.
+
+---
+
+## INIT STEP 6: Load Task Definitions (MANDATORY)
+
+**Action:** Load the task(s) to be solved based on user request.
+
+**Task locations:**
+```
+dax-bench/tasks/
+├── basic/         (task-001 to task-006)
+├── intermediate/  (task-007 to task-020)
+└── advanced/      (task-021 to task-030)
+```
+
+**Each task JSON contains:**
+- `prompt.system`: System prompt for LLM
+- `prompt.user`: The DAX question
+- `prompt.dataModelContext`: Schema (**REPLACE with live schema from Step 5**)
+- `expectedOutput.dax`: Correct DAX
+- `expectedOutput.alternativeCorrect`: Other valid solutions
+- `expectedOutput.expectedResult`: (some tasks) Actual values to validate
+
+**Report to user:**
+> "📝 Loaded {N} task(s): {task_ids}. Complexity: {level}."
+
+---
+
+## INITIALIZATION COMPLETE
+
+Only after ALL 6 steps are completed successfully, display:
+
+```
+╔══════════════════════════════════════════════════════════════════════╗
+║  ✅ INITIALIZATION COMPLETE                                          ║
+╠══════════════════════════════════════════════════════════════════════╣
+║  Lessons Learned: Loaded ({date})                                    ║
+║  Model Cache: {total} models available                               ║
+║  DAX Functions: {count} functions (updated: {date})                  ║
+║  Power BI: Connected ({table_count} tables)                          ║
+║  Schema: Extracted and ready for prompt injection                    ║
+║  Tasks: {N} task(s) loaded                                           ║
+╠══════════════════════════════════════════════════════════════════════╣
+║  Ready to begin benchmark. Proceeding to solve loop...               ║
+╚══════════════════════════════════════════════════════════════════════╝
+```
+
+---
+
+# ⚠️ LESSONS LEARNED: READ BEFORE, WRITE AFTER (ALL MODELS)
+
+## The Lessons Learned Cycle
+
+```
+┌─────────────────────────────────────────────────────────────────────┐
+│                    LESSONS LEARNED LIFECYCLE                        │
+├─────────────────────────────────────────────────────────────────────┤
+│                                                                     │
+│   BEFORE RUN (Init Step 1)           DURING RUN (Solve Loop)       │
+│   ┌─────────────────────┐           ┌─────────────────────┐        │
+│   │ READ lessons-       │           │ APPLY patterns to:  │        │
+│   │ learned.md          │ ───────▶  │ - Craft prompts     │        │
+│   │                     │           │ - Give feedback     │        │
+│   │ Extract:            │           │ - Avoid known traps │        │
+│   │ - Failure patterns  │           └─────────────────────┘        │
+│   │ - What works        │                     │                    │
+│   │ - Model quirks      │                     ▼                    │
+│   └─────────────────────┘    AFTER **ALL MODELS** COMPLETE         │
+│                              ┌─────────────────────┐               │
+│                              │ WRITE new learnings │               │
+│                  ◀────────── │ to lessons-         │               │
+│                              │ learned.md          │               │
+│                              └─────────────────────┘               │
+└─────────────────────────────────────────────────────────────────────┘
+```
+
+---
+
+## ⛔ CRITICAL: Fair Comparison Rule
+
+**When comparing multiple models, DO NOT write lessons learned until ALL models have completed.**
+
+```
+WRONG (Unfair):
+  Run Model A → Write lessons → Run Model B → Write lessons → Run Model C
+  ❌ Model B benefits from Model A's learnings
+  ❌ Model C benefits from both A and B's learnings
+
+CORRECT (Fair):
+  Run Model A → Run Model B → Run Model C → Write ALL lessons
+  ✅ All models start with same prior knowledge
+  ✅ Fair comparison achieved
+```
+
+**Enforcement:**
+- During a multi-model comparison run, accumulate learnings in memory
+- Only write to lessons-learned.md after the LAST model completes
+- Include learnings from ALL models in a single update
+
+---
+
+## BEFORE RUN: Apply Existing Lessons (Init Step 1)
+
+When you read lessons-learned.md in Step 1, **actively use this knowledge**:
+
+### During Prompt Construction
+- Check "Common Failure Patterns" for the task category
+- Include hints from "Validated Learnings" in the prompt
+- Reference model-specific quirks if using a previously-tested model
+
+### During Iteration Feedback
+- Use "Effective Feedback Strategies" section
+- Apply specific feedback phrases that worked before
+- Avoid generic "try again" messages
+
+---
+
+## AFTER ALL MODELS COMPLETE: Write Lessons (MANDATORY)
+
+**You MUST update the lessons-learned file after ALL models in the comparison set have completed.**
+
+### What to Write
+
+| Section | When to Update | What to Add |
+|---------|----------------|-------------|
+| **Last Updated** | Always | Today's date |
+| **Model Performance Summary** | Always | New row for EACH model tested |
+| **Run History** | Always | New run entry with all models |
+| **Multi-Iteration Fixes** | If any task took >1 iteration | Error → Feedback → Lesson (per model) |
+| **Validated Learnings** | If a new pattern emerged | Problem → Rule → Feedback |
+
+### Multi-Iteration Documentation Format
+
+For EVERY task that required more than 1 iteration, document:
+
+```markdown
+### Run {N}: {task_id} - {model_name} ({iterations} iterations)
+- **Initial Error**: {What the model got wrong on first try}
+- **Error Type**: {syntax|semantic|wrong_value|missing_function}
+- **Feedback Given**: "{Exact feedback text that fixed it}"
+- **Lesson for Future**: {Pattern to remember for similar tasks}
+```
+
+### Comparison Run Entry Format
+
+```markdown
+## Run {N}: {date} - Multi-Model Comparison
+
+**Models Tested:** {model_1}, {model_2}, {model_3}
+**Tasks:** {task_list or "all"}
+
+### Results Summary
+| Model | Solved | First-Try | Avg Iters | Cost |
+|-------|--------|-----------|-----------|------|
+| {model_1} | X/Y | X/Y | N.N | $X.XX |
+| {model_2} | X/Y | X/Y | N.N | $X.XX |
+| {model_3} | X/Y | X/Y | N.N | $X.XX |
+
+### Multi-Iteration Fixes
+{All multi-iteration entries for all models}
+
+### New Patterns Discovered
+{Any new learnings applicable to future runs}
+```
+
+### Write Location
+
+```
+Edit: .claude/skills/dax-bench-solver/lessons-learned.md
+```
+
+---
 
 ## File Locations
 
-- **Tasks**: `dax-bench/tasks/{basic,intermediate,advanced}/task-XXX.json`
-- **Lessons Learned**: `.claude/skills/dax-bench-solver/lessons-learned.md` ⚠️ READ BEFORE RUN, WRITE AFTER
-- **Model Cache**: `dax-bench/cache/openrouter_models.json` ⚠️ SOURCE FOR MODEL IDs
-- **Reference Values**: `dax-bench/reference_values.json` (expected outputs)
-- **DAX Functions**: `dax-bench/dax_functions_reference.json` (static validation)
-- **Run Logs**: `dax-bench/runs/` (created per run)
-- **Contoso Model**: `dax-bench/Contoso.pbix`
+| File | Purpose | When to Access |
+|------|---------|----------------|
+| `.claude/skills/dax-bench-solver/lessons-learned.md` | Run history & patterns | Step 1 (read), Post-run (write) |
+| `dax-bench/models_cache.json` | OpenRouter model IDs | Step 2 |
+| `dax-bench/dax_functions_reference.json` | Valid DAX functions | Step 3 |
+| `dax-bench/tasks/{level}/task-XXX.json` | Task definitions | Step 6 |
+| `dax-bench/runs/` | Run logs | Created during solve loop |
 
-## Workflow
+---
 
-### Step 0: Initialize (REQUIRED)
+# WORKFLOW (After Initialization)
 
-**Before any benchmark work:**
-
-1. **Read lessons learned:**
-   ```
-   Read: .claude/skills/dax-bench-solver/lessons-learned.md
-   ```
-   Pay attention to:
-   - "Validated Learnings" section for common pitfalls
-   - "Multi-Iteration Fixes" tables for specific task issues
-   - Model-specific notes
-
-2. **Check DAX validation list currency:**
-   ```
-   Read: dax-bench/dax_functions_reference.json (check "last_updated" field)
-   ```
-
-   **Ask the user:**
-   > "The DAX function validation list was last updated on {last_updated}.
-   > Would you like me to check DAX.guide for any new functions added since then?
-   > - Yes: I'll scrape https://dax.guide/functions/ for updates
-   > - No: Proceed with current list"
-
-   **If user says YES:**
-   - Fetch https://dax.guide/functions/
-   - Extract all function names from the page
-   - Compare against current `valid_functions` list
-   - Add any new functions found
-   - Update `last_updated` to today's date
-   - Report: "Added X new functions: {list}" or "No new functions found"
-
-   **If user says NO:**
-   - Proceed with workflow
-
-3. **Load model cache:**
-   ```bash
-   python dax-bench/fetch_models.py refresh  # if cache >24h old
-   ```
-   Then read `dax-bench/cache/openrouter_models.json` to get exact model IDs.
-
-4. **Verify Power BI connection:**
-   ```
-   mcp__powerbi-desktop__manage_model_connection(operation: "get_current")
-   ```
-
-### Step 1: Select Task(s)
+## Step 1: Select Task(s)
 
 Load task(s) from the `dax-bench/tasks/` directory:
 
