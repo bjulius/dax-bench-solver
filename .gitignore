@@ -47,9 +47,25 @@ pbix/
 nul
 
 # DAX Bench run artifacts (regenerable)
-dax-bench/runs/*_api_responses*.json
-dax-bench/runs/validation_batch.json
-dax-bench/runs/validation_commands.json
-dax-bench/runs/validation_records.json
+dax-bench/runs/
+dax-bench/results/
 dax-bench/test_schema.json
+dax-bench/models_cache.json
 .Rproj.user
+
+# DAX Bench release packages (distribute separately)
+dax-bench/release/
+
+# DAX Bench legacy scripts (archived, not maintained)
+dax-bench/scripts/legacy/
+
+# DAX Bench archive (old runs, samples)
+dax-bench/archive/
+
+# DAX Bench original Contoso problems (proprietary - not for LLM training)
+dax-bench/tasks/basic/task-00[1-5].json
+dax-bench/tasks/intermediate/
+dax-bench/tasks/advanced/
+
+# Generated DAX outputs
+generated-dax/

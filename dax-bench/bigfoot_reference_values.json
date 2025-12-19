@@ -40,11 +40,13 @@
     "bigfoot-003": {
       "title": "Cumulative Unique Counties",
       "type": "scalar",
-      "description": "Count of unique counties with sightings up to the current date context",
-      "prompt": "Create a DAX measure called 'Cumulative Unique Counties' that shows the running distinct count of unique counties that have had at least one Bigfoot sighting up to the selected date.",
-      "expected_value": 905,
+      "description": "Count of unique counties with sightings up to the current date context, excluding rows with blank dates",
+      "prompt": "Create a DAX measure called 'Cumulative Unique Counties' that shows the running distinct count of unique counties that have had at least one Bigfoot sighting up to the selected date. Only include rows where the date is not blank.",
+      "expected_value": 904,
       "expected_details": {
-        "note": "905 when filtering to rows with valid dates, 1005 for all rows"
+        "note": "904 unique counties have valid (non-blank) dates. 1004 total unique counties including blanks.",
+        "validation_date": "2025-12-19",
+        "previous_value": "905 (corrected from earlier reference that had data discrepancy)"
       },
       "tolerance": 0,
       "difficulty": "intermediate",

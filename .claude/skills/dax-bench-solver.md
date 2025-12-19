@@ -38,7 +38,8 @@ Every time the DAX Bench Solver skill is initiated, you MUST:
 ╔══════════════════════════════════════════════════════════════════════╗
 ║               DAX BENCH SOLVER - INITIALIZATION                       ║
 ╠══════════════════════════════════════════════════════════════════════╣
-║  [ ] Step 1: Read Lessons Learned                                    ║
+║  [ ] Step 0: Memory File Decision (FIRST!)                           ║
+║  [ ] Step 1: Read Lessons Learned (if enabled)                       ║
 ║  [ ] Step 2: Refresh OpenRouter Model Cache                          ║
 ║  [ ] Step 3: Offer DAX Function List Update                          ║
 ║  [ ] Step 4: Verify Power BI Connection                              ║
@@ -49,7 +50,55 @@ Every time the DAX Bench Solver skill is initiated, you MUST:
 
 ---
 
-## INIT STEP 1: Read Lessons Learned (MANDATORY)
+## INIT STEP 0: Memory File Decision (MANDATORY - DO THIS FIRST!)
+
+**⚠️ THIS STEP MUST BE COMPLETED BEFORE READING ANY LESSONS LEARNED FILE.**
+
+**Action:** Ask the user whether to enable the memory file (lessons-learned.md) using the AskUserQuestion tool:
+
+```
+╔══════════════════════════════════════════════════════════════════════╗
+║                    MEMORY FILE CONFIGURATION                          ║
+╠══════════════════════════════════════════════════════════════════════╣
+║  The "lessons-learned.md" memory file contains accumulated           ║
+║  knowledge from previous benchmark runs including:                    ║
+║  - Known failure patterns and fixes                                  ║
+║  - Effective feedback strategies                                     ║
+║  - Model-specific quirks                                             ║
+╠══════════════════════════════════════════════════════════════════════╣
+║  RECOMMENDATION:                                                      ║
+║  • ENABLE (ON) for real-world DAX problem solving                    ║
+║  • DISABLE (OFF) for fair model benchmarking/comparison              ║
+╚══════════════════════════════════════════════════════════════════════╝
+```
+
+**Use AskUserQuestion with these options:**
+
+| Option | Description |
+|--------|-------------|
+| **OFF - Fair Benchmark Mode (Recommended for comparisons)** | Models compete without prior knowledge. Results reflect pure model capability. Best for: benchmarking, model comparisons, evaluations. |
+| **ON - Assisted Mode** | Leverage accumulated knowledge to maximize solve rate. Best for: production DAX problem solving, getting work done. |
+
+**Store the decision as a global variable for the entire run:**
+```
+MEMORY_FILE_ENABLED = true | false
+```
+
+**Report to user:**
+> "🧠 Memory File: **{ENABLED/DISABLED}**"
+> - If DISABLED: "Fair benchmark mode active. No prior learnings will be used."
+> - If ENABLED: "Assisted mode active. Prior learnings will enhance prompts."
+
+---
+
+## INIT STEP 1: Read Lessons Learned (CONDITIONAL)
+
+**⚠️ SKIP THIS STEP ENTIRELY IF MEMORY_FILE_ENABLED = false**
+
+If memory file is DISABLED:
+> "⏭️ Step 1 SKIPPED: Memory file disabled for fair benchmarking."
+
+If memory file is ENABLED:
 
 **Action:** Read the lessons-learned file BEFORE any benchmark work.
 
@@ -211,13 +260,15 @@ dax-bench/tasks/
 
 ## INITIALIZATION COMPLETE
 
-Only after ALL 6 steps are completed successfully, display:
+Only after ALL steps are completed successfully, display:
 
 ```
 ╔══════════════════════════════════════════════════════════════════════╗
 ║  ✅ INITIALIZATION COMPLETE                                          ║
 ╠══════════════════════════════════════════════════════════════════════╣
-║  Lessons Learned: Loaded ({date})                                    ║
+║  🧠 Memory File: {ENABLED/DISABLED}                                  ║
+║     → {Mode description}                                             ║
+║  Lessons Learned: {Loaded (date) / SKIPPED - fair benchmark mode}    ║
 ║  Model Cache: {total} models available                               ║
 ║  DAX Functions: {count} functions (updated: {date})                  ║
 ║  Power BI: Connected ({table_count} tables)                          ║
@@ -227,6 +278,10 @@ Only after ALL 6 steps are completed successfully, display:
 ║  Ready to begin benchmark. Proceeding to solve loop...               ║
 ╚══════════════════════════════════════════════════════════════════════╝
 ```
+
+**Memory File Status Display:**
+- If ENABLED: `🧠 Memory File: ENABLED (Assisted Mode)`
+- If DISABLED: `🧠 Memory File: DISABLED (Fair Benchmark Mode)`
 
 ---
 
@@ -239,21 +294,39 @@ Only after ALL 6 steps are completed successfully, display:
 │                    LESSONS LEARNED LIFECYCLE                        │
 ├─────────────────────────────────────────────────────────────────────┤
 │                                                                     │
-│   BEFORE RUN (Init Step 1)           DURING RUN (Solve Loop)       │
-│   ┌─────────────────────┐           ┌─────────────────────┐        │
-│   │ READ lessons-       │           │ APPLY patterns to:  │        │
-│   │ learned.md          │ ───────▶  │ - Craft prompts     │        │
-│   │                     │           │ - Give feedback     │        │
-│   │ Extract:            │           │ - Avoid known traps │        │
-│   │ - Failure patterns  │           └─────────────────────┘        │
-│   │ - What works        │                     │                    │
-│   │ - Model quirks      │                     ▼                    │
-│   └─────────────────────┘    AFTER **ALL MODELS** COMPLETE         │
-│                              ┌─────────────────────┐               │
-│                              │ WRITE new learnings │               │
-│                  ◀────────── │ to lessons-         │               │
-│                              │ learned.md          │               │
-│                              └─────────────────────┘               │
+│   STEP 0: MEMORY FILE DECISION                                      │
+│   ┌─────────────────────┐                                          │
+│   │ Ask user:           │                                          │
+│   │ 🎯 OFF = Fair       │───┐                                      │
+│   │ 🧠 ON  = Assisted   │   │                                      │
+│   └─────────────────────┘   │                                      │
+│              │              │                                      │
+│              ▼              │                                      │
+│   ┌──────────────────────────────────────────────────┐             │
+│   │  IF 🎯 OFF (Fair Benchmark)  │  IF 🧠 ON (Assisted) │           │
+│   ├──────────────────────────────────────────────────┤             │
+│   │  SKIP lessons read           │  READ lessons-      │           │
+│   │  Use neutral prompts         │  learned.md         │           │
+│   │  Use generic feedback        │  APPLY patterns     │           │
+│   │  Pure model capability       │  Enhanced prompts   │           │
+│   └──────────────────────────────────────────────────┘             │
+│                              │                                      │
+│                              ▼                                      │
+│                    DURING RUN (Solve Loop)                         │
+│                    ┌─────────────────────┐                         │
+│                    │ Execute tasks       │                         │
+│                    │ Track iterations    │                         │
+│                    │ Validate in PBI     │                         │
+│                    └─────────────────────┘                         │
+│                              │                                      │
+│                              ▼                                      │
+│              AFTER **ALL MODELS** COMPLETE                         │
+│              ┌─────────────────────┐                               │
+│              │ WRITE new learnings │                               │
+│              │ to lessons-         │                               │
+│              │ learned.md          │                               │
+│              │ (Mark as 🎯 or 🧠)   │                               │
+│              └─────────────────────┘                               │
 └─────────────────────────────────────────────────────────────────────┘
 ```
 
@@ -282,7 +355,17 @@ CORRECT (Fair):
 
 ---
 
-## BEFORE RUN: Apply Existing Lessons (Init Step 1)
+## BEFORE RUN: Apply Existing Lessons (Init Step 1) - CONDITIONAL
+
+**⚠️ THIS SECTION ONLY APPLIES IF MEMORY_FILE_ENABLED = true**
+
+If memory file is DISABLED (Fair Benchmark Mode):
+- **DO NOT** use any prior learnings during prompt construction
+- **DO NOT** use any learned feedback strategies
+- Use only generic, neutral feedback when iterations fail
+- This ensures fair comparison between models
+
+If memory file is ENABLED (Assisted Mode):
 
 When you read lessons-learned.md in Step 1, **actively use this knowledge**:
 
@@ -327,10 +410,14 @@ For EVERY task that required more than 1 iteration, document:
 ### Comparison Run Entry Format
 
 ```markdown
-## Run {N}: {date} - Multi-Model Comparison
+## Run {N}: {date} - Multi-Model Comparison {🎯 FAIR BENCHMARK | 🧠 ASSISTED}
 
+**Memory File:** {DISABLED (Fair Benchmark) | ENABLED (Assisted Mode)}
 **Models Tested:** {model_1}, {model_2}, {model_3}
 **Tasks:** {task_list or "all"}
+
+> {If DISABLED: "⚠️ Fair benchmark - no prior learnings used. Results reflect pure model capability."}
+> {If ENABLED: "🧠 Assisted mode - prior learnings enhanced prompts and feedback."}
 
 ### Results Summary
 | Model | Solved | First-Try | Avg Iters | Cost |
@@ -492,6 +579,7 @@ Create markdown log at `dax-bench/runs/{timestamp}_{model}_{task}.md`:
 - **Task**: task-009 (YoY Growth %)
 - **Model**: claude-opus-4.5
 - **Timestamp**: 2024-12-13T14:30:00Z
+- **Memory File**: 🧠 DISABLED (Fair Benchmark Mode)
 - **Result**: ✅ SOLVED in 2 iterations
 
 ## Iteration 1
@@ -544,6 +632,11 @@ For dual-model runs, create `dax-bench/runs/{timestamp}_comparison.md`:
 **Date**: 2024-12-13
 **Models**: Claude Opus 4.5 vs DeepSeek V3.2
 **Tasks**: All 30 tasks
+**Memory File**: 🧠 DISABLED (Fair Benchmark Mode)
+
+> ⚠️ **Benchmark Validity Note**: Memory file was {ENABLED/DISABLED} for this run.
+> - DISABLED = Fair comparison (models had no prior knowledge)
+> - ENABLED = Assisted mode (results may not reflect pure model capability)
 
 ## Summary
 
@@ -563,9 +656,37 @@ For dual-model runs, create `dax-bench/runs/{timestamp}_comparison.md`:
 Both models solve all 30 tasks successfully. Claude Opus 4.5 is **faster**
 ```
 
-### Step 6: Update Lessons Learned (REQUIRED)
+### Step 6: Update Lessons Learned (CONDITIONAL)
 
-**After completing any benchmark run, you MUST update the lessons-learned file:**
+**⚠️ THIS STEP BEHAVIOR DEPENDS ON MEMORY FILE SETTING:**
+
+#### If MEMORY_FILE_ENABLED = false (Fair Benchmark Mode):
+
+**You MUST STILL update the lessons-learned file**, but clearly mark the run as a fair benchmark:
+
+```
+Edit: .claude/skills/dax-bench-solver/lessons-learned.md
+```
+
+**Required updates for Fair Benchmark runs:**
+
+1. **Update "Last Updated" date** to today
+
+2. **Add row to Model Performance Summary table WITH BENCHMARK FLAG:**
+   ```markdown
+   | {model_id} | {solved}/{total} ({%}) | {first_try}/{total} ({%}) | {avg_iters} | 🎯 Fair Benchmark (no memory) |
+   ```
+
+3. **Add to Run History with FAIR BENCHMARK notation:**
+   ```markdown
+   ## Run {N}: {date} - {model} 🎯 FAIR BENCHMARK
+   **Memory File**: DISABLED
+   **Note**: Results reflect pure model capability without prior learnings.
+   ```
+
+#### If MEMORY_FILE_ENABLED = true (Assisted Mode):
+
+**Standard update process:**
 
 ```
 Edit: .claude/skills/dax-bench-solver/lessons-learned.md
@@ -577,7 +698,7 @@ Edit: .claude/skills/dax-bench-solver/lessons-learned.md
 
 2. **Add row to Model Performance Summary table:**
    ```markdown
-   | {model_id} | {solved}/{total} ({%}) | {first_try}/{total} ({%}) | {avg_iters} | {notes} |
+   | {model_id} | {solved}/{total} ({%}) | {first_try}/{total} ({%}) | {avg_iters} | 🧠 Assisted Mode |
    ```
 
 3. **For each task that required >1 iteration, add to Run History:**
