@@ -11,7 +11,7 @@ env/
 dist/
 build/
 
-# Large data files (keep repo lightweight - download separately)
+# Large data files (download from BFRO/Kaggle)
 *.csv
 
 # IDE
@@ -36,8 +36,9 @@ desktop.ini
 # Crash dumps
 *.stackdump
 
-# Power BI files (large binaries)
+# Power BI files (large binaries) - except BigfootDAX benchmark file
 *.pbix
+!BigfootDAX.pbix
 pbix/
 
 # Screenshots and images (debug artifacts)
